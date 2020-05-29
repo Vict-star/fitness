@@ -10,12 +10,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 class FitnessApplicationTests {
     @Autowired
     private UserService userService;
+
     @Test
     void contextLoads() {
     }
-//    测试获取用户
+
+    //    测试获取用户
     @Test
-    void testGetUser(){
+    void testGetUser() {
         User user = userService.getUserById("123456");
         System.out.print(user);
     }

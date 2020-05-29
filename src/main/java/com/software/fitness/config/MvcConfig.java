@@ -1,4 +1,5 @@
 package com.software.fitness.config;
+
 import com.software.fitness.component.LoginHandlerInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -11,11 +12,12 @@ public class MvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**","/index/**")
+        registry.addResourceHandler("/**", "/index/**")
                 .addResourceLocations("classpath:/static/");
         super.addResourceHandlers(registry);
     }
-//    测试和示范——视图映射
+
+    //    测试和示范——视图映射
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/Login").setViewName("/Login");
