@@ -1,72 +1,85 @@
 package com.software.fitness.domain;
 
-import java.sql.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 public class Coach {
-    private int ID;
+    private int id;
     private String name;
-    private String gender;
+    private boolean gender;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date_of_birth;
-    private String phone_number;
+    private String phone;
     private String address;
+    private String password;
 
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public int getId() {
+        return id;
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getGender() {
-        return gender;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    public Date getDate_of_birth() {
+        return date_of_birth;
     }
 
     public void setDate_of_birth(Date date_of_birth) {
         this.date_of_birth = date_of_birth;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
         return "Coach{" +
-                "ID=" + ID +
+                "id=" + id +
                 ", name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
+                ", gender=" + gender +
                 ", date_of_birth=" + date_of_birth +
-                ", phone_number='" + phone_number + '\'' +
+                ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>fragments</title>
+</head>
+<body>
+<!--topNavStart-->
+<nav  th:fragment="topNav" class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">力美健后台管理</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+<!--    <ul class="navbar-nav px-3">-->
+        <div class="dropdown px-3">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                [[${session.loginUser.user_id}]]
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">个人信息</a>
+                <a class="dropdown-item" href="#">修改密码</a>
+                <a class="dropdown-item" href="/index/Logout">登出系统</a>
+            </div>
+        </div>
+</nav>
+<!--topNavEnd-->
+
+<!--sidebarMenu-->
+<nav th:fragment="sidebarMenu" id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="sidebar-sticky pt-3">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a th:class="${activeUri=='home'?'nav-link active':'nav-link'}"
+                   href="/index">
+                    <span data-feather="home"></span>
+                    主页 <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:class="${activeUri=='attendance'?'nav-link active':'nav-link'}" href="#">
+                    <span data-feather="clipboard"></span>
+                    会员考勤
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:class="${activeUri=='chooseClass'?'nav-link active':'nav-link'}" href="#">
+                    <span data-feather="shopping-cart"></span>
+                    会员选课
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:class="${activeUri=='memberManage'?'nav-link active':'nav-link'}" href="#">
+                    <span data-feather="users"></span>
+                    会员管理
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:class="${activeUri=='coachManage'?'nav-link active':'nav-link'}"
+                   href="/admin/coachManage">
+                    <span data-feather="user"></span>
+                    教练管理
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:class="${activeUri=='classManage'?'nav-link active':'nav-link'}" href="#">
+                    <span data-feather="layers"></span>
+                    课程管理
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:class="${activeUri=='classTable'?'nav-link active':'nav-link'}" href="#">
+                    <span data-feather="file-text"></span>
+                    课程表
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<!--sidebarMenu-->
+</body>
+</html>
