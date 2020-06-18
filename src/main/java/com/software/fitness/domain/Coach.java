@@ -12,7 +12,6 @@ public class Coach {
     private Date date_of_birth;
     private String phone;
     private String address;
-    private String password;
 
     public int getId() {
         return id;
@@ -62,14 +61,6 @@ public class Coach {
         this.address = address;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
         return "Coach{" +
@@ -79,7 +70,6 @@ public class Coach {
                 ", date_of_birth=" + date_of_birth +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }
