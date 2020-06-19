@@ -24,11 +24,26 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/memberManage")
+    public String memberManagePage(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("loginUser");
+        if (user == null) {
+            return "Login";
+        } else {
+            return "admin/memberManage";
+        }
+    }
+
     @PostMapping("/coachManage/add")
     public String addCoach(Coach coach,RedirectAttributes attributes){
         attributes.addFlashAttribute("message", "添加结果");
         System.out.println(coach.toString());
         return "redirect:/admin/coachManage";
+    }
+
+    @GetMapping("/memberManage/add")
+    public String addMember(HttpServletRequest request) {
+        return "redirect:/admin/memberManage";
     }
 
 }
