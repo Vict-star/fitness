@@ -38,8 +38,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a th:class="${activeUri=='attendance'?'nav-link active':'nav-link'}" href="#">
-                    <span data-feather="clipboard"></span>
+                <a th:class="${activeUri=='attendance'?'nav-link active':'nav-link'}"
+                   href="/admin/attendance">
+                    <span data-feather="user"></span>
                     会员考勤
                 </a>
             </li>
@@ -50,8 +51,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a th:class="${activeUri=='memberManage'?'nav-link active':'nav-link'}" href="#">
-                    <span data-feather="users"></span>
+                <a th:class="${activeUri=='memberManage'?'nav-link active':'nav-link'}"
+                   href="/admin/memberManage">
+                    <span data-feather="user"></span>
                     会员管理
                 </a>
             </li>

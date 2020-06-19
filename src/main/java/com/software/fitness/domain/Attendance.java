@@ -2,7 +2,7 @@ package com.software.fitness.domain;
 
 import java.sql.Date;
 
-public class Attendence {
+public class Attendance {
     private int course_ID;
     private int member_ID;
     //确定和数据库date对应？？？
@@ -36,7 +36,7 @@ public class Attendence {
 
     @Override
     public String toString() {
-        return "Attendence{" +
+        return "Attendance{" +
                 "course_ID=" + course_ID +
                 ", member_ID=" + member_ID +
                 ", date=" + date +

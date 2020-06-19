@@ -34,6 +34,16 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/attendance")
+    public String attendancePage(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("loginUser");
+        if (user == null) {
+            return "Login";
+        } else {
+            return "admin/attendance";
+        }
+    }
+
     @PostMapping("/coachManage/add")
     public String addCoach(Coach coach,RedirectAttributes attributes){
         attributes.addFlashAttribute("message", "添加结果");
@@ -41,9 +51,11 @@ public class AdminController {
         return "redirect:/admin/coachManage";
     }
 
-    @GetMapping("/memberManage/add")
+    @PostMapping("/memberManage/add")
     public String addMember(HttpServletRequest request) {
-        return "redirect:/admin/memberManage";
+        return "admin/memberManage";
     }
+
+
 
 }
