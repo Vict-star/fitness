@@ -1,6 +1,8 @@
 package com.software.fitness.controller;
 
 import com.software.fitness.domain.Coach;
+import com.software.fitness.domain.Member;
+import com.software.fitness.domain.User;
 import com.software.fitness.domain.Staff;
 //import com.software.fitness.service.AdminService;
 import com.software.fitness.service.AdminService;
@@ -30,6 +32,26 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/memberManage")
+    public String memberManagePage(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("loginUser");
+        if (user == null) {
+            return "Login";
+        } else {
+            return "admin/memberManage";
+        }
+    }
+
+    @GetMapping("/attendance")
+    public String attendancePage(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("loginUser");
+        if (user == null) {
+            return "Login";
+        } else {
+            return "admin/attendance";
+        }
+    }
+
     @PostMapping("/coachManage/add")
     public String addCoach(Coach coach,RedirectAttributes attributes){
 //        coach.setState("在职");
@@ -50,5 +72,13 @@ public class AdminController {
     public String classTablePage(){
         return "/admin/classTable";
     }
+
+    @PostMapping("/memberManage/add")
+    public String addMember(Member member, RedirectAttributes attributes) {
+        attributes.addFlashAttribute("message", "添加结果");
+        System.out.println(member.toString());
+        return "redirect:/admin/memberManage";
+    }
+
 
 }
