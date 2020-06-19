@@ -12,12 +12,12 @@ public class Attendance {
         return course_ID;
     }
 
-    public int getMember_ID() {
-        return member_ID;
-    }
-
     public void setCourse_ID(int course_ID) {
         this.course_ID = course_ID;
+    }
+
+    public int getMember_ID() {
+        return member_ID;
     }
 
     public void setMember_ID(int member_ID) {

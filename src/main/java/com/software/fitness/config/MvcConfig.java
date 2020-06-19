@@ -28,7 +28,7 @@ public class MvcConfig extends WebMvcConfigurationSupport {
         super.addInterceptors(registry);
         registry.addInterceptor(new LoginHandlerInterceptor())
                 .addPathPatterns("/admin/**")
-                .excludePathPatterns("/Login","/index","/index/Login");
+                .excludePathPatterns("/Login", "/index", "/index/Login");
     }
 
 }

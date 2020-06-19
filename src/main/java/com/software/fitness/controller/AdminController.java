@@ -1,6 +1,7 @@
 package com.software.fitness.controller;
 
 import com.software.fitness.domain.Coach;
+import com.software.fitness.domain.Member;
 import com.software.fitness.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,17 +46,18 @@ public class AdminController {
     }
 
     @PostMapping("/coachManage/add")
-    public String addCoach(Coach coach,RedirectAttributes attributes){
+    public String addCoach(Coach coach, RedirectAttributes attributes) {
         attributes.addFlashAttribute("message", "添加结果");
         System.out.println(coach.toString());
         return "redirect:/admin/coachManage";
     }
 
     @PostMapping("/memberManage/add")
-    public String addMember(HttpServletRequest request) {
-        return "admin/memberManage";
+    public String addMember(Member member, RedirectAttributes attributes) {
+        attributes.addFlashAttribute("message", "添加结果");
+        System.out.println(member.toString());
+        return "redirect:/admin/memberManage";
     }
-
 
 
 }
