@@ -7,11 +7,13 @@ import java.util.Date;
 public class Coach {
     private int id;
     private String name;
-    private boolean gender;
+    private String gender;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date_of_birth;
-    private String phone;
+    private String phone_number;
     private String address;
+    private String state;
+    private String introduction;
 
     public int getId() {
         return id;
@@ -29,14 +31,6 @@ public class Coach {
         this.name = name;
     }
 
-    public boolean isGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
-    }
-
     public Date getDate_of_birth() {
         return date_of_birth;
     }
@@ -45,12 +39,12 @@ public class Coach {
         this.date_of_birth = date_of_birth;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public String getAddress() {
@@ -61,15 +55,41 @@ public class Coach {
         this.address = address;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
     @Override
     public String toString() {
         return "Coach{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", gender=" + gender +
+                ", gender='" + gender + '\'' +
                 ", date_of_birth=" + date_of_birth +
-                ", phone='" + phone + '\'' +
+                ", phone_number='" + phone_number + '\'' +
                 ", address='" + address + '\'' +
+                ", state='" + state + '\'' +
+                ", introduction='" + introduction + '\'' +
                 '}';
     }
 }

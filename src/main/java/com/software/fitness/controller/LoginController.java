@@ -1,5 +1,6 @@
 package com.software.fitness.controller;
 
+import com.software.fitness.domain.Staff;
 import com.software.fitness.domain.User;
 import com.software.fitness.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class LoginController {
 
     @GetMapping
     public String login(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("loginUser");
+        Staff user = (Staff) request.getSession().getAttribute("loginUser");
         if (user == null) {
             return "Login";
         } else {
@@ -32,7 +33,7 @@ public class LoginController {
     @PostMapping("/Login")
     public String userlogin(@RequestParam String userId, @RequestParam String password,
                             RedirectAttributes attributes, HttpServletRequest request) {
-        User user = userService.getUserById(userId);
+        Staff user = userService.getStaffById(userId);
         System.out.print(user);
         if (user != null && user.getPassword().equals(password)) {
             user.setPassword("");

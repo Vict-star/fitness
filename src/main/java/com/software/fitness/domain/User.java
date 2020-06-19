@@ -1,15 +1,15 @@
 package com.software.fitness.domain;
 
 public class User {
-    private String user_id;
+    private String ID;
     private String password;
 
-    public String getUser_id() {
-        return user_id;
+    public String getID() {
+        return ID;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getPassword() {
@@ -23,7 +23,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "user_id='" + user_id + '\'' +
+                "ID='" + ID + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

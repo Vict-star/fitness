@@ -1,5 +1,6 @@
 package com.software.fitness;
 
+import com.software.fitness.domain.Staff;
 import com.software.fitness.domain.User;
 import com.software.fitness.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ class FitnessApplicationTests {
     //    测试获取用户
     @Test
     void testGetUser() {
-        User user = userService.getUserById("123456");
+        Staff user = userService.getStaffById("123456");
         System.out.print(user);
     }
 }

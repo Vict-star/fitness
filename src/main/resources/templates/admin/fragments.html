@@ -15,7 +15,7 @@
 <!--    <ul class="navbar-nav px-3">-->
         <div class="dropdown px-3">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                [[${session.loginUser.user_id}]]
+                [[${session.loginUser.ID}]]
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">个人信息</a>
@@ -69,7 +69,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a th:class="${activeUri=='classTable'?'nav-link active':'nav-link'}" href="#">
+                <a th:class="${activeUri=='classTable'?'nav-link active':'nav-link'}"
+                   href="/admin/classTable">
                     <span data-feather="file-text"></span>
                     课程表
                 </a>

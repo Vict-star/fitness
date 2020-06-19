@@ -1,8 +1,8 @@
 package com.software.fitness.service;
 
 
-import com.software.fitness.domain.User;
+import com.software.fitness.domain.Staff;
 
 public interface UserService {
-    User getUserById(String userId);
+    Staff getStaffById(String ID);
 }

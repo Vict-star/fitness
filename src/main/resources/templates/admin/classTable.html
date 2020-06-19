@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>课程表</title>
+    <base th:href="@{/}">
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-4.5.0-dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+    <link href="dashboard.css" rel="stylesheet">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<script th:inline="javascript">
+    window.onload = function () {	// 页面加载之后, 获取页面中的对象
+        initTable()
+    };
+    function initTable(){
+        var day = 7;
+        var slot = 1;
+        for(;slot<6;slot++){
+            for(;day>0;day--){
+                var id = day*321+slot;
+                var dayFrom = id%30;
+                var dayTo = id%30;
+                var html = "<td style='width: 14%'>[课程"+id+"]<br>" +
+                    "日期:2020-6-"+dayFrom+"<br>~2020-7-"+dayTo+"<br>" +
+                    "教练:zcf</td>>";
+                $('#slot' + slot).after(html);
+            }
+            if(slot<5) day = 7;
+        }
+    }
+</script>
+<div th:replace="admin/fragments::topNav"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="admin/fragments::sidebarMenu(activeUri='classTable')"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">课程表</h1>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th> </th>
+                        <th>周一</th>
+                        <th>周二</th>
+                        <th>周三</th>
+                        <th>周四</th>
+                        <th>周五</th>
+                        <th>周六</th>
+                        <th>周日</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr><td id="slot1">第一二节</td></tr>
+                    <tr><td id="slot2">第三四节</td></tr>
+                    <tr><td id="slot3">第七八节</td></tr>
+                    <tr><td id="slot4">第七八节</td></tr>
+                    <tr><td id="slot5">晚上</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="bootstrap-4.5.0-dist/js/bootstrap.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="dashboard.js"></script></body>
+</html>

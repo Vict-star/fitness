@@ -1,7 +1,7 @@
 package com.software.fitness.service.Impl;
 
 import com.software.fitness.dao.UserDao;
-import com.software.fitness.domain.User;
+import com.software.fitness.domain.Staff;
 import com.software.fitness.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User getUserById(String userId) {
-        return userDao.getUserById(userId);
+    public Staff getStaffById(String ID) {
+        return userDao.getStaffById(ID);
     }
 }
