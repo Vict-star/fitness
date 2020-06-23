@@ -91,12 +91,12 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Integer increaseNumberOfCourses(int id) {
-        return memberDao.increaseNumberOfCourses(id);
+        return memberDao.increaseNumberOfCourse(id);
     }
 
     @Override
     public Integer decreaseNumberOfCourses(int id) {
-        return memberDao.decreaseNumberOfCourses(id);
+        return memberDao.decreaseNumberOfCourse(id);
     }
 
     @Override

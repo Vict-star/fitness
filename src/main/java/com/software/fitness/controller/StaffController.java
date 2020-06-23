@@ -91,7 +91,7 @@ public class StaffController {
     public String addCoach(Coach coach, RedirectAttributes attributes){
         String message = "";
         int id = staffService.insertCoach(coach);
-        if(id >= 0){
+        if(id > 0){
             message = "添加教练成功";
         }
         else {
@@ -106,7 +106,7 @@ public class StaffController {
     public String editCoach(Coach coach, RedirectAttributes attributes){
         String message = "";
         int id = staffService.updateCoach(coach);
-        if(id >= 0){
+        if(id > 0){
             message = "修改教练成功";
         }
         else {
@@ -122,7 +122,7 @@ public class StaffController {
     public String addMember(Member member, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertMember(member);
-        if(id >= 0){
+        if(id > 0){
             message = "添加会员成功";
         }
         else {
@@ -137,7 +137,7 @@ public class StaffController {
     public String editMember(Member member, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.updateMember(member);
-        if(id >= 0){
+        if(id > 0){
             message = "修改会员成功";
         }
         else {
@@ -153,7 +153,7 @@ public class StaffController {
     public String attendanceSign(Attendance attendance, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertAttendance(attendance);
-        if(id >= 0){
+        if(id > 0){
             message = "签到成功";
         }
         else {
@@ -169,7 +169,7 @@ public class StaffController {
     public String addCourse(Course course, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertCourse(course);
-        if(id >= 0){
+        if(id > 0){
             message = "添加课程成功";
         }
         else {
@@ -184,7 +184,7 @@ public class StaffController {
     public String editCourse(Course course, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.updateCourse(course);
-        if(id >= 0){
+        if(id > 0){
             message = "修改课程成功";
         }
         else {
@@ -200,7 +200,7 @@ public class StaffController {
     public String pickClass(Take_course take_course, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertTakeCourse(take_course);
-        if(id >= 0){
+        if(id > 0){
             message = "选课成功";
             //同步已选课程数和课程的会员数
             staffService.increaseNumberOfMember(take_course.getCourse_id());
@@ -218,7 +218,7 @@ public class StaffController {
     public String quitClass(Take_course take_course, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.deleteTakeCourse(take_course);
-        if(id >= 0){
+        if(id > 0){
             message = "退课成功";
             //同步已选课程数和课程的会员数
             staffService.decreaseNumberOfMember(take_course.getCourse_id());
@@ -237,7 +237,7 @@ public class StaffController {
     public String addStaff(Staff staff, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertStaff(staff);
-        if(id >= 0){
+        if(id > 0){
             message = "添加员工成功";
         }
         else {
@@ -252,7 +252,7 @@ public class StaffController {
     public String editStaff(Course staff, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.updateCourse(staff);
-        if(id >= 0){
+        if(id > 0){
             message = "修改员工成功";
         }
         else {

@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.software.fitness.dao.CoachDao">
+
     <insert id="insert" parameterType="com.software.fitness.domain.Coach">
         insert into coach
-        (`name`, `gender`, `date_of_birth`,`phone_number`,`address`,`state`,`introduction`)
+        (`name`, `gender`, `date_of_birth`,`phone_number`,`address`,`introduction`)
         VALUES
         (#{name},#{gender},#{date_of_birth},#{phone_number},#{address},#{introduction});
 
@@ -12,4 +13,17 @@
             SELECT last_insert_id();
         </selectKey>
     </insert>
+
+    <update id="update" parameterType="com.software.fitness.domain.Coach">
+
+    </update>
+
+    <delete id="delete" parameterType="com.software.fitness.domain.Coach">
+
+    </delete>
+
+    <select id="getAllCoach" resultType="com.software.fitness.domain.Coach">
+        select * from coach;
+    </select>
+
 </mapper>

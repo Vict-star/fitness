@@ -15,7 +15,7 @@ public class Member {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date validity;
     private String state;
-    private int number_of_courses;
+    private int number_of_course;
 
     public int getID() {
         return ID;
@@ -65,12 +65,12 @@ public class Member {
         this.validity = validity;
     }
 
-    public int getNumber_of_courses() {
-        return number_of_courses;
+    public int getNumber_of_course() {
+        return number_of_course;
     }
 
-    public void setNumber_of_courses(int number_of_courses) {
-        this.number_of_courses = number_of_courses;
+    public void setNumber_of_course(int number_of_course) {
+        this.number_of_course = number_of_course;
     }
 
     public String getPassword() {
@@ -100,7 +100,7 @@ public class Member {
                 ", phone_number='" + phone_number + '\'' +
                 ", validity=" + validity +
                 ", state='" + state + '\'' +
-                ", number_of_courses=" + number_of_courses +
+                ", number_of_courses=" + number_of_course +
                 '}';
     }
 }

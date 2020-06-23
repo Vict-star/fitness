@@ -7,8 +7,8 @@ import java.util.Date;
 public class Attendance {
     private int course_ID;
     private int member_ID;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date date_of_attendance;
 
     public int getCourse_ID() {
         return course_ID;
@@ -26,12 +26,12 @@ public class Attendance {
         this.member_ID = member_ID;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDate_of_attendance() {
+        return date_of_attendance;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate_of_attendance(Date date_of_attendance) {
+        this.date_of_attendance = date_of_attendance;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Attendance {
         return "Attendance{" +
                 "course_ID=" + course_ID +
                 ", member_ID=" + member_ID +
-                ", date=" + date +
+                ", date=" + date_of_attendance +
                 '}';
     }
 }

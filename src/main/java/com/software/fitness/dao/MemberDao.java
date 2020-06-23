@@ -21,7 +21,7 @@ public interface MemberDao {
 
     Member getMemberByID(int id);
 
-    Integer increaseNumberOfCourses(int id);
+    Integer increaseNumberOfCourse(int id);
 
-    Integer decreaseNumberOfCourses(int id);
+    Integer decreaseNumberOfCourse(int id);
 }
