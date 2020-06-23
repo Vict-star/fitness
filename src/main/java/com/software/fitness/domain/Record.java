@@ -1,12 +1,17 @@
 package com.software.fitness.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Record {
     private int record_id;
     private int staff_ID;
     private int member_ID;
-    private Timestamp time;
+    //TODO 需要确认
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date time;
     private String operation;
 
     public int getMember_ID() {
@@ -41,12 +46,12 @@ public class Record {
         this.operation = operation;
     }
 
-    public Timestamp getTime() {
-        return time;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
-    public void setTime(Timestamp time) {
-        this.time = time;
+    public Date getTime() {
+        return time;
     }
 
     @Override

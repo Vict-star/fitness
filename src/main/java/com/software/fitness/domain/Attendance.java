@@ -1,11 +1,13 @@
 package com.software.fitness.domain;
 
-import java.sql.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 public class Attendance {
     private int course_ID;
     private int member_ID;
-    //确定和数据库date对应？？？
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     public int getCourse_ID() {
@@ -31,8 +33,6 @@ public class Attendance {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    //等等，这个还没把date加入
 
     @Override
     public String toString() {

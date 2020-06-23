@@ -1,5 +1,7 @@
 package com.software.fitness.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Course {
@@ -10,6 +12,7 @@ public class Course {
     private int capacity;
     private int number_of_member;
     private String room_number;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date end_date;
     private String description;
 
