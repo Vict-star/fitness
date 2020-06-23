@@ -1,9 +1,6 @@
 package com.software.fitness.service.Impl;
 
-import com.software.fitness.dao.CoachDao;
-import com.software.fitness.dao.CourseDao;
-import com.software.fitness.dao.MemberDao;
-import com.software.fitness.dao.StaffDao;
+import com.software.fitness.dao.*;
 import com.software.fitness.domain.*;
 import com.software.fitness.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +16,12 @@ public class StaffServiceImpl implements StaffService {
     private MemberDao memberDao;
     @Autowired
     private CourseDao courseDao;
+    @Autowired
+    private Take_courseDao take_courseDao;
+    @Autowired
+    private AttendanceDao attendanceDao;
+    @Autowired
+    private Time_slotDao time_slotDao;
 
 
     @Override
@@ -138,51 +141,51 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Integer insertTimeSlot(Time_slot time_slot) {
-        return null;
+        return time_slotDao.insert(time_slot);
     }
 
     @Override
     public Integer updateTimeSlot(Time_slot time_slot) {
-        return null;
+        return time_slotDao.update(time_slot);
     }
 
     @Override
     public Integer deleteTimeSlot(Time_slot time_slot) {
-        return null;
+        return time_slotDao.delete(time_slot);
     }
 
     @Override
     public Time_slot[] getAllTimeSlot() {
-        return new Time_slot[0];
+        return time_slotDao.getAllTimeSlot();
     }
 
     @Override
     public Integer insertAttendance(Attendance attendance) {
-        return null;
+        return attendanceDao.insert(attendance);
     }
 
     @Override
     public Integer updateAttendance(Attendance attendance) {
-        return null;
+        return attendanceDao.update(attendance);
     }
 
     @Override
     public Integer deleteAttendance(Attendance attendance) {
-        return null;
+        return attendanceDao.delete(attendance);
     }
 
     @Override
     public Integer insertTakeCourse(Take_course take_course) {
-        return null;
+        return take_courseDao.insert(take_course);
     }
 
     @Override
     public Integer updateTakeCourse(Take_course take_course) {
-        return null;
+        return take_courseDao.update(take_course);
     }
 
     @Override
     public Integer deleteTakeCourse(Take_course take_course) {
-        return null;
+        return take_courseDao.delete(take_course);
     }
 }

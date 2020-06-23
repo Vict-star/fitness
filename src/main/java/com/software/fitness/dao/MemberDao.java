@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface MemberDao {
+
     Member getMemberByPhoneNumber(String phone_number);
 
     Integer insert(Member member);

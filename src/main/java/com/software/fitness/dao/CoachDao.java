@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface CoachDao {
+
     Integer insert(Coach coach);
 
     Integer update(Coach coach);

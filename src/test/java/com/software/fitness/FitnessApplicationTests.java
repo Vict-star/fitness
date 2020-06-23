@@ -18,7 +18,7 @@ class FitnessApplicationTests {
     //    测试获取用户
     @Test
     void testGetUser() {
-        Staff user = staffService.getStaffById("123456");
+        Staff user = staffService.getStaffByPhoneNumber("123456");
         System.out.print(user);
     }
 }
