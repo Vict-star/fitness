@@ -12,7 +12,9 @@ public class Member {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date_of_birth;
     private String phone_number;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date validity;
+    private String state;
     private int number_of_courses;
 
     public int getID() {
@@ -79,6 +81,14 @@ public class Member {
         this.password = password;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
@@ -89,6 +99,7 @@ public class Member {
                 ", date_of_birth=" + date_of_birth +
                 ", phone_number='" + phone_number + '\'' +
                 ", validity=" + validity +
+                ", state='" + state + '\'' +
                 ", number_of_courses=" + number_of_courses +
                 '}';
     }

@@ -1,4 +1,5 @@
 package com.software.fitness.component;
+import com.software.fitness.domain.Staff;
 import com.software.fitness.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;

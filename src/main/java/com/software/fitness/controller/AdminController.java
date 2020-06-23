@@ -17,6 +17,17 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ *  主页 /index
+ *  教练管理 /coachManage
+ *  会员管理 /memberManage
+ *  签到 /attendance
+ *  课程管理 /courseManage
+ *  会员选课 /chooseClass
+ *  课程表 /classTable
+ */
+
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {

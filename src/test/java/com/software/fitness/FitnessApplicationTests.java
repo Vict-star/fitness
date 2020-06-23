@@ -1,8 +1,7 @@
 package com.software.fitness;
 
 import com.software.fitness.domain.Staff;
-import com.software.fitness.domain.User;
-import com.software.fitness.service.UserService;
+import com.software.fitness.service.StaffService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class FitnessApplicationTests {
     @Autowired
-    private UserService userService;
+    private StaffService staffService;
 
     @Test
     void contextLoads() {
@@ -19,7 +18,7 @@ class FitnessApplicationTests {
     //    测试获取用户
     @Test
     void testGetUser() {
-        Staff user = userService.getStaffById("123456");
+        Staff user = staffService.getStaffById("123456");
         System.out.print(user);
     }
 }
