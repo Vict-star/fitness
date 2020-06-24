@@ -2,7 +2,6 @@ package com.software.fitness.controller;
 
 import com.software.fitness.domain.Coach;
 import com.software.fitness.domain.Member;
-import com.software.fitness.domain.User;
 import com.software.fitness.domain.Staff;
 //import com.software.fitness.service.AdminService;
 import com.software.fitness.service.AdminService;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 @RequestMapping("/admin")
@@ -34,7 +31,7 @@ public class AdminController {
 
     @GetMapping("/memberManage")
     public String memberManagePage(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("loginUser");
+        Staff user = (Staff) request.getSession().getAttribute("loginUser");
         if (user == null) {
             return "Login";
         } else {
@@ -44,7 +41,7 @@ public class AdminController {
 
     @GetMapping("/attendance")
     public String attendancePage(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("loginUser");
+       Staff user = (Staff) request.getSession().getAttribute("loginUser");
         if (user == null) {
             return "Login";
         } else {
@@ -79,6 +76,18 @@ public class AdminController {
         System.out.println(member.toString());
         return "redirect:/admin/memberManage";
     }
+
+
+    @GetMapping("/register")
+    public String registerPage(HttpServletRequest request) {
+        Staff user = (Staff) request.getSession().getAttribute("loginUser");
+        if (user == null) {
+            return "Login";
+        } else {
+            return "admin/register";
+        }
+    }
+
 
 
 }
