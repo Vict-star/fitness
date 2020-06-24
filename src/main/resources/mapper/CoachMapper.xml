@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.software.fitness.dao.CoachDao">
 
-    <insert id="insert" parameterType="com.software.fitness.domain.Coach">
+    <insert id="insert" parameterType="com.software.fitness.domain.Coach" useGeneratedKeys="true" keyProperty="id">
         insert into coach
         (`name`, `gender`, `date_of_birth`,`phone_number`,`address`,`introduction`)
         VALUES
@@ -15,15 +15,28 @@
     </insert>
 
     <update id="update" parameterType="com.software.fitness.domain.Coach">
-
+        update coach
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="gender != null">gender=#{gender},</if>
+            <if test="date_of_birth != null">date_of_birth=#{date_of_birth},</if>
+            <if test="phone_number != null">phone_number=#{phone_number},</if>
+            <if test="address != null">address=#{address},</if>
+            <if test="state != null">state=#{state},</if>
+            <if test="introduction != null">introduction=#{introduction},</if>
+        </set>
+        where id = #{id};
     </update>
 
     <delete id="delete" parameterType="com.software.fitness.domain.Coach">
-
+        delete
+        from coach
+        where id = #{id};
     </delete>
 
     <select id="getAllCoach" resultType="com.software.fitness.domain.Coach">
-        select * from coach;
+        select *
+        from coach;
     </select>
 
 </mapper>

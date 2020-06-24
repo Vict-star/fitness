@@ -5,36 +5,35 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class Record {
-    private int record_id;
-    private int staff_ID;
-    private int member_ID;
-    //TODO 需要确认
+    private int id;
+    private int staff_id;
+    private int member_id;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time;
     private String operation;
 
-    public int getMember_ID() {
-        return member_ID;
+    public int getMember_id() {
+        return member_id;
     }
 
-    public void setMember_ID(int member_ID) {
-        this.member_ID = member_ID;
+    public void setMember_id(int member_id) {
+        this.member_id = member_id;
     }
 
-    public int getRecord_id() {
-        return record_id;
+    public int getId() {
+        return id;
     }
 
-    public void setRecord_id(int record_id) {
-        this.record_id = record_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getStaff_ID() {
-        return staff_ID;
+    public int getStaff_id() {
+        return staff_id;
     }
 
-    public void setStaff_ID(int staff_ID) {
-        this.staff_ID = staff_ID;
+    public void setStaff_id(int staff_id) {
+        this.staff_id = staff_id;
     }
 
     public String getOperation() {
@@ -45,22 +44,23 @@ public class Record {
         this.operation = operation;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
     public Date getTime() {
         return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     @Override
     public String toString() {
         return "Record{" +
-                "record_id=" + record_id +
-                ", staff_ID=" + staff_ID +
-                ", member_ID=" + member_ID +
+                "id=" + id +
+                ", staff_id=" + staff_id +
+                ", member_id=" + member_id +
                 ", time=" + time +
                 ", operation='" + operation + '\'' +
                 '}';
     }
+
 }

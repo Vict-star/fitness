@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class Member {
-    private int ID;
+    private int id;
     private String password;
     private String name;
     private String gender;
@@ -17,12 +17,12 @@ public class Member {
     private String state;
     private int number_of_course;
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -92,7 +92,7 @@ public class Member {
     @Override
     public String toString() {
         return "Member{" +
-                "ID=" + ID +
+                "id=" + id +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", gender='" + gender + '\'' +
@@ -100,7 +100,8 @@ public class Member {
                 ", phone_number='" + phone_number + '\'' +
                 ", validity=" + validity +
                 ", state='" + state + '\'' +
-                ", number_of_courses=" + number_of_course +
+                ", number_of_course=" + number_of_course +
                 '}';
     }
+
 }

@@ -16,36 +16,34 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/staff")
 public class StaffController {
     /**
-     *  TODO 主页 /index
-     *  TODO 教练管理 /coachManage /add添加 /edit修改
-     *  TODO 会员管理 /memberManage /add添加 /edit修改
-     *  TODO 签到 /attendance /sign签到
-     *  TODO 课程管理 /courseManage /add添加 /edit修改
-     *  TODO 会员选课 /chooseClass /pick选课 /quit退课
-     *  TODO 课程表 /classTable
-     *  TODO 操作员管理 /staffManage /add添加 /edit修改
-     *  TODO 历史记录 /history
+     * TODO 主页 /index
+     * TODO 教练管理 /coachManage /add添加 /edit修改
+     * TODO 会员管理 /memberManage /add添加 /edit修改
+     * TODO 签到 /attendance /sign签到
+     * TODO 课程管理 /courseManage /add添加 /edit修改
+     * TODO 会员选课 /chooseClass /pick选课 /quit退课
+     * TODO 课程表 /classTable
+     * TODO 操作员管理 /staffManage /add添加 /edit修改
+     * TODO 历史记录 /history
      */
 
     @Autowired
     private StaffService staffService;
 
     /**
-     *
      * @param request
      * @return 是否登陆成功
      */
-    private boolean isLogin(@NonNull HttpServletRequest request){
+    private boolean isLogin(@NonNull HttpServletRequest request) {
         Staff staff = (Staff) request.getSession().getAttribute("loginUser");
         return staff != null;
     }
 
     /**
-     *
      * @param request
      * @return 是否为管理员
      */
-    private boolean isAdmin(@NonNull HttpServletRequest request){
+    private boolean isAdmin(@NonNull HttpServletRequest request) {
         Staff staff = (Staff) request.getSession().getAttribute("loginUser");
         return staff.getIs_admin().equals("是");
     }
@@ -70,28 +68,28 @@ public class StaffController {
     }
 
     @GetMapping("/classTable")
-    public String classTablePage(HttpServletRequest request){
+    public String classTablePage(HttpServletRequest request) {
         return isLogin(request) ? "staff/classTable" : "Login";
     }
 
     @GetMapping("/chooseClass")
-    public String chooseClassPage(HttpServletRequest request){
+    public String chooseClassPage(HttpServletRequest request) {
         return isLogin(request) ? "staff/chooseClass" : "Login";
     }
 
     @GetMapping("/courseManage")
-    public String courseManagePage(HttpServletRequest request){
+    public String courseManagePage(HttpServletRequest request) {
         return isLogin(request) ? "staff/courseManage" : "Login";
     }
 
     //更高权限
     @GetMapping("/staffManage")
-    public String staffManagePage(HttpServletRequest request){
+    public String staffManagePage(HttpServletRequest request) {
         return isLogin(request) && isAdmin(request) ? "staff/staffManage" : "Login";
     }
 
     @GetMapping("/history")
-    public String historyPage(HttpServletRequest request){
+    public String historyPage(HttpServletRequest request) {
         return isLogin(request) && isAdmin(request) ? "staff/history" : "Login";
     }
 
@@ -101,13 +99,12 @@ public class StaffController {
 
     //TODO coachManage页面操作方法
     @PostMapping("/coachManage/add")
-    public String addCoach(Coach coach, RedirectAttributes attributes){
+    public String addCoach(Coach coach, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertCoach(coach);
-        if(id > 0){
+        if (id > 0) {
             message = "添加教练成功";
-        }
-        else {
+        } else {
             message = "添加教练失败";
         }
         attributes.addFlashAttribute("message", message);
@@ -116,13 +113,12 @@ public class StaffController {
     }
 
     @PostMapping("/coachManage/edit")
-    public String editCoach(Coach coach, RedirectAttributes attributes){
+    public String editCoach(Coach coach, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.updateCoach(coach);
-        if(id > 0){
+        if (id > 0) {
             message = "修改教练成功";
-        }
-        else {
+        } else {
             message = "修改教练失败";
         }
         attributes.addFlashAttribute("message", message);
@@ -135,10 +131,9 @@ public class StaffController {
     public String addMember(Member member, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertMember(member);
-        if(id > 0){
+        if (id > 0) {
             message = "添加会员成功";
-        }
-        else {
+        } else {
             message = "添加会员失败";
         }
         attributes.addFlashAttribute("message", message);
@@ -150,10 +145,9 @@ public class StaffController {
     public String editMember(Member member, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.updateMember(member);
-        if(id > 0){
+        if (id > 0) {
             message = "修改会员成功";
-        }
-        else {
+        } else {
             message = "修改会员失败";
         }
         attributes.addFlashAttribute("message", message);
@@ -166,10 +160,9 @@ public class StaffController {
     public String attendanceSign(Attendance attendance, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertAttendance(attendance);
-        if(id > 0){
+        if (id > 0) {
             message = "签到成功";
-        }
-        else {
+        } else {
             message = "签到失败";
         }
         attributes.addFlashAttribute("message", message);
@@ -182,10 +175,9 @@ public class StaffController {
     public String addCourse(Course course, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertCourse(course);
-        if(id > 0){
+        if (id > 0) {
             message = "添加课程成功";
-        }
-        else {
+        } else {
             message = "添加课程失败";
         }
         attributes.addFlashAttribute("message", message);
@@ -197,10 +189,9 @@ public class StaffController {
     public String editCourse(Course course, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.updateCourse(course);
-        if(id > 0){
+        if (id > 0) {
             message = "修改课程成功";
-        }
-        else {
+        } else {
             message = "修改课程失败";
         }
         attributes.addFlashAttribute("message", message);
@@ -213,13 +204,12 @@ public class StaffController {
     public String pickClass(Take_course take_course, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertTakeCourse(take_course);
-        if(id > 0){
+        if (id > 0) {
             message = "选课成功";
             //同步已选课程数和课程的会员数
             staffService.increaseNumberOfMember(take_course.getCourse_id());
             staffService.increaseNumberOfCourses(take_course.getMember_id());
-        }
-        else {
+        } else {
             message = "选课失败";
         }
         attributes.addFlashAttribute("message", message);
@@ -231,13 +221,12 @@ public class StaffController {
     public String quitClass(Take_course take_course, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.deleteTakeCourse(take_course);
-        if(id > 0){
+        if (id > 0) {
             message = "退课成功";
             //同步已选课程数和课程的会员数
             staffService.decreaseNumberOfMember(take_course.getCourse_id());
             staffService.decreaseNumberOfCourses(take_course.getMember_id());
-        }
-        else {
+        } else {
             message = "退课失败";
         }
         attributes.addFlashAttribute("message", message);
@@ -250,10 +239,9 @@ public class StaffController {
     public String addStaff(Staff staff, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertStaff(staff);
-        if(id > 0){
+        if (id > 0) {
             message = "添加员工成功";
-        }
-        else {
+        } else {
             message = "添加员工失败";
         }
         attributes.addFlashAttribute("message", message);
@@ -265,10 +253,9 @@ public class StaffController {
     public String editStaff(Course staff, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.updateCourse(staff);
-        if(id > 0){
+        if (id > 0) {
             message = "修改员工成功";
-        }
-        else {
+        } else {
             message = "修改员工失败";
         }
         attributes.addFlashAttribute("message", message);

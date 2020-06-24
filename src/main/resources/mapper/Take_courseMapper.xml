@@ -6,16 +6,14 @@
     <insert id="insert" parameterType="com.software.fitness.domain.Take_course">
         insert into take_course
             (course_id, member_id)
-            VALUES
-                   (#{course_id},#{member_id});
+        VALUES (#{course_id}, #{member_id});
     </insert>
 
-    <update id="update" parameterType="com.software.fitness.domain.Take_course">
-
-    </update>
-
     <delete id="delete" parameterType="com.software.fitness.domain.Take_course">
-
+        delete
+        from take_course
+        where course_id = #{course_id}
+          and member_id = #{course_id};
     </delete>
 
 </mapper>

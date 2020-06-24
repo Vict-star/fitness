@@ -10,7 +10,6 @@ public interface AttendanceDao {
 
     Integer insert(Attendance attendance);
 
-    Integer update(Attendance attendance);
-
     Integer delete(Attendance attendance);
+
 }

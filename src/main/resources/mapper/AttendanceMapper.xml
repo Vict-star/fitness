@@ -2,21 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.software.fitness.dao.AttendanceDao">
+
     <insert id="insert" parameterType="com.software.fitness.domain.Attendance">
         insert into attendance
-        (`course_id`, `member_id`, date_of_attendance)
-        VALUES
-        (#{course_id}, #{member_id}, #{date})
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-            SELECT last_insert_id();
-        </selectKey>
+            (course_id, member_id, date_of_attendance)
+        VALUES (#{course_id}, #{member_id}, #{date_of_attendance});
     </insert>
 
-    <update id="update" parameterType="com.software.fitness.domain.Attendance">
-
-    </update>
-
     <delete id="delete" parameterType="com.software.fitness.domain.Attendance">
-
+        delete
+        from attendance
+        where course_id = #{course_id}
+          and member_id = #{member_id}
+          and date_of_attendance = #{date_of_attendance};
     </delete>
+
 </mapper>

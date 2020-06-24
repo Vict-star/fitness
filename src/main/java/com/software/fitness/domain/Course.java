@@ -5,10 +5,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class Course {
-    private int ID;
+    private int id;
     private String name;
     private int coach_id;
-    private int time_slot_time_slot_id;
+    private int time_slot_id;
     private int capacity;
     private int number_of_member;
     private String room_number;
@@ -24,12 +24,12 @@ public class Course {
         this.name = name;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Date getEnd_date() {
@@ -64,12 +64,12 @@ public class Course {
         this.number_of_member = number_of_member;
     }
 
-    public int getTime_slot_time_slot_id() {
-        return time_slot_time_slot_id;
+    public int getTime_slot_id() {
+        return time_slot_id;
     }
 
-    public void setTime_slot_time_slot_id(int time_slot_time_slot_id) {
-        this.time_slot_time_slot_id = time_slot_time_slot_id;
+    public void setTime_slot_id(int time_slot_id) {
+        this.time_slot_id = time_slot_id;
     }
 
     public String getDescription() {
@@ -91,10 +91,10 @@ public class Course {
     @Override
     public String toString() {
         return "Course{" +
-                "ID=" + ID +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", coach_id=" + coach_id +
-                ", time_slot_time_slot_id=" + time_slot_time_slot_id +
+                ", time_slot_id=" + time_slot_id +
                 ", capacity=" + capacity +
                 ", number_of_member=" + number_of_member +
                 ", room_number='" + room_number + '\'' +

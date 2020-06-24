@@ -90,6 +90,11 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
+    public Member getMemberByPhoneNumber(String phone_number) {
+        return memberDao.getMemberByPhoneNumber(phone_number);
+    }
+
+    @Override
     public Integer increaseNumberOfCourses(int id) {
         return memberDao.increaseNumberOfCourse(id);
     }
@@ -165,11 +170,6 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Integer updateAttendance(Attendance attendance) {
-        return attendanceDao.update(attendance);
-    }
-
-    @Override
     public Integer deleteAttendance(Attendance attendance) {
         return attendanceDao.delete(attendance);
     }
@@ -177,11 +177,6 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public Integer insertTakeCourse(Take_course take_course) {
         return take_courseDao.insert(take_course);
-    }
-
-    @Override
-    public Integer updateTakeCourse(Take_course take_course) {
-        return take_courseDao.update(take_course);
     }
 
     @Override

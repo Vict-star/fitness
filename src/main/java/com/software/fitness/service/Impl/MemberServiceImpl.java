@@ -37,11 +37,6 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Integer updateTakeCourse(Take_course take_course) {
-        return take_courseDao.update(take_course);
-    }
-
-    @Override
     public Integer deleteTakeCourse(Take_course take_course) {
         return take_courseDao.delete(take_course);
     }

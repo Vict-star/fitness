@@ -1,7 +1,7 @@
 package com.software.fitness.domain;
 
 public class Staff {
-    private int ID;
+    private int id;
     private String password;
     private String name;
     private String phone_number;
@@ -33,12 +33,12 @@ public class Staff {
         this.name = name;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAddress() {
@@ -65,4 +65,16 @@ public class Staff {
         this.state = state;
     }
 
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "id=" + id +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", address='" + address + '\'' +
+                ", state='" + state + '\'' +
+                ", is_admin='" + is_admin + '\'' +
+                '}';
+    }
 }

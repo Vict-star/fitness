@@ -10,7 +10,5 @@ public interface Take_courseDao {
 
     Integer insert(Take_course take_course);
 
-    Integer update(Take_course take_course);
-
     Integer delete(Take_course take_course);
 }

@@ -1,6 +1,9 @@
 package com.software.fitness.service;
 
-import com.software.fitness.domain.*;
+import com.software.fitness.domain.Coach;
+import com.software.fitness.domain.Course;
+import com.software.fitness.domain.Member;
+import com.software.fitness.domain.Take_course;
 
 public interface MemberService {
 
@@ -9,8 +12,6 @@ public interface MemberService {
     Integer updateMember(Member member);
 
     Integer insertTakeCourse(Take_course take_course);
-
-    Integer updateTakeCourse(Take_course take_course);
 
     Integer deleteTakeCourse(Take_course take_course);
 

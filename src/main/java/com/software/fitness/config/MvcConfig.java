@@ -12,7 +12,7 @@ public class MvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**", "/index/**","/staff/**", "/member/**")
+        registry.addResourceHandler("/**", "/index/**", "/staff/**", "/member/**")
                 .addResourceLocations("classpath:/static/");
         super.addResourceHandlers(registry);
     }
@@ -28,7 +28,7 @@ public class MvcConfig extends WebMvcConfigurationSupport {
         super.addInterceptors(registry);
         registry.addInterceptor(new LoginHandlerInterceptor())
                 .addPathPatterns("/staff/**").addPathPatterns("/member/**")
-                .excludePathPatterns("/Login","/index","/index/Login","/bootstrap-4.5.0-dist/**");
+                .excludePathPatterns("/Login", "/index", "/index/Login", "/bootstrap-4.5.0-dist/**");
     }
 
 }

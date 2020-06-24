@@ -11,6 +11,7 @@ import com.software.fitness.domain.*;
 public interface StaffService {
 
     Staff getStaffByPhoneNumber(String phone_number);
+
     //Admin级权限
     Integer insertStaff(Staff staff);
 
@@ -35,6 +36,8 @@ public interface StaffService {
     Integer deleteMember(Member member);
 
     Member getMemberByID(int id);
+
+    Member getMemberByPhoneNumber(String phone_number);
 
     Integer increaseNumberOfCourses(int id);
 
@@ -66,13 +69,9 @@ public interface StaffService {
 
     Integer insertAttendance(Attendance attendance);
 
-    Integer updateAttendance(Attendance attendance);
-
     Integer deleteAttendance(Attendance attendance);
 
     Integer insertTakeCourse(Take_course take_course);
-
-    Integer updateTakeCourse(Take_course take_course);
 
     Integer deleteTakeCourse(Take_course take_course);
 
