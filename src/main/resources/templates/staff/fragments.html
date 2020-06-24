@@ -38,40 +38,37 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a th:class="${activeUri=='attendance'?'nav-link active':'nav-link'}" href="#">
+                <a th:class="${activeUri=='attendance'?'nav-link active':'nav-link'}" href="/staff/attendance">
                     <span data-feather="clipboard"></span>
                     会员考勤
                 </a>
             </li>
             <li class="nav-item">
-                <a th:class="${activeUri=='chooseClass'?'nav-link active':'nav-link'}" href="#">
+                <a th:class="${activeUri=='chooseClass'?'nav-link active':'nav-link'}" href="/staff/chooseClass">
                     <span data-feather="shopping-cart"></span>
                     会员选课
                 </a>
             </li>
             <li class="nav-item">
-                <a th:class="${activeUri=='memberManage'?'nav-link active':'nav-link'}" href="#">
+                <a th:class="${activeUri=='memberManage'?'nav-link active':'nav-link'}" href="/staff/memberManage">
                     <span data-feather="users"></span>
                     会员管理
                 </a>
             </li>
             <li class="nav-item">
-                <a th:class="${activeUri=='coachManage'?'nav-link active':'nav-link'}"
-                   href="/staff/coachManage">
+                <a th:class="${activeUri=='coachManage'?'nav-link active':'nav-link'}" href="/staff/coachManage">
                     <span data-feather="user"></span>
                     教练管理
                 </a>
             </li>
             <li class="nav-item">
-                <a th:class="${activeUri=='courseManage'?'nav-link active':'nav-link'}"
-                   href="#">
+                <a th:class="${activeUri=='courseManage'?'nav-link active':'nav-link'}" href="/staff/courseManage">
                     <span data-feather="layers"></span>
                     课程管理
                 </a>
             </li>
             <li class="nav-item">
-                <a th:class="${activeUri=='classTable'?'nav-link active':'nav-link'}"
-                   href="/staff/classTable">
+                <a th:class="${activeUri=='classTable'?'nav-link active':'nav-link'}" href="/staff/classTable">
                     <span data-feather="file-text"></span>
                     课程表
                 </a>
