@@ -12,7 +12,7 @@ public class MvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**", "/index/**","/admin/**")
+        registry.addResourceHandler("/**", "/index/**","/staff/**", "/member/**")
                 .addResourceLocations("classpath:/static/");
         super.addResourceHandlers(registry);
     }

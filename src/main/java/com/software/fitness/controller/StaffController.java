@@ -24,6 +24,7 @@ public class StaffController {
      *  TODO 会员选课 /chooseClass /pick选课 /quit退课
      *  TODO 课程表 /classTable
      *  TODO 操作员管理 /staffManage /add添加 /edit修改
+     *  TODO 历史记录 /history
      */
 
     @Autowired
@@ -39,7 +40,13 @@ public class StaffController {
         return staff != null;
     }
 
-    private boolean isAdmin(@NonNull Staff staff){
+    /**
+     *
+     * @param request
+     * @return 是否为管理员
+     */
+    private boolean isAdmin(@NonNull HttpServletRequest request){
+        Staff staff = (Staff) request.getSession().getAttribute("loginUser");
         return staff.getIs_admin().equals("是");
     }
 
@@ -77,9 +84,15 @@ public class StaffController {
         return isLogin(request) ? "staff/courseManage" : "Login";
     }
 
+    //更高权限
     @GetMapping("/staffManage")
     public String staffManagePage(HttpServletRequest request){
-        return isLogin(request) ? "staff/staffManage" : "Login";
+        return isLogin(request) && isAdmin(request) ? "staff/staffManage" : "Login";
+    }
+
+    @GetMapping("/history")
+    public String historyPage(HttpServletRequest request){
+        return isLogin(request) && isAdmin(request) ? "staff/history" : "Login";
     }
 
     /**

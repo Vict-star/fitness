@@ -18,4 +18,9 @@ public class RecordServiceImpl implements RecordService {
     public Integer deleteRecord(Record record) {
         return recordDao.delete(record);
     }
+
+    @Override
+    public Record[] getAllRecord() {
+        return recordDao.getAllRecord();
+    }
 }

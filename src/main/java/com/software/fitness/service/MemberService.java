@@ -3,6 +3,7 @@ package com.software.fitness.service;
 import com.software.fitness.domain.*;
 
 public interface MemberService {
+
     Member getMemberByPhoneNumber(String phone_number);
 
     Integer updateMember(Member member);
@@ -16,4 +17,5 @@ public interface MemberService {
     Course[] getAllCourse();
 
     Coach[] getAllCoach();
+
 }

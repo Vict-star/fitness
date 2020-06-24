@@ -14,4 +14,8 @@
 
     </delete>
 
+    <select id="getAllRecord" resultType="com.software.fitness.domain.Record">
+        select * from record;
+    </select>
+
 </mapper>

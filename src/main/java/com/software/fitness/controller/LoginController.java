@@ -25,7 +25,7 @@ public class LoginController {
         if (user == null) {
             return "Login";
         } else {
-            return "admin/index";
+            return "staff/index";
         }
     }
 

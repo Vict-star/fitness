@@ -9,8 +9,8 @@ import com.software.fitness.domain.*;
  */
 
 public interface StaffService {
-    Staff getStaffByPhoneNumber(String phone_number);
 
+    Staff getStaffByPhoneNumber(String phone_number);
     //Admin级权限
     Integer insertStaff(Staff staff);
 

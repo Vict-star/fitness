@@ -13,4 +13,6 @@ public interface RecordDao {
 
     Integer delete(Record record);
 
+    Record[] getAllRecord();
+
 }
