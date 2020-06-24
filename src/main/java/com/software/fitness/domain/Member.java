@@ -5,22 +5,24 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class Member {
-    private int ID;
+    private int id;
     private String password;
     private String name;
     private String gender;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date_of_birth;
     private String phone_number;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date validity;
-    private int number_of_courses;
+    private String state;
+    private int number_of_course;
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -63,12 +65,12 @@ public class Member {
         this.validity = validity;
     }
 
-    public int getNumber_of_courses() {
-        return number_of_courses;
+    public int getNumber_of_course() {
+        return number_of_course;
     }
 
-    public void setNumber_of_courses(int number_of_courses) {
-        this.number_of_courses = number_of_courses;
+    public void setNumber_of_course(int number_of_course) {
+        this.number_of_course = number_of_course;
     }
 
     public String getPassword() {
@@ -79,17 +81,27 @@ public class Member {
         this.password = password;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
-                "ID=" + ID +
+                "id=" + id +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", gender='" + gender + '\'' +
                 ", date_of_birth=" + date_of_birth +
                 ", phone_number='" + phone_number + '\'' +
                 ", validity=" + validity +
-                ", number_of_courses=" + number_of_courses +
+                ", state='" + state + '\'' +
+                ", number_of_course=" + number_of_course +
                 '}';
     }
+
 }

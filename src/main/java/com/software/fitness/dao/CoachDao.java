@@ -7,5 +7,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface CoachDao {
-    Integer addCoach(Coach coach);
+
+    Integer insert(Coach coach);
+
+    Integer update(Coach coach);
+
+    Integer delete(Coach coach);
+
+    Coach[] getAllCoach();
 }

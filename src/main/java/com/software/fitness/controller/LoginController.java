@@ -1,8 +1,7 @@
 package com.software.fitness.controller;
 
 import com.software.fitness.domain.Staff;
-import com.software.fitness.domain.User;
-import com.software.fitness.service.UserService;
+import com.software.fitness.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/index")
 public class LoginController {
     @Autowired
-    private UserService userService;
+    private StaffService staffService;
 
     @GetMapping
     public String login(HttpServletRequest request) {
@@ -26,19 +25,19 @@ public class LoginController {
         if (user == null) {
             return "Login";
         } else {
-            return "admin/index";
+            return "staff/index";
         }
     }
 
     @PostMapping("/Login")
-    public String userlogin(@RequestParam String userId, @RequestParam String password,
-                            RedirectAttributes attributes, HttpServletRequest request) {
-        Staff user = userService.getStaffById(userId);
-        System.out.print(user);
-        if (user != null && user.getPassword().equals(password)) {
-            user.setPassword("");
-            request.getSession().setAttribute("loginUser", user);
-            return "/admin/index";
+    public String login(@RequestParam String phone_number, @RequestParam String password,
+                        RedirectAttributes attributes, HttpServletRequest request) {
+        Staff staff = staffService.getStaffByPhoneNumber(phone_number);
+        System.out.print(staff);
+        if (staff != null && staff.getPassword().equals(password) && staff.getState().equals("在职")) {
+            staff.setPassword("");
+            request.getSession().setAttribute("loginUser", staff);
+            return "/staff/index";
         } else {
             attributes.addFlashAttribute("message", "用户名或密码错误");
             return "redirect:/index";
@@ -46,7 +45,7 @@ public class LoginController {
     }
 
     @GetMapping("/Logout")
-    public String userloginOut(HttpServletRequest request) {
+    public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("loginUser");
         return "redirect:/index";
     }

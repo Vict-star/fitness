@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.software.fitness.dao.MemberDao">
+
+    <insert id="insert" parameterType="com.software.fitness.domain.Member" useGeneratedKeys="true" keyProperty="id">
+        insert into member
+        (password, name, gender, date_of_birth, phone_number, validity, number_of_course)
+        VALUES
+        (#{password},#{name},#{gender},#{date_of_birth},#{phone_number},#{validity},#{number_of_course});
+
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT last_insert_id();
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="com.software.fitness.domain.Member">
+        update member
+        <set>
+            <if test="password != null">password = #{password},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="date_of_birth != null">date_of_birth = #{date_of_birth},</if>
+            <if test="phone_number != null">phone_number = #{phone_number},</if>
+            <if test="validity != null">validity = #{validity},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="number_of_course != 0">number_of_course = #{number_of_course},</if>
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="com.software.fitness.domain.Member">
+        delete from member where id = #{id};
+    </delete>
+
+    <select id="getMemberByPhoneNumber" resultType="com.software.fitness.domain.Member">
+        select * from member where phone_number=#{phone_number};
+    </select>
+
+    <select id="getAllMember" resultType="com.software.fitness.domain.Member">
+        select * from member;
+    </select>
+
+    <select id="getMemberByID" resultType="com.software.fitness.domain.Member">
+        select * from member where id=#{id};
+    </select>
+
+    <update id="increaseNumberOfCourse">
+        update member set number_of_course = number_of_course + 1 where id=#{id};
+    </update>
+
+    <update id="decreaseNumberOfCourse">
+        update member set number_of_course = number_of_course - 1 where id=#{id};
+    </update>
+
+</mapper>

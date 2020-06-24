@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.software.fitness.dao.CourseDao">
+
+    <insert id="insert" parameterType="com.software.fitness.domain.Course" useGeneratedKeys="true" keyProperty="id">
+        insert into course
+        (name, coach_id, time_slot_id, capacity, room_number, start_date, end_date, description)
+        VALUES (#{name}, #{coach_id}, #{time_slot_id}, #{capacity}, #{room_number}, #{start_date}, #{end_date},
+                #{description});
+    </insert>
+
+    <update id="update" parameterType="com.software.fitness.domain.Course">
+        update course
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="coach_id != 0">coach_id = #{coach_id},</if>
+            <if test="time_slot_id != 0">time_slot_id = #{time_slot_id},</if>
+            <if test="capacity != 0">capacity = #{capacity},</if>
+            <if test="number_of_member != 0">number_of_member = #{number_of_member},</if>
+            <if test="room_number != null">room_number = #{room_number},</if>
+            <if test="start_date != null">start_date = #{start_date},</if>
+            <if test="end_date != null">end_date = #{end_date},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="description != null">description = #{description},</if>
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="com.software.fitness.domain.Course">
+        delete
+        from course
+        where id = #{id};
+    </delete>
+
+    <select id="getCourseByID" parameterType="int" resultType="com.software.fitness.domain.Course">
+        select *
+        from course
+        where id = #{id};
+    </select>
+
+    <update id="increaseNumberOfMember" parameterType="int">
+        update course
+        set number_of_member = number_of_member + 1
+        where id = #{id};
+    </update>
+
+    <update id="decreaseNumberOfMember" parameterType="int">
+        update course
+        set number_of_member = number_of_member - 1
+        where id = #{id};
+    </update>
+
+    <select id="getAllCourse" resultType="com.software.fitness.domain.Course">
+        select *
+        from course;
+    </select>
+
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.software.fitness.dao.Time_slotDao">
+
+    <insert id="insert" parameterType="com.software.fitness.domain.Time_slot" useGeneratedKeys="true" keyProperty="id">
+        insert into time_slot (start_time, end_time, day) VALUES (#{start_time},#{end_time},#{day});
+
+        <selectKey keyProperty="order_id" order="AFTER" resultType="java.lang.Integer">
+            SELECT last_insert_id();
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="com.software.fitness.domain.Time_slot">
+        update time_slot
+        <set>
+            <if test="start_time != null">start_time = #{start_time},</if>
+            <if test="end_time != null">end_time = #{end_time},</if>
+            <if test="day != null">day = #{day},</if>
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="com.software.fitness.domain.Time_slot">
+        delete
+        from time_slot
+        where id = #{id};
+    </delete>
+
+    <select id="getAllTimeSlot" resultType="com.software.fitness.domain.Time_slot">
+        select *
+        from time_slot;
+    </select>
+
+</mapper>

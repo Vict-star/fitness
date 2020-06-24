@@ -6,7 +6,7 @@
     <meta content="" name="description">
     <meta content="Mark Otto, Jacob Thornton, and Bootstrap contributors" name="author">
     <meta content="Jekyll v4.0.1" name="generator">
-    <title>Dashboard Template · Bootstrap</title>
+    <title>力美健后台管理</title>
 
     <link href="https://getbootstrap.com/docs/4.5/examples/dashboard/" rel="canonical">
 
@@ -37,26 +37,33 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div th:replace="staff/fragments::sidebarMenu(activeUri='user')"></div>
+        <div th:replace="staff/fragments::sidebarMenu(activeUri='home')"></div>
 
         <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4" role="main">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Dashboard</h1>
+                <h1 class="h2">下午好，[[${session.loginUser.name}]]!</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button class="btn btn-sm btn-outline-secondary" type="button">Share</button>
                         <button class="btn btn-sm btn-outline-secondary" type="button">Export</button>
                     </div>
-                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button">
-                        <span data-feather="calendar"></span>
-                        This week
-                    </button>
                 </div>
             </div>
-
-            <canvas class="my-4 w-100" height="380" id="myChart" width="900"></canvas>
-
-            <h2>Section title</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <canvas class="my-4 w-100" height="380" id="myChart" width="900"></canvas>
+                    <!--          <img src="https://upfile2.asqql.com/upfile/hdimg/wmtp/wmtp/2018-07/08/18_7_8_14_26_06tksiguf1.jpg" class="img-fluid" alt="Responsive image">-->
+                </div>
+                <div class="col-md-4">
+                    <div class="jumbotron">
+                        <h2 class="display-5">通知</h2>
+                        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra
+                            attention to featured content or information.</p>
+                        <hr class="my-4">
+                        <p>2020-6-19 From：管理员zcf</p>
+                    </div>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -184,6 +191,7 @@
                     </tbody>
                 </table>
             </div>
+
         </main>
     </div>
 </div>
