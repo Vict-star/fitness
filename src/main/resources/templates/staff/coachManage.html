@@ -93,7 +93,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="coach :${coachList}">
-                        <td th:text="${coach.ID}"></td>
+                        <td th:text="${coach.id}"></td>
                         <td th:text="${coach.name}"></td>
                         <td th:text="${coach.gender}"></td>
                         <td th:text="${#dates.format(coach.date_of_birth,'yyyy年MM月dd日')}"></td>
@@ -102,13 +102,13 @@
                         <td th:text="${coach.state}"></td>
                         <td><button class="btn btn-success" th:onclick="infoModal([[${coach.name}]],[[${coach.introduction}]]);">查看</button></td>
                         <td>
-                            <a class="btn btn-outline-primary btn-sm" th:href="@{/admin/coachManage/}+${coach.ID}">
+                            <a class="btn btn-outline-primary btn-sm" th:href="@{/staff/coachManage/}+${coach.id}">
                                 编辑</a>
-                            <form th:if="${coach.state=='在职'}" th:action="@{/admin/coachManage/}+${coach.ID}+@{/dismiss}" method="post"
+                            <form th:if="${coach.state=='在职'}" th:action="@{/staff/coachManage/}+${coach.id}+@{/dismiss}" method="post"
                                   onsubmit="return comfirmDismiss()">
                             <button class="btn btn-outline-danger btn-sm" >离职</button>
                             </form>
-                            <form th:if="${coach.state=='离职'}" th:action="@{/admin/coachManage/}+${coach.ID}+@{/employ}" method="post">
+                            <form th:if="${coach.state=='离职'}" th:action="@{/staff/coachManage/}+${coach.id}+@{/employ}" method="post">
                                 <button class="btn btn-outline-info btn-sm" >启用</button>
                             </form>
                         </td>
@@ -191,7 +191,7 @@
 <div class="modal fade" id="ModalInfo" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
-            <form action="/admin/coachManage/add" method="post">
+            <form action="/staff/coachManage/add" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="title"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

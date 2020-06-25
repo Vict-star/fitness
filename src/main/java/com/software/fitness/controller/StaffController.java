@@ -5,6 +5,7 @@ import com.software.fitness.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,8 +54,12 @@ public class StaffController {
      * 以下是GET方法的函数
      */
     @GetMapping("/coachManage")
-    public String coachManagePage(HttpServletRequest request) {
-        return isLogin(request) ? "staff/coachManage" : "Login";
+    public String coachManagePage(HttpServletRequest request, Model model) {
+        if(isLogin(request)){
+            model.addAttribute("coachList",staffService.getAllCoach());
+            return "staff/coachManage";
+        }
+        return "Login";
     }
 
     @GetMapping("/memberManage")
