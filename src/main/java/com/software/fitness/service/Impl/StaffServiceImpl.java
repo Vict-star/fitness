@@ -155,6 +155,11 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
+    public Course[] getCourseByState(String state) {
+        return courseDao.getCourseByState(state);
+    }
+
+    @Override
     public Integer insertTimeSlot(Time_slot time_slot) {
         return time_slotDao.insert(time_slot);
     }

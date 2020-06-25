@@ -5,8 +5,8 @@
 
     <insert id="insert" parameterType="com.software.fitness.domain.Course" useGeneratedKeys="true" keyProperty="id">
         insert into course
-        (name, coach_id, capacity,time_slot_id, room_number, start_date, end_date, description)
-        VALUES (#{name}, #{coach_id}, #{capacity},#{time_slot_id}, #{room_number}, #{start_date}, #{end_date},
+        (name, coach_id, capacity, time_slot_id, room_number, start_date, end_date, description)
+        VALUES (#{name}, #{coach_id}, #{capacity}, #{time_slot_id}, #{room_number}, #{start_date}, #{end_date},
                 #{description});
     </insert>
 
@@ -56,5 +56,10 @@
         from course;
     </select>
 
+    <select id="getCourseByState" parameterType="String" resultType="com.software.fitness.domain.Course">
+        select *
+        from course
+        where state = #{state};
+    </select>
 
 </mapper>

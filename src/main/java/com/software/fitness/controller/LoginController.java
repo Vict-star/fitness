@@ -1,6 +1,5 @@
 package com.software.fitness.controller;
 
-import com.software.fitness.domain.Member;
 import com.software.fitness.domain.Staff;
 import com.software.fitness.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;

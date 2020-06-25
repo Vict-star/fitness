@@ -4,8 +4,8 @@
 <mapper namespace="com.software.fitness.dao.RecordDao">
 
     <insert id="insert" parameterType="com.software.fitness.domain.Record" useGeneratedKeys="true" keyProperty="id">
-        insert into record (staff_id, member_id, time, operation) VALUES
-        (#{staff_id},#{member_id},#{time},#{operation});
+        insert into record (staff_id, member_id, time, operation)
+        VALUES (#{staff_id}, #{member_id}, #{time}, #{operation});
     </insert>
 
     <delete id="delete" parameterType="com.software.fitness.domain.Record">

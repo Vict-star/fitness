@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
 
 @Controller
 @RequestMapping("/staff")
@@ -59,8 +60,8 @@ public class StaffController {
      */
     @GetMapping("/coachManage")
     public String coachManagePage(HttpServletRequest request, Model model) {
-        if(isLogin(request)){
-            model.addAttribute("coachList",staffService.getAllCoach());
+        if (isLogin(request)) {
+            model.addAttribute("coachList", staffService.getAllCoach());
             return "staff/coachManage";
         }
         return "Login";
@@ -68,8 +69,8 @@ public class StaffController {
 
     @GetMapping("/memberManage")
     public String memberManagePage(HttpServletRequest request, Model model) {
-        if(isLogin(request)){
-            model.addAttribute("memberList",staffService.getAllMember());
+        if (isLogin(request)) {
+            model.addAttribute("memberList", staffService.getAllMember());
             return "staff/memberManage";
         }
         return "Login";
@@ -77,19 +78,29 @@ public class StaffController {
 
     @GetMapping("/attendance")
     public String attendancePage(HttpServletRequest request, Model model) {
-        if(isLogin(request)){
-            model.addAttribute("courseList",staffService.getAllCourse());
+        if (isLogin(request)) {
+            model.addAttribute("courseList", staffService.getCourseByState("正在上课"));
             return "staff/attendance";
+        }
+        return "Login";
+    }
+
+    @GetMapping("/attendance/{id}")
+    public String attendanceSignPage(@PathVariable("id") int id, HttpServletRequest request, Model model) {
+        if (isLogin(request)) {
+            model.addAttribute("course", staffService.getCourseByID(id));
+            model.addAttribute("memberList", staffService.getMemberByCourseID(id));
+            return "staff/attendanceSign";
         }
         return "Login";
     }
 
     @GetMapping("/classTable")
     public String classTablePage(HttpServletRequest request, Model model) {
-        if(isLogin(request)){
-            model.addAttribute("courseList",staffService.getAllCourse());
-            model.addAttribute("coachList",staffService.getAllCoach());
-            model.addAttribute("time_slotList",staffService.getAllTimeSlot());
+        if (isLogin(request)) {
+            model.addAttribute("courseList", staffService.getAllCourse());
+            model.addAttribute("coachList", staffService.getAllCoach());
+            model.addAttribute("time_slotList", staffService.getAllTimeSlot());
         }
         return isLogin(request) ? "staff/classTable" : "Login";
     }
@@ -101,8 +112,8 @@ public class StaffController {
 
     @GetMapping("/courseManage")
     public String courseManagePage(HttpServletRequest request, Model model) {
-        if(isLogin(request)){
-            model.addAttribute("courseList",staffService.getAllCourse());
+        if (isLogin(request)) {
+            model.addAttribute("courseList", staffService.getAllCourse());
             return "staff/courseManage";
         }
         return "Login";
@@ -110,8 +121,8 @@ public class StaffController {
 
     @GetMapping("/courseManage/{id}")
     public String courseEditPage(@PathVariable("id") int id, HttpServletRequest request, Model model) {
-        if(isLogin(request)){
-            model.addAttribute("course",staffService.getCourseByID(id));
+        if (isLogin(request)) {
+            model.addAttribute("course", staffService.getCourseByID(id));
             return "staff/courseEdit";
         }
         return "Login";
@@ -120,8 +131,8 @@ public class StaffController {
     //更高权限
     @GetMapping("/staffManage")
     public String staffManagePage(HttpServletRequest request, Model model) {
-        if(isLogin(request) && isAdmin(request)){
-            model.addAttribute("staffList",staffService.getAllStaff());
+        if (isLogin(request) && isAdmin(request)) {
+            model.addAttribute("staffList", staffService.getAllStaff());
             return "staff/staffManage";
         }
         return "Login";
@@ -129,8 +140,8 @@ public class StaffController {
 
     @GetMapping("/history")
     public String historyPage(HttpServletRequest request, Model model) {
-        if(isLogin(request)){
-            model.addAttribute("recordList",recordService.getAllRecord());
+        if (isLogin(request)) {
+            model.addAttribute("recordList", recordService.getAllRecord());
             return "staff/history";
         }
         return "Login";
@@ -138,8 +149,8 @@ public class StaffController {
 
     @GetMapping("/coachManage/{id}")
     public String coachEditPage(@PathVariable("id") int id, HttpServletRequest request, Model model) {
-        if(isLogin(request)){
-            model.addAttribute("coach",staffService.getCoachByID(id));
+        if (isLogin(request)) {
+            model.addAttribute("coach", staffService.getCoachByID(id));
             return "staff/coachEdit";
         }
         return "Login";
@@ -179,15 +190,15 @@ public class StaffController {
     }
 
     @PostMapping("/coachManage/{id}/dismiss")
-    public String dismissCoach(@PathVariable("id") int id, RedirectAttributes attributes){
+    public String dismissCoach(@PathVariable("id") int id, RedirectAttributes attributes) {
         Coach coach = new Coach();
         coach.setId(id);
         coach.setState("离职");
         Integer er = staffService.updateCoach(coach);
         String message = "";
-        if(er != null && er > 0){
+        if (er != null && er > 0) {
             message = "" + id + " 已离职";
-        }else{
+        } else {
             message = "更改失败，请稍后重试";
         }
         attributes.addFlashAttribute("message", message);
@@ -195,15 +206,15 @@ public class StaffController {
     }
 
     @PostMapping("/coachManage/{id}/employ")
-    public String employCoach(@PathVariable("id") int id,RedirectAttributes attributes){
+    public String employCoach(@PathVariable("id") int id, RedirectAttributes attributes) {
         Coach coach = new Coach();
         coach.setId(id);
         coach.setState("在职");
         Integer er = staffService.updateCoach(coach);
         String message = "";
-        if(er != null && er > 0){
+        if (er != null && er > 0) {
             message = "" + id + " 已启用";
-        }else{
+        } else {
             message = "更改失败，请稍后重试";
         }
         attributes.addFlashAttribute("message", message);
@@ -211,19 +222,36 @@ public class StaffController {
     }
 
     @PostMapping("/coachManage/{id}/update")
-    public String updateCoach(@PathVariable int id, Coach coach,RedirectAttributes attributes) {
+    public String updateCoach(@PathVariable("id") int id, Coach coach, RedirectAttributes attributes) {
         coach.setId(id);
         Integer er = staffService.updateCoach(coach);
         String message;
-        if(er != null && er > 0){
+        if (er != null && er > 0) {
             message = "更新成功";
-        }else{
+        } else {
             message = "更改失败，请稍后重试";
         }
         attributes.addFlashAttribute("message", message);
-        return "redirect:/staff/coachManage/"+id;
+        return "redirect:/staff/coachManage/" + id;
     }
 
+    @PostMapping("/attendance/{cid}/{mid}")
+    public String updateCoach(@PathVariable("cid") int cid, @PathVariable("mid") int mid, RedirectAttributes attributes) {
+        Attendance attendance = new Attendance();
+        attendance.setCourse_id(cid);
+        attendance.setMember_id(cid);
+        Calendar calendar = Calendar.getInstance();
+        attendance.setDate_of_attendance(calendar.getTime());
+        Integer er = staffService.insertAttendance(attendance);
+        String message;
+        if (er != null && er > 0) {
+            message = "签到成功";
+        } else {
+            message = "签到失败";
+        }
+        attributes.addFlashAttribute("message", message);
+        return "redirect:/staff/attendance/" + cid;
+    }
 
 
     //TODO memberManage页面操作方法
@@ -300,15 +328,15 @@ public class StaffController {
     }
 
     @PostMapping("/courseManage/{id}/cancel")
-    public String cancelCourse(@PathVariable("id") int id, RedirectAttributes attributes){
+    public String cancelCourse(@PathVariable("id") int id, RedirectAttributes attributes) {
         Course course = new Course();
         course.setId(id);
         course.setState("已结课");
         Integer er = staffService.updateCourse(course);
         String message = "";
-        if(er != null && er > 0){
+        if (er != null && er > 0) {
             message = "" + id + " 已取消";
-        }else{
+        } else {
             message = "更改失败，请稍后重试";
         }
         attributes.addFlashAttribute("message", message);
@@ -316,18 +344,18 @@ public class StaffController {
     }
 
     @PostMapping("/courseManage/{id}/update")
-    public String cancelCourse(@PathVariable("id") int id,Course course,RedirectAttributes attributes){
+    public String cancelCourse(@PathVariable("id") int id, Course course, RedirectAttributes attributes) {
         course.setId(id);
         Integer er = staffService.updateCourse(course);
         System.out.println(course.toString());
         String message = "";
-        if(er != null && er > 0){
+        if (er != null && er > 0) {
             message = "" + id + " 已更新";
-        }else{
+        } else {
             message = "更改失败，请稍后重试";
         }
         attributes.addFlashAttribute("message", message);
-        return "redirect:/staff/courseManage/"+id;
+        return "redirect:/staff/courseManage/" + id;
     }
 
     //TODO chooseClass页面操作方法

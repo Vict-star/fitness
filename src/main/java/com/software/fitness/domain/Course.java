@@ -95,12 +95,12 @@ public class Course {
         return state;
     }
 
-    public Date getStart_date() {
-        return start_date;
-    }
-
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Date getStart_date() {
+        return start_date;
     }
 
     public void setStart_date(Date start_date) {

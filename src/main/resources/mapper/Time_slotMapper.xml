@@ -4,7 +4,8 @@
 <mapper namespace="com.software.fitness.dao.Time_slotDao">
 
     <insert id="insert" parameterType="com.software.fitness.domain.Time_slot" keyProperty="id">
-        insert into time_slot (id,start_time, end_time, day) VALUES (#{id},#{start_time},#{end_time},#{day});
+        insert into time_slot (id, start_time, end_time, day)
+        VALUES (#{id}, #{start_time}, #{end_time}, #{day});
     </insert>
 
     <update id="update" parameterType="com.software.fitness.domain.Time_slot">

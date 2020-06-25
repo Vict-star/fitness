@@ -67,6 +67,8 @@ public interface StaffService {
 
     Course[] getAllCourse();
 
+    Course[] getCourseByState(String state);
+
     Integer insertTimeSlot(Time_slot time_slot);
 
     Integer updateTimeSlot(Time_slot time_slot);

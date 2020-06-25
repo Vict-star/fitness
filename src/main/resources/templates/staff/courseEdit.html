@@ -9,11 +9,17 @@
     <link href="bootstrap-4.5.0-dist/css/bootstrap.css" rel="stylesheet">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+    <link href="https://getbootstrap.com/docs/4.5/examples/dashboard/" rel="canonical">
     <link href="https://getbootstrap.com/docs/4.5/examples/dashboard/" rel="canonical">
     <link href="dashboard.css" rel="stylesheet">
     <style>
@@ -41,10 +47,11 @@
             alert(message);
         }
     }
-    function comfirmCancel(number_of_member){
+
+    function comfirmCancel(number_of_member) {
         var msg = "您确定要取消该课程吗?";
-        if(number_of_member>0)
-            msg =msg + "该课程已有报名会员!";
+        if (number_of_member > 0)
+            msg = msg + "该课程已有报名会员!";
         return confirm(msg);
     }
 </script>
@@ -53,15 +60,17 @@
     <div class="row">
         <div th:replace="staff/fragments::sidebarMenu(activeUri='classManage')"></div>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4" role="main">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">课程编辑</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <form th:if="${course.state == '即将开课'}" th:action="@{/staff/classManage/}+${course.id}+@{/cancel}"
-                              th:onsubmit="comfirmCancel([[${course.number_of_member}]]);" method="post">
-                            <button  type="submit" class="btn btn-outline-danger"
-                                     data-toggle="modal" data-target="#ModalManage">
+                        <form method="post"
+                              th:action="@{/staff/classManage/}+${course.id}+@{/cancel}"
+                              th:if="${course.state == '即将开课'}"
+                              th:onsubmit="comfirmCancel([[${course.number_of_member}]]);">
+                            <button class="btn btn-outline-danger" data-target="#ModalManage"
+                                    data-toggle="modal" type="submit">
                                 <span data-feather="user-minus"></span>
                                 取消课程
                             </button>
@@ -71,65 +80,71 @@
             </div>
             <div class="row">
                 <div class="col-md-6" th:object="${course}">
-                    <form th:action="@{/staff/courseManage/}+*{id}+@{/update}" method="post">
-                        <input type="text" th:value="*{id}" class="form-control" id="id" name="id" hidden="">
-                        <input type="text" th:value="*{state}" class="form-control" id="state" name="state" hidden="">
+                    <form method="post" th:action="@{/staff/courseManage/}+*{id}+@{/update}">
+                        <input class="form-control" hidden="" id="id" name="id" th:value="*{id}" type="text">
+                        <input class="form-control" hidden="" id="state" name="state" th:value="*{state}" type="text">
                         <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">课程名</label>
+                            <label class="col-sm-2 col-form-label" for="name">课程名</label>
                             <div class="col-sm-10">
-                                <input type="text" th:value="*{name}" class="form-control" id="name" name="name">
+                                <input class="form-control" id="name" name="name" th:value="*{name}" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="coach_id" class="col-sm-2 col-form-label">教练ID</label>
+                            <label class="col-sm-2 col-form-label" for="coach_id">教练ID</label>
                             <div class="col-sm-10">
-                                <input type="number" th:value="*{coach_id}" class="form-control" id="coach_id" name="coach_id" required>
+                                <input class="form-control" id="coach_id" name="coach_id" required
+                                       th:value="*{coach_id}" type="number">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">时间段ID</label>
+                            <label class="col-sm-2 col-form-label" for="name">时间段ID</label>
                             <div class="col-sm-10">
-                                <input type="number" th:value="*{time_slot_id}" class="form-control" id="time_slot_id" name="time_slot_id" required>
+                                <input class="form-control" id="time_slot_id" name="time_slot_id" required
+                                       th:value="*{time_slot_id}" type="number">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="capacity" class="col-sm-2 col-form-label">容量</label>
+                            <label class="col-sm-2 col-form-label" for="capacity">容量</label>
                             <div class="col-sm-10">
-                                <input type="number"  class="form-control" id="capacity" name="capacity" required
-                                       th:value="*{capacity}">
+                                <input class="form-control" id="capacity" name="capacity" required
+                                       th:value="*{capacity}"
+                                       type="number">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="room_number" class="col-sm-2 col-form-label">房间号</label>
+                            <label class="col-sm-2 col-form-label" for="room_number">房间号</label>
                             <div class="col-sm-10">
-                                <input type="text"  class="form-control" id="room_number" name="room_number" required
-                                       th:value="*{room_number}">
+                                <input class="form-control" id="room_number" name="room_number" required
+                                       th:value="*{room_number}"
+                                       type="text">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="start_date" class="col-sm-2 col-form-label">开课日期</label>
+                            <label class="col-sm-2 col-form-label" for="start_date">开课日期</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" id="start_date" name="start_date"
-                                th:value="*{#dates.format(start_date,'yyyy-MM-dd')}">
+                                <input class="form-control" id="start_date" name="start_date"
+                                       th:value="*{#dates.format(start_date,'yyyy-MM-dd')}"
+                                       type="date">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="end_date" class="col-sm-2 col-form-label">结课日期</label>
+                            <label class="col-sm-2 col-form-label" for="end_date">结课日期</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" id="end_date" name="end_date"
-                                       th:value="*{#dates.format(end_date,'yyyy-MM-dd')}">
+                                <input class="form-control" id="end_date" name="end_date"
+                                       th:value="*{#dates.format(end_date,'yyyy-MM-dd')}"
+                                       type="date">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="description" class="col-sm-2 col-form-label">简介</label>
+                            <label class="col-sm-2 col-form-label" for="description">简介</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="description" id="description" rows="3"
-                                th:text="*{description}"></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="3"
+                                          th:text="*{description}"></textarea>
                             </div>
                         </div>
-                        <div  class="row justify-content-center">
+                        <div class="row justify-content-center">
                             <div class="btn-group">
-                                <button type="submit" class="btn btn-primary">确认修改</button>
+                                <button class="btn btn-primary" type="submit">确认修改</button>
                                 <a class="btn btn-success" href="/staff/courseManage">取消返回</a>
                             </div>
                         </div>
@@ -141,5 +156,6 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-<script src="dashboard.js"></script></body>
+<script src="dashboard.js"></script>
+</body>
 </html>

@@ -23,4 +23,6 @@ public interface CourseDao {
     Integer decreaseNumberOfMember(int id);
 
     Course[] getAllCourse();
+
+    Course[] getCourseByState(String state);
 }

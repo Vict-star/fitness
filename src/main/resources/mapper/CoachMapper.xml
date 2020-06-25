@@ -5,9 +5,8 @@
 
     <insert id="insert" parameterType="com.software.fitness.domain.Coach" useGeneratedKeys="true" keyProperty="id">
         insert into coach
-        (`name`, `gender`, `date_of_birth`,`phone_number`,`address`,`introduction`)
-        VALUES
-        (#{name},#{gender},#{date_of_birth},#{phone_number},#{address},#{introduction});
+        (`name`, `gender`, `date_of_birth`, `phone_number`, `address`, `introduction`)
+        VALUES (#{name}, #{gender}, #{date_of_birth}, #{phone_number}, #{address}, #{introduction});
     </insert>
 
     <update id="update" parameterType="com.software.fitness.domain.Coach">
@@ -36,7 +35,9 @@
     </select>
 
     <select id="getCoachByID" parameterType="int" resultType="com.software.fitness.domain.Coach">
-        select * from coach where id = #{id};
+        select *
+        from coach
+        where id = #{id};
     </select>
 
 </mapper>

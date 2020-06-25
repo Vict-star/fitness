@@ -4,7 +4,9 @@
 <mapper namespace="com.software.fitness.dao.StaffDao">
 
     <select id="getStaffByPhoneNumber" resultType="com.software.fitness.domain.Staff">
-        select * from staff where phone_number=#{phone_number};
+        select *
+        from staff
+        where phone_number = #{phone_number};
     </select>
 
     <insert id="insert" parameterType="com.software.fitness.domain.Staff" useGeneratedKeys="true" keyProperty="id">
@@ -32,11 +34,14 @@
     </update>
 
     <delete id="delete" parameterType="com.software.fitness.domain.Staff">
-        delete from staff where id = #{id};
+        delete
+        from staff
+        where id = #{id};
     </delete>
 
     <select id="getAllStaff" resultType="com.software.fitness.domain.Staff">
-        select * from staff;
+        select *
+        from staff;
     </select>
 
 </mapper>
