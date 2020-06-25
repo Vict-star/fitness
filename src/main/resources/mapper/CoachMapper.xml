@@ -2,14 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.software.fitness.dao.CoachDao">
+    <select id="getCoach" parameterType="java.lang.Integer" resultType="com.software.fitness.domain.Coach">
+        SELECT * from coach WHERE `ID` = #{ID};
+    </select>
     <insert id="addCoach" parameterType="com.software.fitness.domain.Coach">
         insert into coach
         (`name`, `gender`, `date_of_birth`,`phone_number`,`address`,`state`,`introduction`)
         VALUES
-        (#{name},#{gender},#{date_of_birth},#{phone_number},#{address},#{introduction});
+        (#{name},#{gender},#{date_of_birth},#{phone_number},#{address},
+        #{state},#{introduction});
 
-        <selectKey keyProperty="order_id" order="AFTER" resultType="java.lang.Integer">
+        <selectKey keyProperty="ID" order="AFTER" resultType="java.lang.Integer">
             SELECT last_insert_id();
         </selectKey>
     </insert>
+
+    <select id="listCoach" resultType="com.software.fitness.domain.Coach">
+        SELECT * FROM coach;
+    </select>
+
+    <update id="updateCoach" parameterType="com.software.fitness.domain.Coach">
+        UPDATE coach SET `name`=#{name}, `gender` = #{gender},
+         `date_of_birth`=#{date_of_birth},`phone_number`=#{phone_number} ,
+         `address` = #{address}, `introduction` = #{introduction},
+          `state` = #{state} WHERE `ID` = #{ID};
+    </update>
 </mapper>

@@ -34,7 +34,7 @@ public class LoginController {
     public String userlogin(@RequestParam String userId, @RequestParam String password,
                             RedirectAttributes attributes, HttpServletRequest request) {
         Staff user = userService.getStaffById(userId);
-        System.out.print(user);
+        System.out.println(user);
         if (user != null && user.getPassword().equals(password)) {
             user.setPassword("");
             request.getSession().setAttribute("loginUser", user);

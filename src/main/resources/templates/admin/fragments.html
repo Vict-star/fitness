@@ -15,7 +15,7 @@
 <!--    <ul class="navbar-nav px-3">-->
         <div class="dropdown px-3">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                [[${session.loginUser.ID}]]
+                [[${session.loginUser.name}]]
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">个人信息</a>
@@ -38,7 +38,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a th:class="${activeUri=='attendance'?'nav-link active':'nav-link'}" href="#">
+                <a th:class="${activeUri=='attendance'?'nav-link active':'nav-link'}"
+                   href="/admin/attendance">
                     <span data-feather="clipboard"></span>
                     会员考勤
                 </a>
@@ -50,7 +51,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a th:class="${activeUri=='memberManage'?'nav-link active':'nav-link'}" href="#">
+                <a th:class="${activeUri=='memberManage'?'nav-link active':'nav-link'}"
+                   href="/admin/memberManage">
                     <span data-feather="users"></span>
                     会员管理
                 </a>
