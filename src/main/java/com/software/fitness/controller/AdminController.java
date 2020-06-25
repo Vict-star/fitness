@@ -1,9 +1,6 @@
 package com.software.fitness.controller;
 
-import com.software.fitness.domain.Coach;
-import com.software.fitness.domain.Member;
-import com.software.fitness.domain.User;
-import com.software.fitness.domain.Staff;
+import com.software.fitness.domain.*;
 //import com.software.fitness.service.AdminService;
 import com.software.fitness.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +106,7 @@ public class AdminController {
     }
 
     @GetMapping("/coachManage/{id}")
-    public String coachInfoModal(@PathVariable int id, Model model) {
+    public String coachEditPage(@PathVariable int id, Model model) {
         Coach coach = adminService.getCoach(id);
         model.addAttribute("coach",coach);
         return "/admin/coachEdit";
@@ -126,5 +123,24 @@ public class AdminController {
         }
         attributes.addFlashAttribute("message", message);
         return "redirect:/admin/coachManage/"+id;
+    }
+
+    @GetMapping("/classManage")
+    public String classManagePage(){
+        /*获取课程页（使用pagehelper分页）逻辑*/
+        return "/admin/classManage";
+    }
+
+    @GetMapping("/classManage/{ID}")
+    public String classEditPage(@PathVariable int ID){
+        /*获取单课程逻辑*/
+        return "/admin/classEdit";
+    }
+
+    @PostMapping("/courseManage/add")
+    public String addCourse(Course course, RedirectAttributes attributes){
+        /*添加课程逻辑*/
+        /*添加提示逻辑*/
+        return "redirect:/admin/classManage";
     }
 }
