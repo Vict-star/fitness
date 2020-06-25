@@ -101,3 +101,14 @@ body {
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
+
+.frame{
+    width: 320px;
+    height: 600px;
+    background: linear-gradient(180deg,#604848,#283043)fixed;
+    margin: 50px auto;
+    color: #2c606d;
+    border-radius: 5px;
+    box-shadow: 0 0 7px #ead5ee;
+    overflow: hidden;
+}

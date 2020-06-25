@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>课程表</title>
+    <base th:href="@{/}">
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-4.5.0-dist/css/bootstrap.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div th:replace="admin/fragments::topNav"></div>
+
+<br><br><br>
+<form class="frame">
+<div class="container container-small">
+    <div class = "form-group has-error">
+        <label class="control-label">姓名</label>
+        <input class="form-control" type="text">
+        <label class="control-label">手机号码</label>
+        <input class="form-control" type="number">
+        <label class="control-label">性别</label>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                选择性别
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">男</a>
+                <a class="dropdown-item" href="#">女</a>
+            </div>
+        </div>
+        <label >生日</label>
+        <input class="form-control" type="date">
+        <label class="control-label">会员卡充值</label>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                充值时间
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">3个月</a>
+                <a class="dropdown-item" href="#">6个月</a>
+                <a class="dropdown-item" href="#">12个月</a>
+            </div>
+        </div>
+        <label class="control-label">密码</label>
+        <input class="form-control" type="number">
+        <label class="control-label">确认密码</label>
+        <input class="form-control" type="number">
+        <br><br>
+        <center><button type="submit" class="btn btn-primary">确定</button></center>
+    </div></div>
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="bootstrap-4.5.0-dist/js/bootstrap.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="dashboard.js"></script></body>
+</html>
