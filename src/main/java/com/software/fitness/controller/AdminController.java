@@ -143,4 +143,22 @@ public class AdminController {
         /*添加提示逻辑*/
         return "redirect:/admin/classManage";
     }
+
+    @GetMapping("/chooseClass")
+    public String chooseClassPage(){
+        /*添加课程逻辑*/
+        /*添加提示逻辑*/
+        return "/admin/chooseClass";
+    }
+
+    @PostMapping("/chooseClass/add")
+    public String takeClass(RedirectAttributes attributes){
+        /*选课逻辑 流程：
+        * 查找验证会员
+        * 课程容量查询
+        * 添加选课*/
+        String message = "添加成功";
+        attributes.addFlashAttribute("message", message);
+        return "redirect:/admin/chooseClass";
+    }
 }
