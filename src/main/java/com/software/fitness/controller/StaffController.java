@@ -64,6 +64,9 @@ public class StaffController {
 
     @GetMapping("/memberManage")
     public String memberManagePage(HttpServletRequest request) {
+        if(isLogin(request)){
+
+        }
         return isLogin(request) ? "staff/memberManage" : "Login";
     }
 
