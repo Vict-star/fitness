@@ -31,6 +31,14 @@ public class Coach {
         this.name = name;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public Date getDate_of_birth() {
         return date_of_birth;
     }
@@ -53,14 +61,6 @@ public class Coach {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public String getState() {

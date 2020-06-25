@@ -12,8 +12,8 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 //    private UserService userService;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Staff user = (Staff) request.getSession().getAttribute("loginUser");
-        if (null == user) {
+        Staff staff = (Staff) request.getSession().getAttribute("loginUser");
+        if (null == staff) {
             request.setAttribute("message", "没有权限请先登录");
             request.getRequestDispatcher("/index").forward(request, response);
             return false;

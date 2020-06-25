@@ -1,5 +1,6 @@
 package com.software.fitness.controller;
 
+import com.software.fitness.domain.Member;
 import com.software.fitness.domain.Staff;
 import com.software.fitness.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,17 @@ public class LoginController {
 
     @GetMapping
     public String login(HttpServletRequest request) {
-        Staff user = (Staff) request.getSession().getAttribute("loginUser");
-        if (user == null) {
+        Staff staff = (Staff) request.getSession().getAttribute("loginUser");
+        if (staff == null) {
             return "Login";
         } else {
             return "staff/index";
         }
+    }
+
+    @GetMapping("/Register")
+    public String register(HttpServletRequest request) {
+        return "Register";
     }
 
     @PostMapping("/Login")
