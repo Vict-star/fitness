@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class Coach {
-    private int id;
+    private int ID;
     private String name;
     private String gender;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -15,12 +15,12 @@ public class Coach {
     private String state;
     private String introduction;
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getName() {
@@ -29,6 +29,14 @@ public class Coach {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public Date getDate_of_birth() {
@@ -55,14 +63,6 @@ public class Coach {
         this.address = address;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getState() {
         return state;
     }
@@ -82,7 +82,7 @@ public class Coach {
     @Override
     public String toString() {
         return "Coach{" +
-                "id=" + id +
+                "ID=" + ID +
                 ", name='" + name + '\'' +
                 ", gender='" + gender + '\'' +
                 ", date_of_birth=" + date_of_birth +
