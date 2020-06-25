@@ -35,10 +35,10 @@ public class LoginController {
         return "Register";
     }
 
-    @PostMapping("/Register")
-    public String register(Member member, RedirectAttributes attributes, HttpServletRequest request) {
-        staffService.insertMember(member);
-    }
+    //@PostMapping("/Register")
+    //public String register(Member member, RedirectAttributes attributes, HttpServletRequest request) {
+        //staffService.insertMember(member);
+    //}
 
 
     @PostMapping("/Login")
