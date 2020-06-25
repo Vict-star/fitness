@@ -6,9 +6,6 @@
     <insert id="insert" parameterType="com.software.fitness.domain.Record" useGeneratedKeys="true" keyProperty="id">
         insert into record (staff_id, member_id, time, operation) VALUES
         (#{staff_id},#{member_id},#{time},#{operation});
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-            SELECT last_insert_id();
-        </selectKey>
     </insert>
 
     <delete id="delete" parameterType="com.software.fitness.domain.Record">

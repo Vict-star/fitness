@@ -9,11 +9,14 @@ public class Course {
     private String name;
     private int coach_id;
     private int time_slot_id;
-    private int capacity;
-    private int number_of_member;
+    private int capacity = -1;
+    private int number_of_member = -1;
     private String room_number;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date start_date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date end_date;
+    private String state;
     private String description;
 
     public String getName() {
@@ -88,6 +91,22 @@ public class Course {
         this.room_number = room_number;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public Date getStart_date() {
+        return start_date;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -98,7 +117,9 @@ public class Course {
                 ", capacity=" + capacity +
                 ", number_of_member=" + number_of_member +
                 ", room_number='" + room_number + '\'' +
+                ", start_date=" + start_date +
                 ", end_date=" + end_date +
+                ", state='" + state + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

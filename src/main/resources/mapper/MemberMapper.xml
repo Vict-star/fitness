@@ -24,7 +24,7 @@
             <if test="phone_number != null">phone_number = #{phone_number},</if>
             <if test="validity != null">validity = #{validity},</if>
             <if test="state != null">state = #{state},</if>
-            <if test="number_of_course != 0">number_of_course = #{number_of_course},</if>
+            <if test="number_of_course >= 0">number_of_course = #{number_of_course},</if>
         </set>
         where id = #{id};
     </update>
@@ -38,7 +38,7 @@
     </select>
 
     <select id="getAllMember" resultType="com.software.fitness.domain.Member">
-        select * from member;
+        select id,name,gender,date_of_birth,phone_number,validity,state,number_of_course from member;
     </select>
 
     <select id="getMemberByID" resultType="com.software.fitness.domain.Member">
@@ -52,5 +52,9 @@
     <update id="decreaseNumberOfCourse">
         update member set number_of_course = number_of_course - 1 where id=#{id};
     </update>
+
+    <select id="getMemberByCourseID" parameterType="int" resultType="com.software.fitness.domain.Member">
+        select id,name,gender,date_of_birth,phone_number,validity,state,number_of_course from member where member.id in (select member_id from take_course where course_id = #{id});
+    </select>
 
 </mapper>

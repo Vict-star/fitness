@@ -4,7 +4,9 @@ import com.software.fitness.dao.RecordDao;
 import com.software.fitness.domain.Record;
 import com.software.fitness.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RecordServiceImpl implements RecordService {
     @Autowired
     private RecordDao recordDao;

@@ -43,7 +43,7 @@ class FitnessApplicationTests {
 
     @Test
     void getMember() {
-        Member member = staffService.getMemberByPhoneNumber("136000");
+        Member member = staffService.getMemberByPhoneNumber("13700000001");
         System.out.println(member.toString());
 
         Member[] members = staffService.getAllMember();
@@ -52,5 +52,11 @@ class FitnessApplicationTests {
         }
     }
 
-
+    @Test
+    void dawd() {
+        Member[] members = staffService.getMemberByCourseID(1);
+        for (Member m : members) {
+            System.out.println(m);
+        }
+    }
 }

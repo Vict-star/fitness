@@ -100,6 +100,11 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
+    public Member[] getMemberByCourseID(int id) {
+        return memberDao.getMemberByCourseID(id);
+    }
+
+    @Override
     public Integer increaseNumberOfCourses(int id) {
         return memberDao.increaseNumberOfCourse(id);
     }

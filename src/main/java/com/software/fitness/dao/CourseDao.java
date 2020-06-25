@@ -16,8 +16,10 @@ public interface CourseDao {
 
     Course getCourseByID(int id);
 
+    @Deprecated
     Integer increaseNumberOfMember(int id);
 
+    @Deprecated
     Integer decreaseNumberOfMember(int id);
 
     Course[] getAllCourse();

@@ -1,9 +1,11 @@
 package com.software.fitness.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+@Service
 public class Record {
     private int id;
     private int staff_id;

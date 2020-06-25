@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>课程管理</title>
+    <base th:href="@{/}">
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-4.5.0-dist/css/bootstrap.css" rel="stylesheet">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+    <link href="https://getbootstrap.com/docs/4.5/examples/dashboard/" rel="canonical">
+    <link href="dashboard.css" rel="stylesheet">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<script th:inline="javascript">
+    window.onload = function () {	// 页面加载之后, 获取页面中的对象
+        var message = [[${message}]];
+        if (message != null && message != "") {
+            alert(message);
+        }
+    }
+    function infoModal(name,info) {
+        $('#coachInfo').empty();
+        $('#title').empty();
+        $('#coachInfo').append(info);
+        $('#title').append(name+'简介');
+        $('#ModalInfo').modal('show');
+    }
+    function comfirmCancel(number_of_member){
+        var msg = "您确定要取消该课程吗?";
+        if(number_of_member>0)
+            msg =msg + "该课程已有报名会员!";
+        return confirm(msg);
+    }
+</script>
+<div th:replace="staff/fragments::topNav"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="staff/fragments::sidebarMenu(activeUri='courseManage')"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">课程管理</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+
+                        <button type="button" class="btn btn-outline-success"
+                                data-toggle="modal" data-target="#ModalManage">
+                            <span data-feather="user-plus"></span>
+                            发布课程
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>课程编号</th>
+                        <th>课程名</th>
+                        <th>教练</th>
+                        <th>容量</th>
+                        <th>人数</th>
+                        <th>房间号</th>
+                        <th>开课日期</th>
+                        <th>结课日期</th>
+                        <th>状态</th>
+                        <th>描述</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="course :${courseList}">
+                        <td th:text="${course.id}"></td>
+                        <td th:text="${course.name}"></td>
+                        <td th:text="${course.coach_id}"></td>
+                        <td th:text="${course.capacity}"></td>
+                        <td th:text="${course.number_of_member}"></td>
+                        <td th:text="${course.room_number}"></td>
+                        <td th:text="${#dates.format(course.start_date,'yyyy年MM月dd日')}"></td>
+                        <td th:text="${#dates.format(course.end_date,'yyyy年MM月dd日')}"></td>
+                        <td th:text="${course.state}"></td>
+                        <td><button class="btn btn-success" th:onclick="infoModal([[${course.name}]],[[${course.description}]]);">查看</button></td>
+                        <td>
+                            <a class="btn btn-outline-primary btn-sm" th:href="@{/staff/courseManage/}+${course.id}">
+                                编辑</a>
+                            <form th:if="${course.state!='已结课'}" th:action="@{/staff/courseManage/}+${course.id}+@{/cancel}"
+                                  th:onsubmit="comfirmCancel([[${course.number_of_member}]]);" method="post">
+                                <button type="submit" class="btn btn-outline-info btn-sm" >取消课程</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+
+ <!--ModalManage-->
+<div class="modal fade" id="ModalManage" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/staff/courseManage/add" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">发布课程</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">课程名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">教练ID</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="coach_id" name="coach_id" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">时间段ID</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="time_slot_id" name="time_slot_id" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="capacity" class="col-sm-2 col-form-label">容量</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="capacity" name="capacity" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="room_number" class="col-sm-2 col-form-label">房间号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="room_number" name="room_number">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="start_date" class="col-sm-3 col-form-label">开课日期</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="start_date" name="start_date">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="end_date" class="col-sm-3 col-form-label">结课日期</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="end_date" name="end_date">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="description" class="col-sm-2 col-form-label">简介</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">添加</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ModalManage -->
+
+<!--ModalInfo-->
+<div class="modal fade" id="ModalInfo" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <form action="/staff/courseManage/add" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="coachInfo">
+
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关 闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- ModalInfo -->
+
+
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="bootstrap-4.5.0-dist/js/bootstrap.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="dashboard.js"></script></body>
+</html>

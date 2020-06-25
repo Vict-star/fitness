@@ -41,8 +41,12 @@ public interface StaffService {
 
     Member getMemberByPhoneNumber(String phone_number);
 
+    Member[] getMemberByCourseID(int id);
+
+    @Deprecated
     Integer increaseNumberOfCourses(int id);
 
+    @Deprecated
     Integer decreaseNumberOfCourses(int id);
 
     Member[] getAllMember();
@@ -55,8 +59,10 @@ public interface StaffService {
 
     Course getCourseByID(int id);
 
+    @Deprecated
     Integer increaseNumberOfMember(int id);
 
+    @Deprecated
     Integer decreaseNumberOfMember(int id);
 
     Course[] getAllCourse();

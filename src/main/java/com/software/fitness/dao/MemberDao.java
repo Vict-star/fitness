@@ -20,7 +20,11 @@ public interface MemberDao {
 
     Member getMemberByID(int id);
 
+    @Deprecated
     Integer increaseNumberOfCourse(int id);
 
+    @Deprecated
     Integer decreaseNumberOfCourse(int id);
+
+    Member[] getMemberByCourseID(int id);
 }

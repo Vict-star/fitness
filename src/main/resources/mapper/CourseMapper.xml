@@ -5,8 +5,8 @@
 
     <insert id="insert" parameterType="com.software.fitness.domain.Course" useGeneratedKeys="true" keyProperty="id">
         insert into course
-        (name, coach_id, time_slot_id, capacity, room_number, start_date, end_date, description)
-        VALUES (#{name}, #{coach_id}, #{time_slot_id}, #{capacity}, #{room_number}, #{start_date}, #{end_date},
+        (name, coach_id, capacity,time_slot_id, room_number, start_date, end_date, description)
+        VALUES (#{name}, #{coach_id}, #{capacity},#{time_slot_id}, #{room_number}, #{start_date}, #{end_date},
                 #{description});
     </insert>
 
@@ -16,8 +16,8 @@
             <if test="name != null">name = #{name},</if>
             <if test="coach_id != 0">coach_id = #{coach_id},</if>
             <if test="time_slot_id != 0">time_slot_id = #{time_slot_id},</if>
-            <if test="capacity != 0">capacity = #{capacity},</if>
-            <if test="number_of_member != 0">number_of_member = #{number_of_member},</if>
+            <if test="capacity > 0">capacity = #{capacity},</if>
+            <if test="number_of_member >= 0">number_of_member = #{number_of_member},</if>
             <if test="room_number != null">room_number = #{room_number},</if>
             <if test="start_date != null">start_date = #{start_date},</if>
             <if test="end_date != null">end_date = #{end_date},</if>

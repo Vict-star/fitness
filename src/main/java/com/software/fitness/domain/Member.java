@@ -15,7 +15,7 @@ public class Member {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date validity;
     private String state;
-    private int number_of_course;
+    private int number_of_course = -1;
 
     public int getId() {
         return id;
