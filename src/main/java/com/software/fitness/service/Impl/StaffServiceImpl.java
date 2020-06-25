@@ -70,6 +70,11 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
+    public Coach getCoachByID(int id) {
+        return coachDao.getCoachByID(id);
+    }
+
+    @Override
     public Integer insertMember(Member member) {
         return memberDao.insert(member);
     }

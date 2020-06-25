@@ -15,4 +15,6 @@ public interface CoachDao {
     Integer delete(Coach coach);
 
     Coach[] getAllCoach();
+
+    Coach getCoachByID(int id);
 }

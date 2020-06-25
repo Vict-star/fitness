@@ -39,24 +39,24 @@
         return confirm(msg);
     }
 </script>
-<div th:replace="admin/fragments::topNav"></div>
+<div th:replace="staff/fragments::topNav"></div>
 <div class="container-fluid">
     <div class="row">
-        <div th:replace="admin/fragments::sidebarMenu(activeUri='coachManage')"></div>
+        <div th:replace="staff/fragments::sidebarMenu(activeUri='coachManage')"></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">教练编辑</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <form th:if="${coach.state == '离职'}" th:action="@{/admin/coachManage/}+${coach.ID}+@{/employ}" method="post">
+                        <form th:if="${coach.state == '离职'}" th:action="@{/staff/coachManage/}+${coach.id}+@{/employ}" method="post">
                         <button  type="submit" class="btn btn-outline-info"
                                 data-toggle="modal" data-target="#ModalManage">
                             <span data-feather="user-plus"></span>
                             启用教练
                         </button>
                         </form>
-                        <form th:if="${coach.state == '在职'}" th:action="@{/admin/coachManage/}+${coach.ID}+@{/dismiss}"
+                        <form th:if="${coach.state == '在职'}" th:action="@{/staff/coachManage/}+${coach.id}+@{/dismiss}"
                               onsubmit="comfirmDismiss()" method="post">
                             <button  type="submit" class="btn btn-outline-danger"
                                      data-toggle="modal" data-target="#ModalManage">
@@ -69,8 +69,8 @@
             </div>
             <div class="row">
                 <div class="col-md-6" th:object="${coach}">
-                    <form th:action="@{/admin/coachManage/}+*{ID}+@{/update}" method="post">
-                        <input type="text" th:value="*{ID}" class="form-control" id="ID" name="ID" hidden="">
+                    <form th:action="@{/staff/coachManage/}+*{id}+@{/update}" method="post">
+                        <input type="text" th:value="*{id}" class="form-control" id="id" name="id" hidden="">
                         <input type="text" th:value="*{state}" class="form-control" id="state" name="state" hidden="">
                         <div class="form-group row">
                             <label for="name" class="col-sm-2 col-form-label">姓名</label>
@@ -122,7 +122,7 @@
                         <div  class="row justify-content-center">
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-primary">确认修改</button>
-                                <a class="btn btn-success" href="/admin/coachManage">取消返回</a>
+                                <a class="btn btn-success" href="/staff/coachManage">取消返回</a>
                             </div>
                         </div>
                     </form>

@@ -29,6 +29,8 @@ public interface StaffService {
 
     Coach[] getAllCoach();
 
+    Coach getCoachByID(int id);
+
     Integer insertMember(Member member);
 
     Integer updateMember(Member member);
