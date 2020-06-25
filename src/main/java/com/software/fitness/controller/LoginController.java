@@ -35,12 +35,6 @@ public class LoginController {
         return "Register";
     }
 
-    //@PostMapping("/Register")
-    //public String register(Member member, RedirectAttributes attributes, HttpServletRequest request) {
-        //staffService.insertMember(member);
-    //}
-
-
     @PostMapping("/Login")
     public String login(@RequestParam String phone_number, @RequestParam String password,
                         RedirectAttributes attributes, HttpServletRequest request) {
