@@ -7,6 +7,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -63,7 +64,11 @@ public class StaffController {
     }
 
     @GetMapping("/memberManage")
-    public String memberManagePage(HttpServletRequest request) {
+    public String memberManagePage(HttpServletRequest request, Model model) {
+        if(isLogin(request)){
+            model.addAttribute("memberList",staffService.getAllMember());
+            return "staff/memberManage";
+        }
         return isLogin(request) ? "staff/memberManage" : "Login";
     }
 
@@ -128,6 +133,38 @@ public class StaffController {
         }
         attributes.addFlashAttribute("message", message);
         System.out.println(coach.toString());
+        return "redirect:/staff/coachManage";
+    }
+
+    @PostMapping("/coachManage/{id}/dismiss")
+    public String dismissCoach(@PathVariable("id") Integer id, RedirectAttributes attributes){
+        Coach coach = new Coach();
+        coach.setId(id);
+        coach.setState("离职");
+        Integer er = staffService.updateCoach(coach);
+        String message = "";
+        if(er != null && er > 0){
+            message = "" + id + "已离职";
+        }else{
+            message = "更改失败，请稍后重试！";
+        }
+        attributes.addFlashAttribute("message", message);
+        return "redirect:/staff/coachManage";
+    }
+
+    @PostMapping("/coachManage/{id}/employ")
+    public String employCoach(@PathVariable("id") Integer id,RedirectAttributes attributes){
+        Coach coach = new Coach();
+        coach.setId(id);
+        coach.setState("在职");
+        Integer er = staffService.updateCoach(coach);
+        String message = "";
+        if(er != null && er > 0){
+            message = "" + id + "已启用";
+        }else{
+            message = "更改失败，请稍后重试！";
+        }
+        attributes.addFlashAttribute("message", message);
         return "redirect:/staff/coachManage";
     }
 
