@@ -10,6 +10,7 @@ public class Course {
     private int capacity;
     private int number_of_member;
     private String room_number;
+    private Date start_date;
     private Date end_date;
     private String description;
 
@@ -29,6 +30,14 @@ public class Course {
         this.ID = ID;
     }
 
+    public Date getStart_date() {
+    	return start_date;
+    }
+    
+    public void setStart_date(Date start_date) {
+    	this.start_date = start_date;
+    }
+    
     public Date getEnd_date() {
         return end_date;
     }
