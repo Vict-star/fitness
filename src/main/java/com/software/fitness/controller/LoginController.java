@@ -40,7 +40,7 @@ public class LoginController {
         Staff staff = staffService.getStaffByPhoneNumber(phone_number);
         System.out.print(staff);
         if (staff != null && staff.getPassword().equals(password) && staff.getState().equals("在职")) {
-            staff.setPassword("");
+            staff.setPassword(null);
             request.getSession().setAttribute("loginUser", staff);
             return "/staff/index";
         } else {

@@ -76,6 +76,15 @@ public class StaffController {
         return "Login";
     }
 
+    @GetMapping("/memberManage/{id}")
+    public String memberEditPage(@PathVariable("id") int id, HttpServletRequest request, Model model) {
+        if (isLogin(request)) {
+            model.addAttribute("member", staffService.getMemberByID(id));
+            return "staff/memberEdit";
+        }
+        return "Login";
+    }
+
     @GetMapping("/attendance")
     public String attendancePage(HttpServletRequest request, Model model) {
         if (isLogin(request)) {
@@ -235,8 +244,54 @@ public class StaffController {
         return "redirect:/staff/coachManage/" + id;
     }
 
+    @PostMapping("/memberManage/{id}/cancel")
+    public String cancelMember(@PathVariable("id") int id, RedirectAttributes attributes) {
+        Member member = new Member();
+        member.setId(id);
+        member.setState("已注销");
+        Integer er = staffService.updateMember(member);
+        String message = "";
+        if (er != null && er > 0) {
+            message = "" + id + " 已注销";
+        } else {
+            message = "更改失败，请稍后重试";
+        }
+        attributes.addFlashAttribute("message", message);
+        return "redirect:/staff/memberManage/";
+    }
+
+    @PostMapping("/memberManage/{id}/activate")
+    public String activateMember(@PathVariable("id") int id, RedirectAttributes attributes) {
+        Member member = new Member();
+        member.setId(id);
+        member.setState("有效");
+        Integer er = staffService.updateMember(member);
+        String message = "";
+        if (er != null && er > 0) {
+            message = "" + id + " 已激活";
+        } else {
+            message = "更改失败，请稍后重试";
+        }
+        attributes.addFlashAttribute("message", message);
+        return "redirect:/staff/memberManage/";
+    }
+
+    @PostMapping("/memberManage/{id}/update")
+    public String updateMember(@PathVariable("id") int id, Member member, RedirectAttributes attributes) {
+        member.setId(id);
+        Integer er = staffService.updateMember(member);
+        String message;
+        if (er != null && er > 0) {
+            message = "更新成功";
+        } else {
+            message = "更改失败，请稍后重试";
+        }
+        attributes.addFlashAttribute("message", message);
+        return "redirect:/staff/memberManage/" + id;
+    }
+
     @PostMapping("/attendance/{cid}/{mid}")
-    public String updateCoach(@PathVariable("cid") int cid, @PathVariable("mid") int mid, RedirectAttributes attributes) {
+    public String attendanceSign(@PathVariable("cid") int cid, @PathVariable("mid") int mid, RedirectAttributes attributes) {
         Attendance attendance = new Attendance();
         attendance.setCourse_id(cid);
         attendance.setMember_id(cid);
