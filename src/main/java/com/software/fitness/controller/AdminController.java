@@ -125,40 +125,137 @@ public class AdminController {
         return "redirect:/admin/coachManage/"+id;
     }
 
+    
+    
     @GetMapping("/classManage")
-    public String classManagePage(){
-        /*获取课程页（使用pagehelper分页）逻辑*/
-        return "/admin/classManage";
+    public String classManagePage(HttpServletRequest request, Model model){
+        List<Course> courseList=adminService.coursePage();
+        model.addAttribute("courseList",courseList);
+        Staff staff = (Staff) request.getSession().getAttribute("loginUser");
+        if (staff == null) {
+            return "Login";
+        } else {
+            return "admin/classManage";
+        }
     }
 
     @GetMapping("/classManage/{ID}")
-    public String classEditPage(@PathVariable int ID){
-        /*获取单课程逻辑*/
+    public String classEditPage(@PathVariable int ID,Model model){
+        Course course = adminService.getCourseById(ID);
+        model.addAttribute("course",course);
         return "/admin/classEdit";
     }
 
     @PostMapping("/courseManage/add")
     public String addCourse(Course course, RedirectAttributes attributes){
-        /*添加课程逻辑*/
-        /*添加提示逻辑*/
+        course.setNumber_of_member(0);//课程初始人数为0
+        System.out.println(course.toString());
+        Integer id = adminService.addCourse(course);
+        String message = "";
+        if(id!=null && id!=-1){
+            message = "添加课程成功，课程ID为:"+id+"。";
+        }else{
+            message = "添加失败，请稍后再次尝试！";
+        }
+        attributes.addFlashAttribute("message", message);
         return "redirect:/admin/classManage";
     }
+    
+    @PostMapping("/courseManage/{ID}/delete")
+    public String deleteCourse(@PathVariable int ID, RedirectAttributes attributes) {
+    	String message;
+    	if(adminService.deleteCourse(ID))
+    		message = "删除课程成功！";
+    	else
+    		message = "删除课程失败，请稍后再次尝试！";
+    	attributes.addAttribute("message", message);
+    	return "redirect:/admin/classManage";
+    }
+    
+    @PostMapping("/courseManage/{ID}/update")
+    public String updateCourse(@PathVariable int ID,Course course, RedirectAttributes attributes) {
+    	String message;
+    	course.setID(ID);
+    	if(adminService.updateCourse(course))
+    		message = "更新课程成功！";
+    	else
+    		message = "更新课程失败，请稍后再次尝试！";
+    	attributes.addAttribute("message", message);
+    	return "redirect:/admin/classManage";
+    }
 
+    
+    
+    
     @GetMapping("/chooseClass")
-    public String chooseClassPage(){
-        /*添加课程逻辑*/
-        /*添加提示逻辑*/
-        return "/admin/chooseClass";
+    public String chooseClassPage(HttpServletRequest request, Model model){
+        List<Course> courseList=adminService.coursePage();
+        model.addAttribute("courseList",courseList);
+        Staff staff = (Staff) request.getSession().getAttribute("loginUser");
+        if (staff == null) {
+            return "Login";
+        } else {
+            return "admin/chooseClass";
+        }
+    }
+    
+    @PostMapping("/chooseClass/{ID}/check")
+    public String checkOneTake(RedirectAttributes attributes,Model model,int ID){
+    	List<Take_course> takes = adminService.getTakeByCourseid(ID);
+    	model.addAttribute("take_courseList", takes);
+    	return "admin/chooseClass";
     }
 
     @PostMapping("/chooseClass/add")
-    public String takeClass(RedirectAttributes attributes){
-        /*选课逻辑 流程：
-        * 查找验证会员
-        * 课程容量查询
-        * 添加选课*/
-        String message = "添加成功";
+    public String takeClass(Take_course take_course,RedirectAttributes attributes){
+    	String message;
+    	Member member = adminService.getMemberById(take_course.getMember_id());
+    	List<Take_course> takes = adminService.getTakeByMemberid(member.getID());
+    	if(takes.size()==2) {
+    		message="选课失败，该会员选课数已达上限！";
+            attributes.addFlashAttribute("message", message);
+            return "redirect:/admin/chooseClass";
+    	}
+    	//该会员选课数是否已达上限是否
+    	for(int i = 0;i<takes.size();i++)
+    		if(takes.get(i).getCourse_id()==take_course.getCourse_id()) {
+        		message="选课失败，该会员已经选择了这门课程！";
+                attributes.addFlashAttribute("message", message);
+                return "redirect:/admin/chooseClass";
+    		}
+    	//该会员是否已选该课程
+    	for(int i = 0;i<takes.size();i++) {
+    		if(adminService.getCourseById(takes.get(i).getCourse_id()).getTime_slot_time_slot_id()==adminService.getCourseById(take_course.getCourse_id()).getTime_slot_time_slot_id()) {
+        		message="选课失败，本次选课和该会员已选的课程有时间冲突！";
+                attributes.addFlashAttribute("message", message);
+                return "redirect:/admin/chooseClass";
+    		}	
+    	}
+    	//本次选课是否和已选的课程有时间冲突
+    	Course course = adminService.getCourseById(take_course.getCourse_id());
+    	if(course.getNumber_of_member()==course.getCapacity()) {
+    		message="选课失败，该课程人数已达上限！";
+            attributes.addFlashAttribute("message", message);
+            return "redirect:/admin/chooseClass";
+		}
+    	//该课程是否已满
+        if(adminService.addTake(take_course)){
+            message = "选课成功！";
+        }else{
+            message = "添加失败，请稍后再次尝试！";
+        }
         attributes.addFlashAttribute("message", message);
         return "redirect:/admin/chooseClass";
+    }
+
+    @PostMapping("/chooseClass/delete")
+    public String dropClass(Take_course take_course,RedirectAttributes attributes) {
+    	String message;
+    	if(adminService.deleteTake(take_course))
+    		message = "退课成功成功！";
+    	else
+    		message = "退课失败失败，请稍后再次尝试！";
+    	attributes.addAttribute("message", message);
+    	return "redirect:/admin/chooseClass";
     }
 }
