@@ -79,4 +79,18 @@
         where member.id in (select member_id from take_course where course_id = #{id});
     </select>
 
+    <select id="getInvalidityMember" resultType="com.software.fitness.domain.Member">
+        select *
+        from member
+        where validity &lt; NOW()
+          and state = '有效';
+    </select>
+
+    <select id="getValidityMember" resultType="com.software.fitness.domain.Member">
+        select *
+        from member
+        where validity > NOW()
+          and state = '已过期';
+    </select>
+
 </mapper>

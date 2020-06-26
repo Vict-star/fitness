@@ -10,7 +10,9 @@ import com.software.fitness.domain.Member;
 import com.software.fitness.domain.Take_course;
 import com.software.fitness.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberDao memberDao;
@@ -49,5 +51,15 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Coach[] getAllCoach() {
         return coachDao.getAllCoach();
+    }
+
+    @Override
+    public Member[] getInvalidityMember() {
+        return memberDao.getInvalidityMember();
+    }
+
+    @Override
+    public Member[] getValidityMember() {
+        return memberDao.getValidityMember();
     }
 }

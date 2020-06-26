@@ -27,4 +27,8 @@ public interface MemberDao {
     Integer decreaseNumberOfCourse(int id);
 
     Member[] getMemberByCourseID(int id);
+
+    Member[] getInvalidityMember();
+
+    Member[] getValidityMember();
 }

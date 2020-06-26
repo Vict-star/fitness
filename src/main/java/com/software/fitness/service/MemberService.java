@@ -19,4 +19,8 @@ public interface MemberService {
 
     Coach[] getAllCoach();
 
+    Member[] getInvalidityMember();
+
+    Member[] getValidityMember();
+
 }

@@ -2,6 +2,7 @@ package com.software.fitness;
 
 import com.software.fitness.domain.Member;
 import com.software.fitness.domain.Staff;
+import com.software.fitness.service.MemberService;
 import com.software.fitness.service.StaffService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class FitnessApplicationTests {
     @Autowired
     private StaffService staffService;
+    @Autowired
+    private MemberService memberService;
 
     @Test
     void getStaff() {
@@ -54,7 +57,11 @@ class FitnessApplicationTests {
 
     @Test
     void dawd() {
-        Member[] members = staffService.getMemberByCourseID(1);
+        Member[] members = memberService.getInvalidityMember();
+        for (Member m : members) {
+            System.out.println(m);
+        }
+        members = memberService.getValidityMember();
         for (Member m : members) {
             System.out.println(m);
         }
