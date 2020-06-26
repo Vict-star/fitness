@@ -115,8 +115,12 @@ public class StaffController {
     }
 
     @GetMapping("/chooseClass")
-    public String chooseClassPage(HttpServletRequest request) {
-        return isLogin(request) ? "staff/chooseClass" : "Login";
+    public String chooseClassPage(HttpServletRequest request, Model model) {
+        if (isLogin(request)) {
+            model.addAttribute("courseList", staffService.getAllCourse());
+            return "staff/chooseClass";
+        }
+        return "Login";
     }
 
     @GetMapping("/courseManage")
@@ -173,9 +177,9 @@ public class StaffController {
     @PostMapping("/coachManage/add")
     public String addCoach(Coach coach, RedirectAttributes attributes) {
         String message = "";
-        int id = staffService.insertCoach(coach);
-        if (id > 0) {
-            message = "添加教练成功";
+        Integer er = staffService.insertCoach(coach);
+        if (er != null && er > 0) {
+            message = "添加教练成功,ID为:" + coach.getId();
         } else {
             message = "添加教练失败";
         }
@@ -206,7 +210,7 @@ public class StaffController {
         Integer er = staffService.updateCoach(coach);
         String message = "";
         if (er != null && er > 0) {
-            message = "" + id + " 已离职";
+            message = "" + coach.getId() + " 已离职";
         } else {
             message = "更改失败，请稍后重试";
         }
@@ -362,7 +366,7 @@ public class StaffController {
         String message = "";
         Integer er = staffService.insertCourse(course);
         if (er != null && er > 0) {
-            message = "添加课程成功";
+            message = "添加课程成功，ID：" + course.getId();
         } else {
             message = "添加课程失败";
         }
@@ -420,7 +424,9 @@ public class StaffController {
     @PostMapping("/chooseClass/pick")
     public String pickClass(Take_course take_course, RedirectAttributes attributes) {
         String message = "";
+        System.out.println(take_course);
         int id = staffService.insertTakeCourse(take_course);
+
         if (id > 0) {
             message = "选课成功";
         } else {

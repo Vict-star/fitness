@@ -38,7 +38,7 @@ public class LoginController {
     public String login(@RequestParam String phone_number, @RequestParam String password,
                         RedirectAttributes attributes, HttpServletRequest request) {
         Staff staff = staffService.getStaffByPhoneNumber(phone_number);
-        System.out.print(staff);
+        System.out.println(staff);
         if (staff != null && staff.getPassword().equals(password) && staff.getState().equals("在职")) {
             staff.setPassword(null);
             request.getSession().setAttribute("loginUser", staff);
