@@ -294,9 +294,10 @@ public class StaffController {
     public String attendanceSign(@PathVariable("cid") int cid, @PathVariable("mid") int mid, RedirectAttributes attributes) {
         Attendance attendance = new Attendance();
         attendance.setCourse_id(cid);
-        attendance.setMember_id(cid);
+        attendance.setMember_id(mid);
         Calendar calendar = Calendar.getInstance();
         attendance.setDate_of_attendance(calendar.getTime());
+        System.out.println(attendance);
         Integer er = staffService.insertAttendance(attendance);
         String message;
         if (er != null && er > 0) {
@@ -313,6 +314,8 @@ public class StaffController {
     @PostMapping("/memberManage/add")
     public String addMember(Member member, RedirectAttributes attributes) {
         String message = "";
+        member.setPassword("member");
+        System.out.println(member.toString());
         int id = staffService.insertMember(member);
         if (id > 0) {
             message = "添加会员成功";
