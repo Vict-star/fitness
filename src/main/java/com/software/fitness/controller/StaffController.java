@@ -311,7 +311,6 @@ public class StaffController {
         }
         System.out.println(attendance);
         Integer er = staffService.insertAttendance(attendance);
-
         if (er != null && er > 0) {
             message = "签到成功";
         } else {
@@ -433,7 +432,6 @@ public class StaffController {
     public String pickClass(Take_course take_course, RedirectAttributes attributes) {
         String message = "";
         System.out.println(take_course);
-        int id = staffService.insertTakeCourse(take_course);
         List<Course> courses = staffService.getCourseByMemberID(take_course.getMember_id());
         Course course = staffService.getCourseByID(take_course.getCourse_id());
         for (Course c : courses) {
@@ -444,7 +442,7 @@ public class StaffController {
                 return "redirect:/staff/chooseClass";
             }
         }
-
+        int id = staffService.insertTakeCourse(take_course);
         if (id > 0) {
             message = "选课成功";
         } else {
