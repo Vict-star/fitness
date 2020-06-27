@@ -32,7 +32,7 @@
     };
 
     function initTable() {
-        var day = 7;
+        /*var day = 7;
         var slot = 1;
         for (; slot < 6; slot++) {
             for (; day > 0; day--) {
@@ -45,6 +45,16 @@
                 $('#slot' + slot).after(html);
             }
             if (slot < 5) day = 7;
+        }*/
+        var CourseTableItemList = [[${CourseTableItemList}]];
+        for(var i = 0; i<CourseTableItemList.length;++i){
+            var date_start = new Date(CourseTableItemList[i].start_date).toLocaleDateString();
+            var date_end = new Date(CourseTableItemList[i].end_date).toLocaleDateString();
+            $("[name='slot"+CourseTableItemList[i].time_slot_id+"']").append(
+                "<a href='staff/courseManage/"+CourseTableItemList[i].id+"'>【"+CourseTableItemList[i].course_name+"】</a><br>" +
+                date_start+"~"+date_end+"<br>"+
+                "<a href='staff/coachManage/"+CourseTableItemList[i].coach_id+"'>教练："+CourseTableItemList[i].coach_name+"</a><br>"
+            );
         }
     }
 </script>
@@ -62,30 +72,53 @@
                     <thead class="thead-dark">
                     <tr>
                         <th></th>
-                        <th>周一</th>
-                        <th>周二</th>
-                        <th>周三</th>
-                        <th>周四</th>
-                        <th>周五</th>
-                        <th>周六</th>
-                        <th>周日</th>
+                        <th style="width: 19%">周一</th>
+                        <th style="width: 19%">周二</th>
+                        <th style="width: 19%">周三</th>
+                        <th style="width: 19%">周四</th>
+                        <th style="width: 19%">周五</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td id="slot1">第一二节</td>
+                        <td >第一二节</td>
+                        <td name="slot1" ></td>
+                        <td name="slot2" ></td>
+                        <td name="slot1" ></td>
+                        <td name="slot2" ></td>
+                        <td name="slot1" ></td>
                     </tr>
                     <tr>
-                        <td id="slot2">第三四节</td>
+                        <td >第三四节</td>
+                        <td name="slot3"></td>
+                        <td name="slot4"></td>
+                        <td name="slot3"></td>
+                        <td name="slot4"></td>
+                        <td name="slot3"></td>
                     </tr>
                     <tr>
-                        <td id="slot3">第七八节</td>
+                        <td >第七八节</td>
+                        <td name="slot5"></td>
+                        <td name="slot6"></td>
+                        <td name="slot5"></td>
+                        <td name="slot6"></td>
+                        <td name="slot5"></td>
                     </tr>
                     <tr>
-                        <td id="slot4">第七八节</td>
+                        <td >第七八节</td>
+                        <td name="slot7"></td>
+                        <td name="slot8"></td>
+                        <td name="slot7"></td>
+                        <td name="slot8"></td>
+                        <td name="slot7"></td>
                     </tr>
                     <tr>
-                        <td id="slot5">晚上</td>
+                        <td >晚上</td>
+                        <td name="slot9"></td>
+                        <td name="slot10"></td>
+                        <td name="slot9"></td>
+                        <td name="slot10"></td>
+                        <td name="slot9"></td>
                     </tr>
                     </tbody>
                 </table>

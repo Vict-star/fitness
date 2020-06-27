@@ -3,6 +3,8 @@ package com.software.fitness.service;
 
 import com.software.fitness.domain.*;
 
+import java.util.List;
+
 /**
  * StaffService
  * 包括所有表的操作接口
@@ -85,4 +87,7 @@ public interface StaffService {
 
     Integer deleteTakeCourse(Take_course take_course);
 
+    List<CourseTableItem> listCourseTableItem();
+
+    List<CourseChosenItem> listCourseChosenItem(Integer course_id);
 }

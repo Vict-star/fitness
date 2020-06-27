@@ -62,4 +62,10 @@
         where state = #{state};
     </select>
 
+    <select id="listCourseTableItem" resultType="com.software.fitness.domain.CourseTableItem">
+        SELECT `course`.`id`,`course`.`name` as `course_name`,`coach`.`name` as `coach_name`,`course`.`start_date`,`course`.`end_date`,
+        `course`.`time_slot_id`,`coach`.`id` as `coach_id`
+        FROM `fitnesstest`.`course`,`fitnesstest`.`coach` where `course`.`coach_id` = `coach`.`id`
+        AND `course`.`state`='正在上课';
+    </select>
 </mapper>

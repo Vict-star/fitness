@@ -65,11 +65,6 @@
     function quitCourse(courseID) {
         $('#ModalQuit').modal('show');
     }
-
-    function comfirmQuit() {
-        var msg = "您确定要退选该会员的课程吗?";
-        return confirm(msg);
-    }
 </script>
 <div th:replace="staff/fragments::topNav"></div>
 <div class="container-fluid">
@@ -130,32 +125,9 @@
                                     th:onclick="takeCourse([[${course.id}]], [[${course.name}]]);">
                                 会员选课
                             </button>
-                            <button class="btn btn-outline-danger btn-sm" th:onclick="quitCourse([[${course.id}]]);">
+                            <a class="btn btn-outline-danger btn-sm" th:href="@{staff/quitClass/}+${course.id}">
                                 会员退课
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>
-                            <button class="btn btn-success" onclick="infoModal('拉伸','酸爽')">查看</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-outline-primary btn-sm" onclick="takeCourse(123,'拉伸课')">
-                                会员选课
-                            </button>
-                            <br>
-                            <button class="btn btn-outline-danger btn-sm" onclick="quitCourse(123)">
-                                会员退课
-                            </button>
+                            </a>
                         </td>
                     </tr>
                     </tbody>

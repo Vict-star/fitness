@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
+import java.util.List;
 
 @Controller
 @RequestMapping("/staff")
@@ -107,9 +108,11 @@ public class StaffController {
     @GetMapping("/classTable")
     public String classTablePage(HttpServletRequest request, Model model) {
         if (isLogin(request)) {
-            model.addAttribute("courseList", staffService.getAllCourse());
-            model.addAttribute("coachList", staffService.getAllCoach());
-            model.addAttribute("time_slotList", staffService.getAllTimeSlot());
+            List<CourseTableItem> list = staffService.listCourseTableItem();
+            model.addAttribute("CourseTableItemList", list);
+//           for(CourseTableItem item: list){
+//               System.out.println(item);
+//           }
         }
         return isLogin(request) ? "staff/classTable" : "Login";
     }
@@ -435,6 +438,14 @@ public class StaffController {
         attributes.addFlashAttribute("message", message);
         System.out.println(take_course.toString());
         return "redirect:/staff/chooseClass";
+    }
+
+    @GetMapping("/quitClass/{cid}")
+    public String quitClassPage(@PathVariable("cid") int course_id, Model model) {
+        List<CourseChosenItem> list = staffService.listCourseChosenItem(course_id);
+        model.addAttribute("CourseChosenItemList",list);
+//        System.out.println(list.size());
+        return "/staff/courseQuit";
     }
 
     @PostMapping("/chooseClass/quit")

@@ -6,6 +6,8 @@ import com.software.fitness.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StaffServiceImpl implements StaffService {
     @Autowired
@@ -199,4 +201,13 @@ public class StaffServiceImpl implements StaffService {
         return take_courseDao.delete(take_course);
     }
 
+    @Override
+    public List<CourseTableItem> listCourseTableItem() {
+        return courseDao.listCourseTableItem();
+    }
+
+    @Override
+    public List<CourseChosenItem> listCourseChosenItem(Integer course_id) {
+        return take_courseDao.listCourseChosenItem(course_id);
+    }
 }
