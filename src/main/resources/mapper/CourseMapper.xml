@@ -99,7 +99,7 @@
     <select id="getCourseByMemberID" parameterType="int" resultType="com.software.fitness.domain.Course">
         select *
         from course
-        where course.id in (select course_id from take_course where member_id = #{id})
+        where course.id in (select course_id from take_course where member_id = #{id}) and course.state != '已结课';
     </select>
 
 </mapper>
