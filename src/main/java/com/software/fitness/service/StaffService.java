@@ -95,4 +95,8 @@ public interface StaffService {
     List<Course> getCourseByDate(Date date);
 
     List<Course> getCourseByMemberID(int id);
+
+    List<CourseTableItem> listCourseTableItem();
+
+    List<CourseChosenItem> listCourseChosenItem(Integer course_id);
 }

@@ -1,12 +1,12 @@
 package com.software.fitness.dao;
 
 import com.software.fitness.domain.Course;
+import com.software.fitness.domain.CourseTableItem;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
-
 @Repository
 @Mapper
 public interface CourseDao {
@@ -32,6 +32,8 @@ public interface CourseDao {
     Integer updateEndState();
 
     Integer updateStartState();
+
+    List<CourseTableItem> listCourseTableItem();
 
     List<Course> getCourseByDate(Date date);
 

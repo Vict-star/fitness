@@ -41,6 +41,15 @@ public class StaffController {
 
     /**
      * @param request
+     * @return 是否登陆成功
+     */
+    private boolean isLogin(@NonNull HttpServletRequest request) {
+        Staff staff = (Staff) request.getSession().getAttribute("loginUser");
+        return staff != null;
+    }
+
+    /**
+     * @param request
      * @return 是否为管理员
      */
     private boolean isAdmin(@NonNull HttpServletRequest request) {
@@ -85,17 +94,14 @@ public class StaffController {
 
     @GetMapping("/classTable")
     public String classTablePage(HttpServletRequest request, Model model) {
-        List<Course> courses = staffService.getCourseByDate(DateUtils.getThisMonday(DateUtils.dayStart(new Date())));
-        CourseInfo[][] courseInfos = new CourseInfo[7][5];
-        for(int i = 0; i < 7; ++i){
-            for(int j = 0; j < 5; ++j){
-                for(Course c : courses){
-
-                }
-            }
+        if (isLogin(request)) {
+            List<CourseTableItem> list = staffService.listCourseTableItem();
+            model.addAttribute("CourseTableItemList", list);
+//           for(CourseTableItem item: list){
+//               System.out.println(item);
+//           }
         }
-        model.addAttribute("classTable", courseInfos);
-        return "staff/classTable";
+        return isLogin(request) ? "staff/classTable" : "Login";
     }
 
     @GetMapping("/chooseClass")
@@ -401,6 +407,14 @@ public class StaffController {
         attributes.addFlashAttribute("message", message);
         System.out.println(take_course.toString());
         return "redirect:/staff/chooseClass";
+    }
+
+    @GetMapping("/quitClass/{cid}")
+    public String quitClassPage(@PathVariable("cid") int course_id, Model model) {
+        List<CourseChosenItem> list = staffService.listCourseChosenItem(course_id);
+        model.addAttribute("CourseChosenItemList",list);
+//        System.out.println(list.size());
+        return "/staff/courseQuit";
     }
 
     @PostMapping("/chooseClass/quit")

@@ -229,4 +229,13 @@ public class StaffServiceImpl implements StaffService {
         List<Member> members = memberDao.getAllMember();
         return new PageInfo<Member>(members);
     }
+    @Override
+    public List<CourseTableItem> listCourseTableItem() {
+        return courseDao.listCourseTableItem();
+    }
+
+    @Override
+    public List<CourseChosenItem> listCourseChosenItem(Integer course_id) {
+        return take_courseDao.listCourseChosenItem(course_id);
+    }
 }
