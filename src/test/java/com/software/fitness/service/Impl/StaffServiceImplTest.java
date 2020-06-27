@@ -9,14 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class StaffServiceImplTest {
     @Autowired
     StaffService staffService;
     @Autowired
     CourseDao courseDao;
+
     @Test
     void listCourseTableItem() {
         List<CourseTableItem> list = courseDao.listCourseTableItem();

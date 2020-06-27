@@ -17,4 +17,13 @@
           and date_of_attendance = #{date_of_attendance};
     </delete>
 
+    <select id="checkAttendance" parameterType="com.software.fitness.domain.Attendance"
+            resultType="com.software.fitness.domain.Attendance">
+        select *
+        from attendance
+        where course_id = #{course_id}
+          and member_id = #{member_id}
+          and date_of_attendance >= #{date_of_attendance};
+    </select>
+
 </mapper>

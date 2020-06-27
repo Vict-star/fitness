@@ -12,4 +12,5 @@ public interface AttendanceDao {
 
     Integer delete(Attendance attendance);
 
+    Attendance checkAttendance(Attendance attendance);
 }

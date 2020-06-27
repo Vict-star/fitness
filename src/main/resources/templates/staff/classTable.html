@@ -47,13 +47,13 @@
             if (slot < 5) day = 7;
         }*/
         var CourseTableItemList = [[${CourseTableItemList}]];
-        for(var i = 0; i<CourseTableItemList.length;++i){
+        for (var i = 0; i < CourseTableItemList.length; ++i) {
             var date_start = new Date(CourseTableItemList[i].start_date).toLocaleDateString();
             var date_end = new Date(CourseTableItemList[i].end_date).toLocaleDateString();
-            $("[name='slot"+CourseTableItemList[i].time_slot_id+"']").append(
-                "<a href='staff/courseManage/"+CourseTableItemList[i].id+"'>【"+CourseTableItemList[i].course_name+"】</a><br>" +
-                date_start+"~"+date_end+"<br>"+
-                "<a href='staff/coachManage/"+CourseTableItemList[i].coach_id+"'>教练："+CourseTableItemList[i].coach_name+"</a><br>"
+            $("[name='slot" + CourseTableItemList[i].time_slot_id + "']").append(
+                "<a href='staff/courseManage/" + CourseTableItemList[i].id + "'>【" + CourseTableItemList[i].course_name + "】</a><br>" +
+                date_start + "~" + date_end + "<br>" +
+                "<a href='staff/coachManage/" + CourseTableItemList[i].coach_id + "'>教练：" + CourseTableItemList[i].coach_name + "</a><br>"
             );
         }
     }
@@ -81,15 +81,15 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td >第一二节</td>
-                        <td name="slot1" ></td>
-                        <td name="slot2" ></td>
-                        <td name="slot1" ></td>
-                        <td name="slot2" ></td>
-                        <td name="slot1" ></td>
+                        <td>第一二节</td>
+                        <td name="slot1"></td>
+                        <td name="slot2"></td>
+                        <td name="slot1"></td>
+                        <td name="slot2"></td>
+                        <td name="slot1"></td>
                     </tr>
                     <tr>
-                        <td >第三四节</td>
+                        <td>第三四节</td>
                         <td name="slot3"></td>
                         <td name="slot4"></td>
                         <td name="slot3"></td>
@@ -97,7 +97,7 @@
                         <td name="slot3"></td>
                     </tr>
                     <tr>
-                        <td >第七八节</td>
+                        <td>第七八节</td>
                         <td name="slot5"></td>
                         <td name="slot6"></td>
                         <td name="slot5"></td>
@@ -105,7 +105,7 @@
                         <td name="slot5"></td>
                     </tr>
                     <tr>
-                        <td >第七八节</td>
+                        <td>第七八节</td>
                         <td name="slot7"></td>
                         <td name="slot8"></td>
                         <td name="slot7"></td>
@@ -113,7 +113,7 @@
                         <td name="slot7"></td>
                     </tr>
                     <tr>
-                        <td >晚上</td>
+                        <td>晚上</td>
                         <td name="slot9"></td>
                         <td name="slot10"></td>
                         <td name="slot9"></td>

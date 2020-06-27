@@ -3,7 +3,6 @@ package com.software.fitness.controller;
 import com.software.fitness.domain.*;
 import com.software.fitness.service.RecordService;
 import com.software.fitness.service.StaffService;
-import com.software.fitness.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
@@ -38,15 +37,6 @@ public class StaffController {
     private StaffService staffService;
     @Autowired
     private RecordService recordService;
-
-    /**
-     * @param request
-     * @return 是否登陆成功
-     */
-    private boolean isLogin(@NonNull HttpServletRequest request) {
-        Staff staff = (Staff) request.getSession().getAttribute("loginUser");
-        return staff != null;
-    }
 
     /**
      * @param request
@@ -94,14 +84,9 @@ public class StaffController {
 
     @GetMapping("/classTable")
     public String classTablePage(HttpServletRequest request, Model model) {
-        if (isLogin(request)) {
-            List<CourseTableItem> list = staffService.listCourseTableItem();
-            model.addAttribute("CourseTableItemList", list);
-//           for(CourseTableItem item: list){
-//               System.out.println(item);
-//           }
-        }
-        return isLogin(request) ? "staff/classTable" : "Login";
+        List<CourseTableItem> list = staffService.listCourseTableItem();
+        model.addAttribute("CourseTableItemList", list);
+        return "staff/classTable";
     }
 
     @GetMapping("/chooseClass")
@@ -268,14 +253,65 @@ public class StaffController {
 
     @PostMapping("/attendance/{cid}/{mid}")
     public String attendanceSign(@PathVariable("cid") int cid, @PathVariable("mid") int mid, RedirectAttributes attributes) {
+        String message, day;
         Attendance attendance = new Attendance();
         attendance.setCourse_id(cid);
         attendance.setMember_id(mid);
         Calendar calendar = Calendar.getInstance();
-        attendance.setDate_of_attendance(calendar.getTime());
+        Date now = calendar.getTime();
+        if (calendar.get(Calendar.DAY_OF_WEEK) == 1 || calendar.get(Calendar.DAY_OF_WEEK) == 7) {
+            message = "今天不是健身天";
+            attributes.addFlashAttribute("message", message);
+            return "redirect:/staff/attendance/" + cid;
+        }
+        switch (calendar.get(Calendar.DAY_OF_WEEK)) {
+            case 2:
+                day = "周一";
+                break;
+            case 3:
+                day = "周二";
+                break;
+            case 4:
+                day = "周三";
+                break;
+            case 5:
+                day = "周四";
+                break;
+            case 6:
+                day = "周五";
+                break;
+            default:
+                day = "";
+        }
+        Time_slot time_slot = staffService.getTimeSlotByTime(new Time(calendar.getTime(), day));
+        if (time_slot == null) {
+            message = "现在不在上课";
+            attributes.addFlashAttribute("message", message);
+            return "redirect:/staff/attendance/" + cid;
+        } else {
+            Course course = staffService.getCourseByID(cid);
+            if (course.getTime_slot_id() != time_slot.getId()) {
+                message = "现在不在上课";
+                attributes.addFlashAttribute("message", message);
+                return "redirect:/staff/attendance/" + cid;
+            }
+            Calendar cals = Calendar.getInstance();
+            cals.setTime(time_slot.getStart_time());
+            calendar.set(Calendar.HOUR, cals.get(Calendar.HOUR));
+            calendar.set(Calendar.MINUTE, cals.get(Calendar.MINUTE));
+            calendar.set(Calendar.SECOND, cals.get(Calendar.SECOND));
+            calendar.set(Calendar.MILLISECOND, cals.get(Calendar.MILLISECOND));
+            attendance.setDate_of_attendance(calendar.getTime());
+            if (staffService.checkAttendance(attendance) != null) {
+                message = "已经签到";
+                attributes.addFlashAttribute("message", message);
+                return "redirect:/staff/attendance/" + cid;
+            }
+            attendance.setDate_of_attendance(now);
+        }
         System.out.println(attendance);
         Integer er = staffService.insertAttendance(attendance);
-        String message;
+
         if (er != null && er > 0) {
             message = "签到成功";
         } else {
@@ -398,6 +434,16 @@ public class StaffController {
         String message = "";
         System.out.println(take_course);
         int id = staffService.insertTakeCourse(take_course);
+        List<Course> courses = staffService.getCourseByMemberID(take_course.getMember_id());
+        Course course = staffService.getCourseByID(take_course.getCourse_id());
+        for (Course c : courses) {
+            if (c.getTime_slot_id() == course.getTime_slot_id()) {
+                message = "课程时间冲突";
+                attributes.addFlashAttribute("message", message);
+                System.out.println(take_course.toString());
+                return "redirect:/staff/chooseClass";
+            }
+        }
 
         if (id > 0) {
             message = "选课成功";
@@ -412,7 +458,7 @@ public class StaffController {
     @GetMapping("/quitClass/{cid}")
     public String quitClassPage(@PathVariable("cid") int course_id, Model model) {
         List<CourseChosenItem> list = staffService.listCourseChosenItem(course_id);
-        model.addAttribute("CourseChosenItemList",list);
+        model.addAttribute("CourseChosenItemList", list);
 //        System.out.println(list.size());
         return "/staff/courseQuit";
     }

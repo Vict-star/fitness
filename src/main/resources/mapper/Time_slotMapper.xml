@@ -29,4 +29,13 @@
         from time_slot;
     </select>
 
+    <select id="getTimeSlotByTime" parameterType="com.software.fitness.domain.Time"
+            resultType="com.software.fitness.domain.Time_slot">
+        select *
+        from time_slot
+        where day = #{day}
+          and start_time &lt;= #{time}
+          and end_time >= #{time};
+    </select>
+
 </mapper>

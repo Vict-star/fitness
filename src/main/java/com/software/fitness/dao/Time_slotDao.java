@@ -1,5 +1,6 @@
 package com.software.fitness.dao;
 
+import com.software.fitness.domain.Time;
 import com.software.fitness.domain.Time_slot;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,6 @@ public interface Time_slotDao {
     Integer delete(Time_slot time_slot);
 
     List<Time_slot> getAllTimeSlot();
+
+    Time_slot getTimeSlotByTime(Time time);
 }

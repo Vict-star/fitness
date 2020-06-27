@@ -99,4 +99,8 @@ public interface StaffService {
     List<CourseTableItem> listCourseTableItem();
 
     List<CourseChosenItem> listCourseChosenItem(Integer course_id);
+
+    Time_slot getTimeSlotByTime(Time time);
+
+    Attendance checkAttendance(Attendance attendance);
 }

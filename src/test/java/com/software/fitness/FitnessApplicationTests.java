@@ -2,16 +2,14 @@ package com.software.fitness;
 
 import com.software.fitness.domain.Member;
 import com.software.fitness.domain.Staff;
+import com.software.fitness.domain.Time;
 import com.software.fitness.service.MemberService;
 import com.software.fitness.service.StaffService;
-import com.software.fitness.utils.DateUtils;
-import org.assertj.core.util.DateUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -62,14 +60,7 @@ class FitnessApplicationTests {
     @Test
     void dawd() {
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR,-12);
-        cal.set(Calendar.MINUTE,0);
-        cal.set(Calendar.SECOND,0);
-        cal.set(Calendar.MILLISECOND,0);
-        System.out.println(new DateUtils().getThisMonday(cal.getTime()));
-        System.out.println(cal.getTime());
-        cal.setFirstDayOfWeek(Calendar.MONDAY);
-        System.out.println(cal.getFirstDayOfWeek());
-        System.out.println(cal.get(Calendar.DAY_OF_WEEK));
+        Time time = new Time(cal.getTime(), "周一");
+        System.out.println(staffService.getTimeSlotByTime(time));
     }
 }

@@ -16,15 +16,18 @@
           and member_id = #{member_id};
     </delete>
 
-    <select id="listCourseChosenItem" parameterType="java.lang.Integer" resultType="com.software.fitness.domain.CourseChosenItem">
-        SELECT  `take_course`.`member_id`,
-    `take_course`.`course_id`,
-    `member`.`name` as `member_name`,
-    `member`.`gender`,
-    `member`.`date_of_birth`,
-    `member`.`phone_number`
-    FROM `fitnesstest`.`member`,`fitnesstest`.`take_course`
-    WHERE `member`.`id` = `take_course`.`member_id` AND `take_course`.`course_id` = #{course_id};
+    <select id="listCourseChosenItem" parameterType="java.lang.Integer"
+            resultType="com.software.fitness.domain.CourseChosenItem">
+        SELECT `take_course`.`member_id`,
+               `take_course`.`course_id`,
+               `member`.`name` as `member_name`,
+               `member`.`gender`,
+               `member`.`date_of_birth`,
+               `member`.`phone_number`
+        FROM `fitnesstest`.`member`,
+             `fitnesstest`.`take_course`
+        WHERE `member`.`id` = `take_course`.`member_id`
+          AND `take_course`.`course_id` = #{course_id};
     </select>
 
 </mapper>
