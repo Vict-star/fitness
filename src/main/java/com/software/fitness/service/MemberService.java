@@ -5,6 +5,8 @@ import com.software.fitness.domain.Course;
 import com.software.fitness.domain.Member;
 import com.software.fitness.domain.Take_course;
 
+import java.util.List;
+
 public interface MemberService {
 
     Member getMemberByPhoneNumber(String phone_number);
@@ -15,12 +17,12 @@ public interface MemberService {
 
     Integer deleteTakeCourse(Take_course take_course);
 
-    Course[] getAllCourse();
+    List<Course> getAllCourse();
 
-    Coach[] getAllCoach();
+    List<Coach> getAllCoach();
 
-    Member[] getInvalidityMember();
+    Integer updateMemberState();
 
-    Member[] getValidityMember();
+    Integer updateCourseState();
 
 }

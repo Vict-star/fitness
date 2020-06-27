@@ -4,6 +4,8 @@ import com.software.fitness.domain.Record;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 @Mapper
@@ -13,6 +15,6 @@ public interface RecordDao {
 
     Integer delete(Record record);
 
-    Record[] getAllRecord();
+    List<Record> getAllRecord();
 
 }

@@ -4,6 +4,8 @@ import com.software.fitness.domain.Time_slot;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface Time_slotDao {
@@ -13,5 +15,5 @@ public interface Time_slotDao {
 
     Integer delete(Time_slot time_slot);
 
-    Time_slot[] getAllTimeSlot();
+    List<Time_slot> getAllTimeSlot();
 }

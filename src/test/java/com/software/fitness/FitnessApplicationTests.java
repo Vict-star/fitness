@@ -4,9 +4,15 @@ import com.software.fitness.domain.Member;
 import com.software.fitness.domain.Staff;
 import com.software.fitness.service.MemberService;
 import com.software.fitness.service.StaffService;
+import com.software.fitness.utils.DateUtils;
+import org.assertj.core.util.DateUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 class FitnessApplicationTests {
@@ -20,7 +26,7 @@ class FitnessApplicationTests {
         Staff staff = staffService.getStaffByPhoneNumber("13609063091");
         System.out.println(staff.toString());
 
-        Staff[] staffs = staffService.getAllStaff();
+        List<Staff> staffs = staffService.getAllStaff();
         for (Staff s : staffs) {
             System.out.println(s);
         }
@@ -46,10 +52,8 @@ class FitnessApplicationTests {
 
     @Test
     void getMember() {
-        Member member = staffService.getMemberByPhoneNumber("13700000001");
-        System.out.println(member.toString());
 
-        Member[] members = staffService.getAllMember();
+        List<Member> members = staffService.getAllMember();
         for (Member m : members) {
             System.out.println(m);
         }
@@ -57,13 +61,15 @@ class FitnessApplicationTests {
 
     @Test
     void dawd() {
-        Member[] members = memberService.getInvalidityMember();
-        for (Member m : members) {
-            System.out.println(m);
-        }
-        members = memberService.getValidityMember();
-        for (Member m : members) {
-            System.out.println(m);
-        }
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR,-12);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.MILLISECOND,0);
+        System.out.println(new DateUtils().getThisMonday(cal.getTime()));
+        System.out.println(cal.getTime());
+        cal.setFirstDayOfWeek(Calendar.MONDAY);
+        System.out.println(cal.getFirstDayOfWeek());
+        System.out.println(cal.get(Calendar.DAY_OF_WEEK));
     }
 }

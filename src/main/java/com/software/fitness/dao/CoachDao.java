@@ -4,6 +4,8 @@ import com.software.fitness.domain.Coach;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface CoachDao {
@@ -14,7 +16,7 @@ public interface CoachDao {
 
     Integer delete(Coach coach);
 
-    Coach[] getAllCoach();
+    List<Coach> getAllCoach();
 
     Coach getCoachByID(int id);
 }

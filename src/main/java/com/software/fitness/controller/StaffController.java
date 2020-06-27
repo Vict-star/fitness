@@ -3,6 +3,7 @@ package com.software.fitness.controller;
 import com.software.fitness.domain.*;
 import com.software.fitness.service.RecordService;
 import com.software.fitness.service.StaffService;
+import com.software.fitness.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/staff")
@@ -38,15 +41,6 @@ public class StaffController {
 
     /**
      * @param request
-     * @return 是否登陆成功
-     */
-    private boolean isLogin(@NonNull HttpServletRequest request) {
-        Staff staff = (Staff) request.getSession().getAttribute("loginUser");
-        return staff != null;
-    }
-
-    /**
-     * @param request
      * @return 是否为管理员
      */
     private boolean isAdmin(@NonNull HttpServletRequest request) {
@@ -60,113 +54,85 @@ public class StaffController {
      */
     @GetMapping("/coachManage")
     public String coachManagePage(HttpServletRequest request, Model model) {
-        if (isLogin(request)) {
-            model.addAttribute("coachList", staffService.getAllCoach());
-            return "staff/coachManage";
-        }
-        return "Login";
+        model.addAttribute("coachList", staffService.getAllCoach());
+        return "staff/coachManage";
     }
 
     @GetMapping("/memberManage")
     public String memberManagePage(HttpServletRequest request, Model model) {
-        if (isLogin(request)) {
-            model.addAttribute("memberList", staffService.getAllMember());
-            return "staff/memberManage";
-        }
-        return "Login";
+        model.addAttribute("memberList", staffService.getAllMember());
+        return "staff/memberManage";
     }
 
     @GetMapping("/memberManage/{id}")
     public String memberEditPage(@PathVariable("id") int id, HttpServletRequest request, Model model) {
-        if (isLogin(request)) {
-            model.addAttribute("member", staffService.getMemberByID(id));
-            return "staff/memberEdit";
-        }
-        return "Login";
+        model.addAttribute("member", staffService.getMemberByID(id));
+        return "staff/memberEdit";
     }
 
     @GetMapping("/attendance")
     public String attendancePage(HttpServletRequest request, Model model) {
-        if (isLogin(request)) {
-            model.addAttribute("courseList", staffService.getCourseByState("正在上课"));
-            return "staff/attendance";
-        }
-        return "Login";
+        model.addAttribute("courseList", staffService.getCourseByState("正在上课"));
+        return "staff/attendance";
     }
 
     @GetMapping("/attendance/{id}")
     public String attendanceSignPage(@PathVariable("id") int id, HttpServletRequest request, Model model) {
-        if (isLogin(request)) {
-            model.addAttribute("course", staffService.getCourseByID(id));
-            model.addAttribute("memberList", staffService.getMemberByCourseID(id));
-            return "staff/attendanceSign";
-        }
-        return "Login";
+        model.addAttribute("course", staffService.getCourseByID(id));
+        model.addAttribute("memberList", staffService.getMemberByCourseID(id));
+        return "staff/attendanceSign";
     }
 
     @GetMapping("/classTable")
     public String classTablePage(HttpServletRequest request, Model model) {
-        if (isLogin(request)) {
-            model.addAttribute("courseList", staffService.getAllCourse());
-            model.addAttribute("coachList", staffService.getAllCoach());
-            model.addAttribute("time_slotList", staffService.getAllTimeSlot());
+        List<Course> courses = staffService.getCourseByDate(DateUtils.getThisMonday(DateUtils.dayStart(new Date())));
+        CourseInfo[][] courseInfos = new CourseInfo[7][5];
+        for(int i = 0; i < 7; ++i){
+            for(int j = 0; j < 5; ++j){
+                for(Course c : courses){
+
+                }
+            }
         }
-        return isLogin(request) ? "staff/classTable" : "Login";
+        model.addAttribute("classTable", courseInfos);
+        return "staff/classTable";
     }
 
     @GetMapping("/chooseClass")
     public String chooseClassPage(HttpServletRequest request, Model model) {
-        if (isLogin(request)) {
-            model.addAttribute("courseList", staffService.getAllCourse());
-            return "staff/chooseClass";
-        }
-        return "Login";
+        model.addAttribute("courseList", staffService.getAllCourse());
+        return "staff/chooseClass";
     }
 
     @GetMapping("/courseManage")
     public String courseManagePage(HttpServletRequest request, Model model) {
-        if (isLogin(request)) {
-            model.addAttribute("courseList", staffService.getAllCourse());
-            return "staff/courseManage";
-        }
-        return "Login";
+        model.addAttribute("courseList", staffService.getAllCourse());
+        return "staff/courseManage";
     }
 
     @GetMapping("/courseManage/{id}")
     public String courseEditPage(@PathVariable("id") int id, HttpServletRequest request, Model model) {
-        if (isLogin(request)) {
-            model.addAttribute("course", staffService.getCourseByID(id));
-            return "staff/courseEdit";
-        }
-        return "Login";
+        model.addAttribute("course", staffService.getCourseByID(id));
+        return "staff/courseEdit";
     }
 
     //更高权限
     @GetMapping("/staffManage")
     public String staffManagePage(HttpServletRequest request, Model model) {
-        if (isLogin(request) && isAdmin(request)) {
-            model.addAttribute("staffList", staffService.getAllStaff());
-            return "staff/staffManage";
-        }
-        return "Login";
+        model.addAttribute("staffList", staffService.getAllStaff());
+        return "staff/staffManage";
     }
 
     @GetMapping("/history")
     public String historyPage(HttpServletRequest request, Model model) {
-        if (isLogin(request)) {
-            model.addAttribute("recordList", recordService.getAllRecord());
-            return "staff/history";
-        }
-        return "Login";
+        model.addAttribute("recordList", recordService.getAllRecord());
+        return "staff/history";
     }
 
     @GetMapping("/coachManage/{id}")
     public String coachEditPage(@PathVariable("id") int id, HttpServletRequest request, Model model) {
-        if (isLogin(request)) {
-            model.addAttribute("coach", staffService.getCoachByID(id));
-            return "staff/coachEdit";
-        }
-        return "Login";
+        model.addAttribute("coach", staffService.getCoachByID(id));
+        return "staff/coachEdit";
     }
 
     /**

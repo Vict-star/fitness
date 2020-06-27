@@ -12,6 +12,8 @@ import com.software.fitness.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MemberServiceImpl implements MemberService {
     @Autowired
@@ -44,22 +46,24 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Course[] getAllCourse() {
+    public List<Course> getAllCourse() {
         return courseDao.getAllCourse();
     }
 
     @Override
-    public Coach[] getAllCoach() {
+    public List<Coach> getAllCoach() {
         return coachDao.getAllCoach();
     }
 
     @Override
-    public Member[] getInvalidityMember() {
-        return memberDao.getInvalidityMember();
+    public Integer updateMemberState() {
+        Integer v = memberDao.updateValidityState(), i = memberDao.updateInvalidityState();
+        return v > i ? i : v;
     }
 
     @Override
-    public Member[] getValidityMember() {
-        return memberDao.getValidityMember();
+    public Integer updateCourseState() {
+        Integer v = courseDao.updateStartState(), i = courseDao.updateEndState();
+        return v > i ? i : v;
     }
 }

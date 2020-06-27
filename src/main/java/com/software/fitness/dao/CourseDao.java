@@ -4,6 +4,9 @@ import com.software.fitness.domain.Course;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+import java.util.List;
+
 @Repository
 @Mapper
 public interface CourseDao {
@@ -22,7 +25,15 @@ public interface CourseDao {
     @Deprecated
     Integer decreaseNumberOfMember(int id);
 
-    Course[] getAllCourse();
+    List<Course> getAllCourse();
 
-    Course[] getCourseByState(String state);
+    List<Course> getCourseByState(String state);
+
+    Integer updateEndState();
+
+    Integer updateStartState();
+
+    List<Course> getCourseByDate(Date date);
+
+    List<Course> getCourseByMemberID(int id);
 }

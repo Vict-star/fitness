@@ -62,4 +62,28 @@
         where state = #{state};
     </select>
 
+    <update id="updateEndState">
+        update course
+        set state = '已结课'
+        where end_date &lt; now()
+          and state = '正在上课';
+    </update>
+
+    <update id="updateStartState">
+        update course
+        set state = '正在上课'
+        where start_date &lt;= now()
+          and state = '即将开课';
+    </update>
+
+    <select id="getCourseByDate" parameterType="java.util.Date" resultType="com.software.fitness.domain.Course">
+        select *
+        from course
+        where end_date >= #{date};
+    </select>
+
+    <select id="getCourseByMemberID" parameterType="int" resultType="com.software.fitness.domain.Course">
+        select * from course where course.id in (select course_id from take_course where member_id = #{id})
+    </select>
+
 </mapper>

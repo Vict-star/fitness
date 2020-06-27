@@ -4,6 +4,8 @@ import com.software.fitness.domain.Member;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface MemberDao {
@@ -16,7 +18,7 @@ public interface MemberDao {
 
     Integer delete(Member member);
 
-    Member[] getAllMember();
+    List<Member> getAllMember();
 
     Member getMemberByID(int id);
 
@@ -26,9 +28,9 @@ public interface MemberDao {
     @Deprecated
     Integer decreaseNumberOfCourse(int id);
 
-    Member[] getMemberByCourseID(int id);
+    List<Member> getMemberByCourseID(int id);
 
-    Member[] getInvalidityMember();
+    Integer updateValidityState();
 
-    Member[] getValidityMember();
+    Integer updateInvalidityState();
 }

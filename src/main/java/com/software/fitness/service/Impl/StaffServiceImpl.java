@@ -1,10 +1,18 @@
 package com.software.fitness.service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.software.fitness.dao.*;
 import com.software.fitness.domain.*;
+import com.software.fitness.page.PageRequest;
+import com.software.fitness.page.PageResult;
 import com.software.fitness.service.StaffService;
+import com.software.fitness.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class StaffServiceImpl implements StaffService {
@@ -45,7 +53,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Staff[] getAllStaff() {
+    public List<Staff> getAllStaff() {
         return staffDao.getAllStaff();
     }
 
@@ -65,7 +73,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Coach[] getAllCoach() {
+    public List<Coach> getAllCoach() {
         return coachDao.getAllCoach();
     }
 
@@ -100,7 +108,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Member[] getMemberByCourseID(int id) {
+    public List<Member> getMemberByCourseID(int id) {
         return memberDao.getMemberByCourseID(id);
     }
 
@@ -115,7 +123,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Member[] getAllMember() {
+    public List<Member> getAllMember() {
         return memberDao.getAllMember();
     }
 
@@ -150,12 +158,12 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Course[] getAllCourse() {
+    public List<Course> getAllCourse() {
         return courseDao.getAllCourse();
     }
 
     @Override
-    public Course[] getCourseByState(String state) {
+    public List<Course> getCourseByState(String state) {
         return courseDao.getCourseByState(state);
     }
 
@@ -175,7 +183,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Time_slot[] getAllTimeSlot() {
+    public List<Time_slot> getAllTimeSlot() {
         return time_slotDao.getAllTimeSlot();
     }
 
@@ -199,4 +207,26 @@ public class StaffServiceImpl implements StaffService {
         return take_courseDao.delete(take_course);
     }
 
+    @Override
+    public PageResult getMemberPage(PageRequest pageRequest) {
+        return PageUtils.getPageResult(pageRequest, getPageInfo(pageRequest));
+    }
+
+    @Override
+    public List<Course> getCourseByDate(Date date) {
+        return courseDao.getCourseByDate(date);
+    }
+
+    @Override
+    public List<Course> getCourseByMemberID(int id) {
+        return courseDao.getCourseByMemberID(id);
+    }
+
+    private PageInfo<Member> getPageInfo(PageRequest pageRequest) {
+        int pageNum = pageRequest.getPageNum();
+        int pageSize = pageRequest.getPageSize();
+        PageHelper.startPage(pageNum, pageSize);
+        List<Member> members = memberDao.getAllMember();
+        return new PageInfo<Member>(members);
+    }
 }

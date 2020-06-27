@@ -2,6 +2,11 @@ package com.software.fitness.service;
 
 
 import com.software.fitness.domain.*;
+import com.software.fitness.page.PageRequest;
+import com.software.fitness.page.PageResult;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * StaffService
@@ -19,7 +24,7 @@ public interface StaffService {
 
     Integer deleteStaff(Staff staff);
 
-    Staff[] getAllStaff();
+    List<Staff> getAllStaff();
 
     Integer insertCoach(Coach coach);
 
@@ -27,7 +32,7 @@ public interface StaffService {
 
     Integer deleteCoach(Coach coach);
 
-    Coach[] getAllCoach();
+    List<Coach> getAllCoach();
 
     Coach getCoachByID(int id);
 
@@ -41,7 +46,7 @@ public interface StaffService {
 
     Member getMemberByPhoneNumber(String phone_number);
 
-    Member[] getMemberByCourseID(int id);
+    List<Member> getMemberByCourseID(int id);
 
     @Deprecated
     Integer increaseNumberOfCourses(int id);
@@ -49,7 +54,7 @@ public interface StaffService {
     @Deprecated
     Integer decreaseNumberOfCourses(int id);
 
-    Member[] getAllMember();
+    List<Member> getAllMember();
 
     Integer insertCourse(Course course);
 
@@ -65,9 +70,9 @@ public interface StaffService {
     @Deprecated
     Integer decreaseNumberOfMember(int id);
 
-    Course[] getAllCourse();
+    List<Course> getAllCourse();
 
-    Course[] getCourseByState(String state);
+    List<Course> getCourseByState(String state);
 
     Integer insertTimeSlot(Time_slot time_slot);
 
@@ -75,7 +80,7 @@ public interface StaffService {
 
     Integer deleteTimeSlot(Time_slot time_slot);
 
-    Time_slot[] getAllTimeSlot();
+    List<Time_slot> getAllTimeSlot();
 
     Integer insertAttendance(Attendance attendance);
 
@@ -85,4 +90,9 @@ public interface StaffService {
 
     Integer deleteTakeCourse(Take_course take_course);
 
+    PageResult getMemberPage(PageRequest pageRequest);
+
+    List<Course> getCourseByDate(Date date);
+
+    List<Course> getCourseByMemberID(int id);
 }
