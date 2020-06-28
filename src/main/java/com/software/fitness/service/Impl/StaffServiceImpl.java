@@ -234,4 +234,14 @@ public class StaffServiceImpl implements StaffService {
             return false;
         }
     }
+
+    @Override
+    public boolean staffDetailUpdate(String id,String name, String phone_number, String address) {
+        Staff staff = staffDao.getStaffByPhoneNumber(phone_number);
+        staff.setPhone_number(phone_number);
+        staff.setAddress(address);
+        staff.setName(name);
+        int row = staffDao.update(staff);
+        return row > 0;
+    }
 }
