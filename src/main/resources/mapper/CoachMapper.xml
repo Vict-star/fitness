@@ -31,7 +31,7 @@
 
     <select id="getAllCoach" resultType="com.software.fitness.domain.Coach">
         select *
-        from coach;
+        from coach
     </select>
 
     <select id="getCoachByID" parameterType="int" resultType="com.software.fitness.domain.Coach">

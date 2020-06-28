@@ -242,7 +242,7 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public PageInfo<Coach> PageAllCoach(int page, int pageSize) {
-        PageHelper.startPage(1, 2);
+        PageHelper.startPage(page, pageSize);
         List<Coach> coachlist = coachDao.getAllCoach();
         PageInfo pageInfo = new PageInfo(coachlist);
         return pageInfo;

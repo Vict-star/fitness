@@ -61,7 +61,7 @@ public class StaffController {
     @GetMapping("/coachManage")
     public String coachManagePage(HttpServletRequest request,
                                   @RequestParam(defaultValue = "1") int page,
-                                  @RequestParam(defaultValue = "1") int pageSize,
+                                  @RequestParam(defaultValue = "2") int pageSize,
                                   Model model) {
         System.out.println("page" + page + "Pagesize" + pageSize);
 
