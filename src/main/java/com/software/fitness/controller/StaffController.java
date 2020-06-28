@@ -586,7 +586,7 @@ public class StaffController {
         if (id > 0) {
             message = "添加员工成功";
             int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
-            recordService.staffInsertRecord(genRecord(sid, "退课：" + staff.toString()));
+            recordService.staffInsertRecord(genRecord(sid, "添加员工：" + staff.toString()));
         } else {
             message = "添加员工失败";
         }
@@ -602,7 +602,7 @@ public class StaffController {
         if (id > 0) {
             message = "修改员工成功";
             int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
-            recordService.staffInsertRecord(genRecord(sid, "退课：" + staff.toString()));
+            recordService.staffInsertRecord(genRecord(sid, "编辑员工：" + staff.toString()));
         } else {
             message = "修改员工失败";
         }

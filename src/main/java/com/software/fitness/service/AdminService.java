@@ -7,4 +7,6 @@ import java.util.List;
 public interface AdminService {
 
     List<Staff> PageStaff();
+
+    Staff getStaffByID(int id);
 }

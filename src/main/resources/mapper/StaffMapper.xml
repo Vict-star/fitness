@@ -44,4 +44,10 @@
         from staff;
     </select>
 
+    <select id="getStaffByID" parameterType="int" resultType="com.software.fitness.domain.Staff">
+        select *
+        from staff
+        where id = #{id};
+    </select>
+
 </mapper>

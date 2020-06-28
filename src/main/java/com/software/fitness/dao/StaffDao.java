@@ -20,4 +20,5 @@ public interface StaffDao {
 
     List<Staff> getAllStaff();
 
+    Staff getStaffByID(int id);
 }

@@ -7,7 +7,6 @@ import com.software.fitness.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -17,7 +16,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<Staff> PageStaff() {
-        return Arrays.asList(staffDao.getAllStaff());
+        return staffDao.getAllStaff();
+    }
+
+    @Override
+    public Staff getStaffByID(int id) {
+        return staffDao.getStaffByID(id);
     }
 
 
