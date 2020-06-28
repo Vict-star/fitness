@@ -1,11 +1,14 @@
 package com.software.fitness.service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.software.fitness.dao.*;
 import com.software.fitness.domain.*;
 import com.software.fitness.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -209,5 +212,26 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public List<CourseChosenItem> listCourseChosenItem(Integer course_id) {
         return take_courseDao.listCourseChosenItem(course_id);
+    }
+
+    @Override
+    public PageInfo<Coach> PageAllCoach(int page,int pageSize) {
+        PageHelper.startPage(1,2);
+        Coach[] coachlist = coachDao.getAllCoach();
+        List<Coach> List= Arrays.asList(coachlist);
+        PageInfo pageInfo = new PageInfo(List);
+        return pageInfo;
+    }
+
+    @Override
+    public boolean changePassword(String phone_number, String staffId, String old_pwd, String new_pwd) {
+        Staff staff = staffDao.getStaffByPhoneNumber(phone_number);
+        if(staff.getPassword().equals(old_pwd)){
+            staff.setPassword(new_pwd);
+            int row = staffDao.update(staff);
+            return row > 0;
+        }else{
+            return false;
+        }
     }
 }
