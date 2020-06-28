@@ -74,6 +74,31 @@ public class StaffController {
         return "Login";
     }
 
+    @GetMapping("/detail")
+    public String staffDetailPage() {
+        return "staff/staffDetail";
+    }
+
+    @PostMapping("/detail/update")
+    public String staffDetailUpdate(HttpServletRequest request, RedirectAttributes attributes,
+            String id, String name,String phone_number,String address) {
+        boolean result = staffService.staffDetailUpdate(id,name,phone_number,address);
+        String message = "";
+        if(result){
+            Staff staff = staffService.getStaffByPhoneNumber(phone_number);
+            staff.setPassword(null);
+            request.getSession().setAttribute("loginUser", staff);
+            message = "修改成功";
+        }
+        else{
+            message = "修改失败，请联系管理员";
+        }
+        attributes.addFlashAttribute("message", message);
+        return "redirect:/staff/detail";
+    }
+
+
+
     @GetMapping("/passwordManage")
     public String passwordManage() {
         return "staff/passwordManage";

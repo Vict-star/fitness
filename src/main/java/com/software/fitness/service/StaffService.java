@@ -101,9 +101,11 @@ public interface StaffService {
 
     List<CourseChosenItem> listCourseChosenItem(Integer course_id);
 
-    PageInfo<Coach> PageAllCoach(int page, int pageSize);
+    PageInfo<Coach> PageAllCoach(int page,int pageSize);
 
     boolean changePassword(String phone_number, String staffId, String old_pwd, String new_pwd);
+
+    boolean staffDetailUpdate(String id,String name, String phone_number, String address);
 
     Time_slot getTimeSlotByTime(Time time);
 

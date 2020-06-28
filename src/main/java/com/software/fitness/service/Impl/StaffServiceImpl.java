@@ -11,6 +11,7 @@ import com.software.fitness.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -268,5 +269,15 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public Attendance checkAttendance(Attendance attendance) {
         return attendanceDao.checkAttendance(attendance);
+    }
+
+    @Override
+    public boolean staffDetailUpdate(String id,String name, String phone_number, String address) {
+        Staff staff = staffDao.getStaffByPhoneNumber(phone_number);
+        staff.setPhone_number(phone_number);
+        staff.setAddress(address);
+        staff.setName(name);
+        int row = staffDao.update(staff);
+        return row > 0;
     }
 }
