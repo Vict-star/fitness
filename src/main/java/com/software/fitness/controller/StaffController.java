@@ -4,7 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.software.fitness.domain.*;
 import com.software.fitness.service.RecordService;
 import com.software.fitness.service.StaffService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
@@ -61,13 +60,13 @@ public class StaffController {
      */
     @GetMapping("/coachManage")
     public String coachManagePage(HttpServletRequest request,
-                                  @RequestParam(defaultValue = "1")int page,
-                                  @RequestParam(defaultValue = "1")int pageSize,
+                                  @RequestParam(defaultValue = "1") int page,
+                                  @RequestParam(defaultValue = "1") int pageSize,
                                   Model model) {
-        System.out.println("page"+page+"Pagesize"+pageSize);
+        System.out.println("page" + page + "Pagesize" + pageSize);
 
         if (isLogin(request)) {
-            PageInfo<Coach> Page =staffService.PageAllCoach(page,pageSize);
+            PageInfo<Coach> Page = staffService.PageAllCoach(page, pageSize);
             System.out.println(Page);
             model.addAttribute("coachPage", Page);
             return "staff/coachManage";
@@ -76,20 +75,19 @@ public class StaffController {
     }
 
     @GetMapping("/passwordManage")
-    public String passwordManage(){
+    public String passwordManage() {
         return "staff/passwordManage";
     }
 
     @PostMapping("/passwordManage/update")
     public String passwordChange(RedirectAttributes attributes,
-                                String phone_number,
-                                 String staff_id,String old_pwd, String new_pwd){
+                                 String phone_number,
+                                 String staff_id, String old_pwd, String new_pwd) {
         String message = "";
-        boolean result = staffService.changePassword(phone_number,staff_id,old_pwd,new_pwd);
-        if(result){
+        boolean result = staffService.changePassword(phone_number, staff_id, old_pwd, new_pwd);
+        if (result) {
             message = "修改成功";
-        }
-        else{
+        } else {
             message = "修改失败，请联系管理员";
         }
         attributes.addFlashAttribute("message", message);
@@ -171,7 +169,7 @@ public class StaffController {
 
     private Record genRecord(int id, String op) {
         Record record = new Record();
-        record.setId(id);
+        record.setStaff_id(id);
         record.setOperation(op);
         return record;
     }

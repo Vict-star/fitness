@@ -1,15 +1,15 @@
 package com.software.fitness;
 
 import com.software.fitness.domain.Member;
+import com.software.fitness.domain.Record;
 import com.software.fitness.domain.Staff;
-import com.software.fitness.domain.Time;
 import com.software.fitness.service.MemberService;
+import com.software.fitness.service.RecordService;
 import com.software.fitness.service.StaffService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Calendar;
 import java.util.List;
 
 @SpringBootTest
@@ -18,6 +18,9 @@ class FitnessApplicationTests {
     private StaffService staffService;
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private RecordService recordService;
+
 
     @Test
     void getStaff() {
@@ -59,8 +62,9 @@ class FitnessApplicationTests {
 
     @Test
     void dawd() {
-        Calendar cal = Calendar.getInstance();
-        Time time = new Time(cal.getTime(), "周一");
-        System.out.println(staffService.getTimeSlotByTime(time));
+        Record record = new Record();
+        record.setStaff_id(3);
+        record.setOperation("1111");
+        recordService.staffInsertRecord(record);
     }
 }

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -242,22 +241,21 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public PageInfo<Coach> PageAllCoach(int page,int pageSize) {
-        PageHelper.startPage(1,2);
-        Coach[] coachlist = coachDao.getAllCoach();
-        List<Coach> List= Arrays.asList(coachlist);
-        PageInfo pageInfo = new PageInfo(List);
+    public PageInfo<Coach> PageAllCoach(int page, int pageSize) {
+        PageHelper.startPage(1, 2);
+        List<Coach> coachlist = coachDao.getAllCoach();
+        PageInfo pageInfo = new PageInfo(coachlist);
         return pageInfo;
     }
 
     @Override
     public boolean changePassword(String phone_number, String staffId, String old_pwd, String new_pwd) {
         Staff staff = staffDao.getStaffByPhoneNumber(phone_number);
-        if(staff.getPassword().equals(old_pwd)){
+        if (staff.getPassword().equals(old_pwd)) {
             staff.setPassword(new_pwd);
             int row = staffDao.update(staff);
             return row > 0;
-        }else{
+        } else {
             return false;
         }
     }

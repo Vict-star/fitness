@@ -1,8 +1,12 @@
 package com.software.fitness.service;
 
 
+import com.github.pagehelper.PageInfo;
 import com.software.fitness.domain.*;
+import com.software.fitness.page.PageRequest;
+import com.software.fitness.page.PageResult;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -97,7 +101,7 @@ public interface StaffService {
 
     List<CourseChosenItem> listCourseChosenItem(Integer course_id);
 
-    PageInfo<Coach> PageAllCoach(int page,int pageSize);
+    PageInfo<Coach> PageAllCoach(int page, int pageSize);
 
     boolean changePassword(String phone_number, String staffId, String old_pwd, String new_pwd);
 
