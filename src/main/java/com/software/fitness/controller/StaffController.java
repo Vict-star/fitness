@@ -81,22 +81,20 @@ public class StaffController {
 
     @PostMapping("/detail/update")
     public String staffDetailUpdate(HttpServletRequest request, RedirectAttributes attributes,
-            String id, String name,String phone_number,String address) {
-        boolean result = staffService.staffDetailUpdate(id,name,phone_number,address);
+                                    Staff staff) {
+        int er = staffService.updateStaff(staff);
         String message = "";
-        if(result){
-            Staff staff = staffService.getStaffByPhoneNumber(phone_number);
-            staff.setPassword(null);
-            request.getSession().setAttribute("loginUser", staff);
+        if (er > 0) {
+            Staff temp = staffService.getStaffByPhoneNumber(staff.getPhone_number());
+            temp.setPassword(null);
+            request.getSession().setAttribute("loginUser", temp);
             message = "修改成功";
-        }
-        else{
+        } else {
             message = "修改失败，请联系管理员";
         }
         attributes.addFlashAttribute("message", message);
         return "redirect:/staff/detail";
     }
-
 
 
     @GetMapping("/passwordManage")
@@ -598,9 +596,9 @@ public class StaffController {
     }
 
     @PostMapping("/staffManage/edit")
-    public String editStaff(Course staff, HttpServletRequest request, RedirectAttributes attributes) {
+    public String editStaff(Staff staff, HttpServletRequest request, RedirectAttributes attributes) {
         String message = "";
-        int id = staffService.updateCourse(staff);
+        int id = staffService.updateStaff(staff);
         if (id > 0) {
             message = "修改员工成功";
             int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
