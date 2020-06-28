@@ -94,7 +94,7 @@
                     <tbody>
 
                     <tr th:each="member :${memberList}">
-                        <td th:text="${member.id}"></td>
+                        <td th:text="${#numbers.formatInteger(member.id,10)}"></td>
                         <td th:text="${member.name}"></td>
                         <td th:text="${member.gender}"></td>
                         <td th:text="${#dates.format(member.date_of_birth,'yyyy年MM月dd日')}"></td>

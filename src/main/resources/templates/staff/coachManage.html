@@ -101,7 +101,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="coach :${coachList}">
-                        <td th:text="${coach.id}"></td>
+                        <td th:text="${#numbers.formatInteger(coach.id,10)}"></td>
                         <td th:text="${coach.name}"></td>
                         <td th:text="${coach.gender}"></td>
                         <td th:text="${#dates.format(coach.date_of_birth,'yyyy年MM月dd日')}"></td>

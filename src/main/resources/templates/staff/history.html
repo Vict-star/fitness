@@ -72,11 +72,11 @@
                     <tbody>
 
                     <tr th:each="record :${recordList}">
-                        <td th:text="${record.id}"></td>
+                        <td th:text="${#numbers.formatInteger(record.id,10)}"></td>
                         <td>
-                            <span th:if="${record.staff_id ne 0}" th:text="'员工 '+${record.staff_id}">
+                            <span th:if="${record.staff_id ne 0}" th:text="'员工 '+${#numbers.formatInteger(record.staff_id,10)}">
                             </span>
-                            <span th:if="${record.member_id ne 0}" th:text="'会员 '+${record.member_id}">
+                            <span th:if="${record.member_id ne 0}" th:text="'会员 '+${#numbers.formatInteger(record.member_id,10)}">
                             </span>
                         </td>
                         <td th:text="${#dates.format(record.time,'yyyy年MM月dd日 HH时mm分ss秒')}"></td>

@@ -106,9 +106,9 @@
                     </thead>
                     <tbody>
                     <tr th:each="course :${courseList}">
-                        <td th:text="${course.id}"></td>
+                        <td th:text="${#numbers.formatInteger(course.id,10)}"></td>
                         <td th:text="${course.name}"></td>
-                        <td th:text="${course.coach_id}"></td>
+                        <td th:text="${#numbers.formatInteger(course.coach_id,10)}"></td>
                         <td th:text="${course.capacity}"></td>
                         <td th:text="${course.number_of_member}"></td>
                         <td th:text="${course.room_number}"></td>
@@ -122,7 +122,7 @@
                         </td>
                         <td>
                             <button class="btn btn-outline-primary btn-sm"
-                                    th:onclick="takeCourse([[${course.id}]], [[${course.name}]]);">
+                                    th:onclick="takeCourse([[${#numbers.formatInteger(course.id,10)}]], [[${course.name}]]);">
                                 会员选课
                             </button>
                             <a class="btn btn-outline-danger btn-sm" th:href="@{staff/quitClass/}+${course.id}">
@@ -248,7 +248,7 @@
      role="dialog" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/staff/chooseClass/add" method="post">
+            <form action="/staff/chooseClass/pick" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ModalQuit_title">选课会员名单</h5>
                     <button aria-label="Close" class="close" data-dismiss="modal" type="button">

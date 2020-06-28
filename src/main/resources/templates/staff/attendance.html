@@ -69,10 +69,10 @@
                     </thead>
                     <tbody>
                     <tr th:each="course :${courseList}">
-                        <td th:text="${course.id}"></td>
+                        <td th:text="${#numbers.formatInteger(course.id,10)}"></td>
                         <td th:text="${course.name}"></td>
-                        <td th:text="${course.coach_id}"></td>
-                        <td th:text="${course.time_slot_id}"></td>
+                        <td th:text="${#numbers.formatInteger(course.coach_id,10)}"></td>
+                        <td th:text="${#numbers.formatInteger(course.time_slot_id,10)}"></td>
                         <td th:text="${course.room_number}"></td>
                         <td>
                             <a class="btn btn-outline-primary btn-sm" th:href="@{/staff/attendance/}+${course.id}">
