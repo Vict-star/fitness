@@ -1,16 +1,15 @@
 package com.software.fitness.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.software.fitness.domain.*;
 import com.software.fitness.service.RecordService;
 import com.software.fitness.service.StaffService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +39,15 @@ public class StaffController {
 
     /**
      * @param request
+     * @return 是否登陆成功
+     */
+    private boolean isLogin(@NonNull HttpServletRequest request) {
+        Staff staff = (Staff) request.getSession().getAttribute("loginUser");
+        return staff != null;
+    }
+
+    /**
+     * @param request
      * @return 是否为管理员
      */
     private boolean isAdmin(@NonNull HttpServletRequest request) {
@@ -52,9 +60,40 @@ public class StaffController {
      * 以下是GET方法的函数
      */
     @GetMapping("/coachManage")
-    public String coachManagePage(HttpServletRequest request, Model model) {
-        model.addAttribute("coachList", staffService.getAllCoach());
-        return "staff/coachManage";
+    public String coachManagePage(HttpServletRequest request,
+                                  @RequestParam(defaultValue = "1")int page,
+                                  @RequestParam(defaultValue = "1")int pageSize,
+                                  Model model) {
+        System.out.println("page"+page+"Pagesize"+pageSize);
+
+        if (isLogin(request)) {
+            PageInfo<Coach> Page =staffService.PageAllCoach(page,pageSize);
+            System.out.println(Page);
+            model.addAttribute("coachPage", Page);
+            return "staff/coachManage";
+        }
+        return "Login";
+    }
+
+    @GetMapping("/passwordManage")
+    public String passwordManage(){
+        return "staff/passwordManage";
+    }
+
+    @PostMapping("/passwordManage/update")
+    public String passwordChange(RedirectAttributes attributes,
+                                String phone_number,
+                                 String staff_id,String old_pwd, String new_pwd){
+        String message = "";
+        boolean result = staffService.changePassword(phone_number,staff_id,old_pwd,new_pwd);
+        if(result){
+            message = "修改成功";
+        }
+        else{
+            message = "修改失败，请联系管理员";
+        }
+        attributes.addFlashAttribute("message", message);
+        return "redirect:/staff/passwordManage";
     }
 
     @GetMapping("/memberManage")
