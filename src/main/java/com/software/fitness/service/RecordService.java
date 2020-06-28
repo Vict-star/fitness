@@ -12,4 +12,8 @@ public interface RecordService {
 
     List<Record> getAllRecord();
 
+    Integer staffInsertRecord(Record record);
+
+    Integer memberInsertRecord(Record record);
+
 }

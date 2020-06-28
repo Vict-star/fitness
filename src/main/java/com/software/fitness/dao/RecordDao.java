@@ -17,4 +17,8 @@ public interface RecordDao {
 
     List<Record> getAllRecord();
 
+    Integer staffInsert(Record record);
+
+    Integer memberInsert(Record record);
+
 }

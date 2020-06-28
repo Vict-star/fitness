@@ -27,4 +27,14 @@ public class RecordServiceImpl implements RecordService {
     public List<Record> getAllRecord() {
         return recordDao.getAllRecord();
     }
+
+    @Override
+    public Integer staffInsertRecord(Record record) {
+        return recordDao.staffInsert(record);
+    }
+
+    @Override
+    public Integer memberInsertRecord(Record record) {
+        return recordDao.memberInsert(record);
+    }
 }

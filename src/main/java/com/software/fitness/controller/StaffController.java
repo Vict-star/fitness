@@ -130,13 +130,22 @@ public class StaffController {
      * 以下是POST方法的函数
      */
 
+    private Record genRecord(int id, String op) {
+        Record record = new Record();
+        record.setId(id);
+        record.setOperation(op);
+        return record;
+    }
+
     //TODO coachManage页面操作方法
     @PostMapping("/coachManage/add")
-    public String addCoach(Coach coach, RedirectAttributes attributes) {
+    public String addCoach(Coach coach, HttpServletRequest request, RedirectAttributes attributes) {
         String message = "";
         Integer er = staffService.insertCoach(coach);
         if (er != null && er > 0) {
-            message = "添加教练成功,ID为:" + coach.getId();
+            message = "添加教练成功,ID为：" + coach.getId();
+            int id = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(id, "添加教练：" + coach.toString()));
         } else {
             message = "添加教练失败";
         }
@@ -146,11 +155,13 @@ public class StaffController {
     }
 
     @PostMapping("/coachManage/edit")
-    public String editCoach(Coach coach, RedirectAttributes attributes) {
+    public String editCoach(Coach coach, HttpServletRequest request, RedirectAttributes attributes) {
         String message = "";
-        int id = staffService.updateCoach(coach);
-        if (id > 0) {
+        int er = staffService.updateCoach(coach);
+        if (er > 0) {
             message = "修改教练成功";
+            int id = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(id, "修改教练：" + coach.toString()));
         } else {
             message = "修改教练失败";
         }
@@ -160,7 +171,7 @@ public class StaffController {
     }
 
     @PostMapping("/coachManage/{id}/dismiss")
-    public String dismissCoach(@PathVariable("id") int id, RedirectAttributes attributes) {
+    public String dismissCoach(@PathVariable("id") int id, HttpServletRequest request, RedirectAttributes attributes) {
         Coach coach = new Coach();
         coach.setId(id);
         coach.setState("离职");
@@ -168,6 +179,8 @@ public class StaffController {
         String message = "";
         if (er != null && er > 0) {
             message = "" + coach.getId() + " 已离职";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "离职教练：" + coach.toString()));
         } else {
             message = "更改失败，请稍后重试";
         }
@@ -176,7 +189,7 @@ public class StaffController {
     }
 
     @PostMapping("/coachManage/{id}/employ")
-    public String employCoach(@PathVariable("id") int id, RedirectAttributes attributes) {
+    public String employCoach(@PathVariable("id") int id, HttpServletRequest request, RedirectAttributes attributes) {
         Coach coach = new Coach();
         coach.setId(id);
         coach.setState("在职");
@@ -184,6 +197,8 @@ public class StaffController {
         String message = "";
         if (er != null && er > 0) {
             message = "" + id + " 已启用";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "启用教练：" + coach.toString()));
         } else {
             message = "更改失败，请稍后重试";
         }
@@ -192,12 +207,14 @@ public class StaffController {
     }
 
     @PostMapping("/coachManage/{id}/update")
-    public String updateCoach(@PathVariable("id") int id, Coach coach, RedirectAttributes attributes) {
+    public String updateCoach(@PathVariable("id") int id, Coach coach, HttpServletRequest request, RedirectAttributes attributes) {
         coach.setId(id);
         Integer er = staffService.updateCoach(coach);
         String message;
         if (er != null && er > 0) {
             message = "更新成功";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "更新教练：" + coach.toString()));
         } else {
             message = "更改失败，请稍后重试";
         }
@@ -206,7 +223,7 @@ public class StaffController {
     }
 
     @PostMapping("/memberManage/{id}/cancel")
-    public String cancelMember(@PathVariable("id") int id, RedirectAttributes attributes) {
+    public String cancelMember(@PathVariable("id") int id, HttpServletRequest request, RedirectAttributes attributes) {
         Member member = new Member();
         member.setId(id);
         member.setState("已注销");
@@ -214,6 +231,8 @@ public class StaffController {
         String message = "";
         if (er != null && er > 0) {
             message = "" + id + " 已注销";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "注销会员：" + member.toString()));
         } else {
             message = "更改失败，请稍后重试";
         }
@@ -222,7 +241,7 @@ public class StaffController {
     }
 
     @PostMapping("/memberManage/{id}/activate")
-    public String activateMember(@PathVariable("id") int id, RedirectAttributes attributes) {
+    public String activateMember(@PathVariable("id") int id, HttpServletRequest request, RedirectAttributes attributes) {
         Member member = new Member();
         member.setId(id);
         member.setState("有效");
@@ -230,6 +249,8 @@ public class StaffController {
         String message = "";
         if (er != null && er > 0) {
             message = "" + id + " 已激活";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "激活会员：" + member.toString()));
         } else {
             message = "更改失败，请稍后重试";
         }
@@ -238,12 +259,14 @@ public class StaffController {
     }
 
     @PostMapping("/memberManage/{id}/update")
-    public String updateMember(@PathVariable("id") int id, Member member, RedirectAttributes attributes) {
+    public String updateMember(@PathVariable("id") int id, Member member, HttpServletRequest request, RedirectAttributes attributes) {
         member.setId(id);
         Integer er = staffService.updateMember(member);
         String message;
         if (er != null && er > 0) {
             message = "更新成功";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "更新会员：" + member.toString()));
         } else {
             message = "更改失败，请稍后重试";
         }
@@ -252,7 +275,7 @@ public class StaffController {
     }
 
     @PostMapping("/attendance/{cid}/{mid}")
-    public String attendanceSign(@PathVariable("cid") int cid, @PathVariable("mid") int mid, RedirectAttributes attributes) {
+    public String attendanceSign(@PathVariable("cid") int cid, @PathVariable("mid") int mid, HttpServletRequest request, RedirectAttributes attributes) {
         String message, day;
         Attendance attendance = new Attendance();
         attendance.setCourse_id(cid);
@@ -313,6 +336,8 @@ public class StaffController {
         Integer er = staffService.insertAttendance(attendance);
         if (er != null && er > 0) {
             message = "签到成功";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "签到：" + attendance.toString()));
         } else {
             message = "签到失败";
         }
@@ -323,13 +348,15 @@ public class StaffController {
 
     //TODO memberManage页面操作方法
     @PostMapping("/memberManage/add")
-    public String addMember(Member member, RedirectAttributes attributes) {
+    public String addMember(Member member, HttpServletRequest request, RedirectAttributes attributes) {
         String message = "";
         member.setPassword("member");
         System.out.println(member.toString());
         int id = staffService.insertMember(member);
         if (id > 0) {
             message = "添加会员成功";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "添加会员：" + member.toString()));
         } else {
             message = "添加会员失败";
         }
@@ -339,11 +366,13 @@ public class StaffController {
     }
 
     @PostMapping("/memberManage/edit")
-    public String editMember(Member member, RedirectAttributes attributes) {
+    public String editMember(Member member, HttpServletRequest request, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.updateMember(member);
         if (id > 0) {
             message = "修改会员成功";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "修改会员：" + member.toString()));
         } else {
             message = "修改会员失败";
         }
@@ -354,11 +383,13 @@ public class StaffController {
 
     //TODO attendance页面操作方法
     @PostMapping("/attendance/sign")
-    public String attendanceSign(Attendance attendance, RedirectAttributes attributes) {
+    public String attendanceSign(Attendance attendance, HttpServletRequest request, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertAttendance(attendance);
         if (id > 0) {
             message = "签到成功";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "签到：" + attendance.toString()));
         } else {
             message = "签到失败";
         }
@@ -369,11 +400,13 @@ public class StaffController {
 
     //TODO courseManage页面操作方法
     @PostMapping("/courseManage/add")
-    public String addCourse(Course course, RedirectAttributes attributes) {
+    public String addCourse(Course course, HttpServletRequest request, RedirectAttributes attributes) {
         String message = "";
         Integer er = staffService.insertCourse(course);
         if (er != null && er > 0) {
             message = "添加课程成功，ID：" + course.getId();
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "添加课程：" + course.toString()));
         } else {
             message = "添加课程失败";
         }
@@ -383,11 +416,13 @@ public class StaffController {
     }
 
     @PostMapping("/courseManage/edit")
-    public String editCourse(Course course, RedirectAttributes attributes) {
+    public String editCourse(Course course, HttpServletRequest request, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.updateCourse(course);
         if (id > 0) {
             message = "修改课程成功";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "修改课程：" + course.toString()));
         } else {
             message = "修改课程失败";
         }
@@ -397,7 +432,7 @@ public class StaffController {
     }
 
     @PostMapping("/courseManage/{id}/cancel")
-    public String cancelCourse(@PathVariable("id") int id, RedirectAttributes attributes) {
+    public String cancelCourse(@PathVariable("id") int id, HttpServletRequest request, RedirectAttributes attributes) {
         Course course = new Course();
         course.setId(id);
         course.setState("已结课");
@@ -405,6 +440,8 @@ public class StaffController {
         String message = "";
         if (er != null && er > 0) {
             message = "" + id + " 已取消";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "取消课程：" + course.toString()));
         } else {
             message = "更改失败，请稍后重试";
         }
@@ -413,13 +450,15 @@ public class StaffController {
     }
 
     @PostMapping("/courseManage/{id}/update")
-    public String cancelCourse(@PathVariable("id") int id, Course course, RedirectAttributes attributes) {
+    public String cancelCourse(@PathVariable("id") int id, Course course, HttpServletRequest request, RedirectAttributes attributes) {
         course.setId(id);
         Integer er = staffService.updateCourse(course);
         System.out.println(course.toString());
         String message = "";
         if (er != null && er > 0) {
             message = "" + id + " 已更新";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "更新课程：" + course.toString()));
         } else {
             message = "更改失败，请稍后重试";
         }
@@ -429,7 +468,7 @@ public class StaffController {
 
     //TODO chooseClass页面操作方法
     @PostMapping("/chooseClass/pick")
-    public String pickClass(Take_course take_course, RedirectAttributes attributes) {
+    public String pickClass(Take_course take_course, HttpServletRequest request, RedirectAttributes attributes) {
         String message = "";
         System.out.println(take_course);
         List<Course> courses = staffService.getCourseByMemberID(take_course.getMember_id());
@@ -445,6 +484,8 @@ public class StaffController {
         int id = staffService.insertTakeCourse(take_course);
         if (id > 0) {
             message = "选课成功";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "选课：" + take_course.toString()));
         } else {
             message = "选课失败";
         }
@@ -462,11 +503,13 @@ public class StaffController {
     }
 
     @PostMapping("/chooseClass/quit")
-    public String quitClass(Take_course take_course, RedirectAttributes attributes) {
+    public String quitClass(Take_course take_course, HttpServletRequest request, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.deleteTakeCourse(take_course);
         if (id > 0) {
             message = "退课成功";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "退课：" + take_course.toString()));
         } else {
             message = "退课失败";
         }
@@ -477,11 +520,13 @@ public class StaffController {
 
     //TODO staffManage页面操作方法S
     @PostMapping("/staffManage/add")
-    public String addStaff(Staff staff, RedirectAttributes attributes) {
+    public String addStaff(Staff staff, HttpServletRequest request, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.insertStaff(staff);
         if (id > 0) {
             message = "添加员工成功";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "退课：" + staff.toString()));
         } else {
             message = "添加员工失败";
         }
@@ -491,11 +536,13 @@ public class StaffController {
     }
 
     @PostMapping("/staffManage/edit")
-    public String editStaff(Course staff, RedirectAttributes attributes) {
+    public String editStaff(Course staff, HttpServletRequest request, RedirectAttributes attributes) {
         String message = "";
         int id = staffService.updateCourse(staff);
         if (id > 0) {
             message = "修改员工成功";
+            int sid = ((Staff) request.getSession().getAttribute("loginUser")).getId();
+            recordService.staffInsertRecord(genRecord(sid, "退课：" + staff.toString()));
         } else {
             message = "修改员工失败";
         }

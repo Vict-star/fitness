@@ -5,7 +5,19 @@
 
     <insert id="insert" parameterType="com.software.fitness.domain.Record" useGeneratedKeys="true" keyProperty="id">
         insert into record (staff_id, member_id, time, operation)
-        VALUES (#{staff_id}, #{member_id}, #{time}, #{operation});
+        VALUES (#{staff_id}, #{member_id}, now(), #{operation});
+    </insert>
+
+    <insert id="staffInsert" parameterType="com.software.fitness.domain.Record" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into record (staff_id, time, operation)
+        VALUES (#{staff_id}, now(), #{operation});
+    </insert>
+
+    <insert id="memberInsert" parameterType="com.software.fitness.domain.Record" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into record (member_id, time, operation)
+        VALUES (#{member_id}, now(), #{operation});
     </insert>
 
     <delete id="delete" parameterType="com.software.fitness.domain.Record">
