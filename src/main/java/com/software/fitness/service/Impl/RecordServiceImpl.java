@@ -15,7 +15,12 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public Integer insertRecord(Record record) {
-        return recordDao.insert(record);
+        try {
+            return recordDao.insert(record);
+        } catch (Exception e) {
+            return 0;
+        }
+
     }
 
     @Override
@@ -30,11 +35,19 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public Integer staffInsertRecord(Record record) {
-        return recordDao.staffInsert(record);
+        try {
+            return recordDao.staffInsert(record);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
     public Integer memberInsertRecord(Record record) {
-        return recordDao.memberInsert(record);
+        try {
+            return recordDao.memberInsert(record);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 }

@@ -133,15 +133,17 @@
             </div>
             <div class="row"><p>当前第[[${coachPage.pageNum}]]页，共[[${coachPage.pages}]]页</p></div>
             <div class="row justify-content-center">
-            <nav>
-                <ul class="pagination">
-                    <li th:if="${coachPage.hasPreviousPage}" class="page-item">
-                        <a class="page-link" th:href="@{/staff/coachManage/?page=}+${coachPage.prePage}">Previous</a></li>
-                    <li class="page-item"><a class="page-link" th:text="${coachPage.pageNum}"></a></li>
-                    <li th:if="${coachPage.hasNextPage}" class="page-item">
-                        <a class="page-link" th:href="@{/staff/coachManage/?page=}+${coachPage.nextPage}">Next</a></li>
-                </ul>
-            </nav>
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item" th:if="${coachPage.hasPreviousPage}">
+                            <a class="page-link"
+                               th:href="@{/staff/coachManage/?page=}+${coachPage.prePage}">Previous</a></li>
+                        <li class="page-item"><a class="page-link" th:text="${coachPage.pageNum}"></a></li>
+                        <li class="page-item" th:if="${coachPage.hasNextPage}">
+                            <a class="page-link" th:href="@{/staff/coachManage/?page=}+${coachPage.nextPage}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </main>
     </div>

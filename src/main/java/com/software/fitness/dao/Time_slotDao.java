@@ -12,8 +12,6 @@ import java.util.List;
 public interface Time_slotDao {
     Integer insert(Time_slot time_slot);
 
-    Integer update(Time_slot time_slot);
-
     Integer delete(Time_slot time_slot);
 
     List<Time_slot> getAllTimeSlot();

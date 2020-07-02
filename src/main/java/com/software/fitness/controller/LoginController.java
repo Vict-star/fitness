@@ -20,7 +20,7 @@ public class LoginController {
     private StaffService staffService;
 
     @GetMapping
-    public String login(HttpServletRequest request) {
+    public String loginPage(HttpServletRequest request) {
         Staff staff = (Staff) request.getSession().getAttribute("loginUser");
         if (staff == null) {
             return "Login";
@@ -36,7 +36,7 @@ public class LoginController {
 
     @PostMapping("/Login")
     public String login(@RequestParam String phone_number, @RequestParam String password,
-                        RedirectAttributes attributes, HttpServletRequest request) {
+                            RedirectAttributes attributes, HttpServletRequest request) {
         Staff staff = staffService.getStaffByPhoneNumber(phone_number);
         System.out.println(staff);
         if (staff != null && staff.getPassword().equals(password) && staff.getState().equals("在职")) {

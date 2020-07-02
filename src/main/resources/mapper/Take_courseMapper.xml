@@ -24,8 +24,8 @@
                `member`.`gender`,
                `member`.`date_of_birth`,
                `member`.`phone_number`
-        FROM `fitnesstest`.`member`,
-             `fitnesstest`.`take_course`
+        FROM `member`,
+             `take_course`
         WHERE `member`.`id` = `take_course`.`member_id`
           AND `take_course`.`course_id` = #{course_id};
     </select>

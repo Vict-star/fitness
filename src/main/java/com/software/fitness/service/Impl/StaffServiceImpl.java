@@ -39,12 +39,21 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Integer insertStaff(Staff staff) {
-        return staffDao.insert(staff);
+        try {
+            return staffDao.insert(staff);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override
     public Integer updateStaff(Staff staff) {
-        return staffDao.update(staff);
+        try {
+            return staffDao.update(staff);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
@@ -59,12 +68,20 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Integer insertCoach(Coach coach) {
-        return coachDao.insert(coach);
+        try {
+            return coachDao.insert(coach);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
     public Integer updateCoach(Coach coach) {
-        return coachDao.update(coach);
+        try {
+            return coachDao.update(coach);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
@@ -84,12 +101,20 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Integer insertMember(Member member) {
-        return memberDao.insert(member);
+        try {
+            return memberDao.insert(member);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
     public Integer updateMember(Member member) {
-        return memberDao.update(member);
+        try {
+            return memberDao.update(member);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
@@ -129,12 +154,20 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Integer insertCourse(Course course) {
-        return courseDao.insert(course);
+        try {
+            return courseDao.insert(course);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
     public Integer updateCourse(Course course) {
-        return courseDao.update(course);
+        try {
+            return courseDao.update(course);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
@@ -169,12 +202,11 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Integer insertTimeSlot(Time_slot time_slot) {
-        return time_slotDao.insert(time_slot);
-    }
-
-    @Override
-    public Integer updateTimeSlot(Time_slot time_slot) {
-        return time_slotDao.update(time_slot);
+        try {
+            return time_slotDao.insert(time_slot);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
@@ -189,7 +221,11 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Integer insertAttendance(Attendance attendance) {
-        return attendanceDao.insert(attendance);
+        try {
+            return attendanceDao.insert(attendance);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
@@ -199,7 +235,11 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Integer insertTakeCourse(Take_course take_course) {
-        return take_courseDao.insert(take_course);
+        try {
+            return take_courseDao.insert(take_course);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
@@ -276,7 +316,11 @@ public class StaffServiceImpl implements StaffService {
         staff.setPhone_number(phone_number);
         staff.setAddress(address);
         staff.setName(name);
-        int row = staffDao.update(staff);
-        return row > 0;
+        try {
+            int row = staffDao.update(staff);
+            return row > 0;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

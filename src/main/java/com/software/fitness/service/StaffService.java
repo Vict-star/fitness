@@ -77,8 +77,6 @@ public interface StaffService {
 
     Integer insertTimeSlot(Time_slot time_slot);
 
-    Integer updateTimeSlot(Time_slot time_slot);
-
     Integer deleteTimeSlot(Time_slot time_slot);
 
     List<Time_slot> getAllTimeSlot();

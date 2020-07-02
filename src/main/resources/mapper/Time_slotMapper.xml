@@ -8,16 +8,6 @@
         VALUES (#{id}, #{start_time}, #{end_time}, #{day});
     </insert>
 
-    <update id="update" parameterType="com.software.fitness.domain.Time_slot">
-        update time_slot
-        <set>
-            <if test="start_time != null">start_time = #{start_time},</if>
-            <if test="end_time != null">end_time = #{end_time},</if>
-            <if test="day != null">day = #{day},</if>
-        </set>
-        where id = #{id};
-    </update>
-
     <delete id="delete" parameterType="com.software.fitness.domain.Time_slot">
         delete
         from time_slot
