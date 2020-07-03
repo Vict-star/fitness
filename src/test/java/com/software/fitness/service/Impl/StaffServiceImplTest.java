@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 @SpringBootTest
 class StaffServiceImplTest {
@@ -118,9 +117,9 @@ class StaffServiceImplTest {
         member.setValidity(Calendar.getInstance().getTime());
         member.setPassword("PASSWORD");
         int i = staffService.insertMember(member);
-        if(i > 0){
+        if (i > 0) {
             System.out.println("插入成功");
-        }else {
+        } else {
             System.out.println("电话号码冲突");
         }
         System.out.println(member);
@@ -136,9 +135,9 @@ class StaffServiceImplTest {
         member.setGender("女");
         member.setName("新名字");
         int i = staffService.updateMember(member);
-        if(i > 0){
+        if (i > 0) {
             System.out.println("更新成功");
-        }else {
+        } else {
             System.out.println("没有");
         }
         System.out.println(member);
@@ -149,9 +148,9 @@ class StaffServiceImplTest {
         Member member = new Member();
         member.setId(6);
         int i = staffService.updateMember(member);
-        if(i > 0){
+        if (i > 0) {
             System.out.println("删除成功");
-        }else {
+        } else {
             System.out.println("没有");
         }
         System.out.println(member);
@@ -189,9 +188,9 @@ class StaffServiceImplTest {
         course.setCoach_id(2);
         course.setTime_slot_id(1);
         int i = staffService.insertCourse(course);
-        if(i > 0){
+        if (i > 0) {
             System.out.println("插入成功");
-        }else {
+        } else {
             System.out.println("没有");
         }
         System.out.println(course);
@@ -207,9 +206,9 @@ class StaffServiceImplTest {
         course.setState("已结课");
         course.setDescription("new Description");
         int i = staffService.updateCourse(course);
-        if(i > 0){
+        if (i > 0) {
             System.out.println("更新成功");
-        }else {
+        } else {
             System.out.println("没有");
         }
         System.out.println(course);
@@ -220,9 +219,9 @@ class StaffServiceImplTest {
         Course course = new Course();
         course.setId(5);
         int i = staffService.deleteCourse(course);
-        if(i > 0){
+        if (i > 0) {
             System.out.println("删除成功");
-        }else {
+        } else {
             System.out.println("没有");
         }
         System.out.println(course);
@@ -251,9 +250,9 @@ class StaffServiceImplTest {
         time_slot.setStart_time(Calendar.getInstance().getTime());
         time_slot.setEnd_time(Calendar.getInstance().getTime());
         int i = staffService.insertTimeSlot(time_slot);
-        if(i > 0){
+        if (i > 0) {
             System.out.println("插入成功");
-        }else {
+        } else {
             System.out.println("没有");
         }
         System.out.println(time_slot);
@@ -267,9 +266,9 @@ class StaffServiceImplTest {
         time_slot.setStart_time(Calendar.getInstance().getTime());
         time_slot.setEnd_time(Calendar.getInstance().getTime());
         int i = staffService.deleteTimeSlot(time_slot);
-        if(i > 0){
+        if (i > 0) {
             System.out.println("删除成功");
-        }else {
+        } else {
             System.out.println("没有");
         }
         System.out.println(time_slot);
@@ -286,9 +285,9 @@ class StaffServiceImplTest {
         take_course.setCourse_id(4);
         take_course.setMember_id(2);
         int i = staffService.insertTakeCourse(take_course);
-        if(i > 0){
+        if (i > 0) {
             System.out.println("插入成功");
-        }else {
+        } else {
             System.out.println("没有");
         }
         System.out.println(take_course);
@@ -300,9 +299,9 @@ class StaffServiceImplTest {
         take_course.setCourse_id(4);
         take_course.setMember_id(2);
         int i = staffService.deleteTakeCourse(take_course);
-        if(i > 0){
+        if (i > 0) {
             System.out.println("删除成功");
-        }else {
+        } else {
             System.out.println("没有");
         }
         System.out.println(take_course);
@@ -325,7 +324,7 @@ class StaffServiceImplTest {
 
     @Test
     void pageAllCoach() {
-        System.out.println(staffService.PageAllCoach(1,10));
+        System.out.println(staffService.PageAllCoach(1, 10));
     }
 
     @Test
